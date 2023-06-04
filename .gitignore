@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+.env.*.local
+.env*.local
+
+# rollup cache
+/.rollup.cache/
