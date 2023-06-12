@@ -8,6 +8,7 @@ type Props = {
   branchSpacing: number;
   branchOrder: number;
   branchColor: string;
+  nodeRadius: number;
 };
 
 export default function BranchPath({
@@ -17,42 +18,35 @@ export default function BranchPath({
   branchSpacing,
   branchColor,
   branchOrder,
+  nodeRadius,
 }: Props) {
-  const width = 1;
-  const height = (end - start) * commitSpacing;
-  const viewBox = `0 0 ${width} ${height}`;
-  const x = branchOrder * branchSpacing;
+  const height = Math.abs(end - start) * (commitSpacing + nodeRadius * 4);
+  const x = nodeRadius * 4 + branchOrder * branchSpacing - 1;
   const matrixColor = hexToColorMatrixVariant(branchColor);
 
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox={viewBox}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g filter="url(#filter0_d_2_590)">
+    <>
+      <g filter={`url(#filter${branchOrder}-${start}-${end})`}>
         <line
           x1={x}
-          y1={start * commitSpacing}
+          y1={start * commitSpacing + nodeRadius * 2}
           x2={x}
-          y2={end * commitSpacing}
+          y2={end * commitSpacing + nodeRadius * 5}
           stroke={branchColor}
-          stroke-width="2"
+          strokeWidth="4"
         />
       </g>
       <defs>
         <filter
-          id="filter0_d_2_590"
+          id={`filter${branchOrder}-${start}-${end}`}
           x={x}
           y={start * commitSpacing}
-          width={width}
+          width={12}
           height={height}
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -76,6 +70,6 @@ export default function BranchPath({
           />
         </filter>
       </defs>
-    </svg>
+    </>
   );
 }
