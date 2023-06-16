@@ -1,4 +1,4 @@
-export type Commit = {
+export type CommitNode = {
   hash: string;
   children: string[];
   parents: string[];

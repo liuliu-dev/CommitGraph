@@ -1,29 +1,8 @@
-import { Commit } from "../../helpers/types";
-
-function dfs(
-  commit: Commit,
-  commits: Map<string, Commit>,
-  sortedCommits: Commit[],
-  i: number,
-  seen: Map<string, boolean>
-) {
-  const commitHash = commit.hash;
-  if (seen.get(commitHash)) {
-    return;
-  }
-  seen.set(commitHash, true);
-  commit.children.forEach((children) => {
-    dfs(commits.get(children)!, commits, sortedCommits, i, seen);
-  });
-  commit.x = i;
-  i++;
-  sortedCommits.push(commit);
-  return { i, sortedCommits, seen };
-}
+import { CommitNode } from "../../helpers/types";
 
 function computePositionX(
-  commits: Commit[],
-  commitsMap: Map<string, Commit>,
+  commits: CommitNode[],
+  commitsMap: Map<string, CommitNode>,
   seen: Map<string, boolean>
 ) {
   // sort commits by committer date from latest to oldest
@@ -31,18 +10,27 @@ function computePositionX(
     (a, b) => b.committerDate.getTime() - a.committerDate.getTime()
   );
 
-  // create a map of commits
-  commits.forEach((commit) => {
-    commitsMap.set(commit.hash, commit);
-  });
-  let sortedCommits: Commit[] = [];
+  let sortedCommits: CommitNode[] = [];
   let i = 0;
 
+  function dfs(commit: CommitNode) {
+    const commitHash = commit.hash;
+    if (seen.get(commitHash)) {
+      return;
+    }
+    seen.set(commitHash, true);
+    commit.children.forEach((children) => {
+      dfs(commitsMap.get(children)!);
+    });
+    commit.x = i;
+    i++;
+    sortedCommits.push(commit);
+    return { i, sortedCommits, seen };
+  }
+
+  // compute topological order of commits
   commitsSortByCommitterDate.forEach((commit) => {
-    const result = dfs(commit, commitsMap, sortedCommits, i, seen);
-    i = result.i;
-    sortedCommits = result.sortedCommits;
-    seen = result.seen;
+    dfs(commit);
   });
   return { sortedCommits, commitsMap };
 }
@@ -59,9 +47,9 @@ function checkOverlap(startCol: number, gap: number[], columns: number[][]) {
 }
 
 function computePositionY(
-  computedXCommits: Commit[],
+  computedXCommits: CommitNode[],
   columns: number[][],
-  commitsMap: Map<string, Commit>
+  commitsMap: Map<string, CommitNode>
 ) {
   computedXCommits.forEach((commit, n) => {
     // if the commit does not have any children, then it's the head of a branch, and it should be at a new column
@@ -75,15 +63,6 @@ function computePositionY(
       .filter((child) => commitsMap.get(child)!.parents[0] === commit.hash)
       .map((child) => commitsMap.get(child)!.y);
 
-    const mergeChildrenY: number[] = [];
-    const mergeChildrenX: number[] = [];
-    commit.children
-      .filter((child) => commitsMap.get(child)!.parents[0] !== commit.hash)
-      .forEach((child) => {
-        mergeChildrenY.push(commitsMap.get(child)!.y);
-        mergeChildrenX.push(commitsMap.get(child)!.x);
-      });
-
     // if the commit is the first parent of its children (extension of a branch), then it should be at the same y as the left most child, and delete other children's y from the forbiddenY map
     if (branchChildrenY.length > 0) {
       commit.y = Math.min(...branchChildrenY);
@@ -93,6 +72,15 @@ function computePositionY(
       columns[commit.y].push(commit.x);
       return;
     }
+
+    const mergeChildrenY: number[] = [];
+    const mergeChildrenX: number[] = [];
+    commit.children
+      .filter((child) => commitsMap.get(child)!.parents[0] !== commit.hash)
+      .forEach((child) => {
+        mergeChildrenY.push(commitsMap.get(child)!.y);
+        mergeChildrenX.push(commitsMap.get(child)!.x);
+      });
 
     // if the commit is the second parent of its children (merge), find the child with the smallest x
     const minChildX = Math.min(...mergeChildrenX);
@@ -111,10 +99,15 @@ function computePositionY(
   return { computedXCommits, columns };
 }
 
-export function computePosition(commits: Commit[]): Commit[] {
+export function computePosition(commits: CommitNode[]): CommitNode[] {
   const seen = new Map<string, boolean>();
 
-  const commitsMap = new Map<string, Commit>();
+  const commitsMap = new Map<string, CommitNode>();
+  // create a map of commits
+  commits.forEach((commit) => {
+    commitsMap.set(commit.hash, commit);
+  });
+
   const columns: number[][] = [];
 
   const { sortedCommits: computedX } = computePositionX(

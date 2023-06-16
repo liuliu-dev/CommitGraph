@@ -1,7 +1,7 @@
-import { Commit } from "./types";
+import { CommitNode } from "./types";
 import React from "react";
 
-type CommitNodes = {
+type Commit = {
   hash: string;
   ownerName: string;
   repoName: string;
@@ -15,10 +15,9 @@ type CommitNodes = {
   committedAt: number;
 };
 
-export function getCommits(commitNodes: CommitNodes[]): Commit[] {
-  let commits: Commit[] = [];
+export function getCommits(commits: Commit[]): CommitNode[] {
   const childrenMap: Map<string, Array<string>> = new Map();
-  commitNodes.forEach((commit) => {
+  commits.forEach((commit) => {
     commit.parents.forEach((parent) => {
       if (!!childrenMap[parent]) {
         childrenMap[parent].push(commit.hash);
@@ -27,8 +26,8 @@ export function getCommits(commitNodes: CommitNodes[]): Commit[] {
       }
     });
   });
-  commitNodes.forEach((commit) => {
-    let c: Commit = {
+  return commits.map((commit) => {
+    return {
       hash: commit.hash,
       parents: commit.parents,
       children: childrenMap[commit.hash] ?? [],
@@ -38,9 +37,7 @@ export function getCommits(commitNodes: CommitNodes[]): Commit[] {
       x: -1,
       y: -1,
     };
-    commits.push(c);
   });
-  return commits;
 }
 
 export function hexToColorMatrixVariant(hex?: string): string {

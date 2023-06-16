@@ -1,9 +1,9 @@
 import React, { use, useState } from "react";
-import { Commit } from "../../helpers/types";
+import { CommitNode } from "../../helpers/types";
 import { computePosition } from "./computePosition";
 
 export type Props = {
-  commits: Commit[];
+  commits: CommitNode[];
 };
 
 export default function CommitGraph({ commits }: Props) {
