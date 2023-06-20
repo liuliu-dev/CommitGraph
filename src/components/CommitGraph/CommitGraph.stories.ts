@@ -44,7 +44,13 @@ const style = {
 export const ThreeBranches: Story = {
   args: {
     commits: getCommits(threeBranches),
-    branchHeads: [],
+    branchHeads: [
+      { branchName: "main", commitHash: "bgpqkjvf2mqoi9lq4upamdj0ke7e8iuo" },
+      {
+        branchName: "liuliu/workspace-1667427424",
+        commitHash: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
+      },
+    ],
     ...style,
   },
 };
