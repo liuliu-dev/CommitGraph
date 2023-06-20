@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-import { CommitNode } from "../../helpers/types";
+import { BranchHeadType, CommitNode } from "../../helpers/types";
 import { computePosition } from "./computePosition";
 import BranchPath from "../BranchPath";
 import { setCommitNodeColor } from "../../helpers/utils";
@@ -11,9 +11,12 @@ import {
   getNewBranchToPath,
 } from "../CurvePath/utils";
 import CommitDot from "../CommitDot";
+import BranchLabel from "../BranchLabel";
+import { getCommitDotPosition } from "../CommitDot/utils";
+
 export type Props = {
   commits: CommitNode[];
-
+  branchHeads: BranchHeadType[];
   commitSpacing: number;
   branchSpacing: number;
   branchColors: string[];
@@ -26,6 +29,7 @@ export default function CommitGraph({
   branchSpacing,
   branchColors,
   nodeRadius,
+  branchHeads,
 }: Props) {
   const { columns, commitsMap } = computePosition(commits);
   const width = columns.length * (branchSpacing + nodeRadius * 2) + 3;
@@ -119,15 +123,29 @@ export default function CommitGraph({
         })}
       </svg>
 
-      {Array.from(commitsMap.values()).map((commit) => (
-        <CommitDetails
-          commit={commit}
-          branchSpacing={branchSpacing}
-          commitSpacing={commitSpacing}
-          nodeRadius={nodeRadius}
-          left={width + 20}
-        />
-      ))}
+      {Array.from(commitsMap.values()).map((commit) => {
+        const { y } = getCommitDotPosition(
+          branchSpacing,
+          commitSpacing,
+          nodeRadius,
+          commit
+        );
+        const branch = branchHeads.filter((b) => b.commitHash === commit.hash);
+        return (
+          <div
+            style={{ left: width + 20, top: y - nodeRadius * 2 }}
+            className={css.commitInfoContainer}
+          >
+            <CommitDetails commit={commit} />
+            {!!branch.length && (
+              <BranchLabel
+                branchName={branch[0].branchName}
+                branchColor={commit.commitColor}
+              />
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

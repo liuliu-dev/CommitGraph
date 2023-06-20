@@ -17,3 +17,8 @@ export type BranchPathType = {
   end: number;
   endCommit: CommitNode;
 };
+
+export type BranchHeadType = {
+  branchName: string;
+  commitHash: string;
+};

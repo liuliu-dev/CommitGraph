@@ -44,6 +44,7 @@ const style = {
 export const ThreeBranches: Story = {
   args: {
     commits: getCommits(threeBranches),
+    branchHeads: [],
     ...style,
   },
 };
@@ -51,6 +52,7 @@ export const ThreeBranches: Story = {
 export const TwoBranches: Story = {
   args: {
     commits: getCommits(twoBranches),
+    branchHeads: [],
     ...style,
   },
 };
@@ -58,6 +60,7 @@ export const TwoBranches: Story = {
 export const TwoCommits: Story = {
   args: {
     commits: getCommits(twoCommits),
+    branchHeads: [],
     ...style,
   },
 };
@@ -65,6 +68,9 @@ export const TwoCommits: Story = {
 export const Multiple: Story = {
   args: {
     commits: getCommits(notPaintedWellInDoltHub),
+    branchHeads: [
+      { branchName: "main", commitHash: "eogh9klv062daesg5s9hpa925budqe7l" },
+    ],
     ...style,
   },
 };
