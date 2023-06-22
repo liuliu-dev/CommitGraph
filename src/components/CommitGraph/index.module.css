@@ -4,8 +4,12 @@
   flex-direction: column;
 }
 
+.svg {
+  width: calc(20vw);
+}
 .commitInfoContainer {
   display: flex;
   align-items: baseline;
   position: absolute;
+  left: calc(20vw + 1rem);
 }

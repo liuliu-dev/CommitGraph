@@ -54,12 +54,16 @@ function checkOverlap(
 function computePositionY(
   computedXCommits: CommitNode[],
   columns: BranchPathType[][],
-  commitsMap: Map<string, CommitNode>
+  commitsMap: Map<string, CommitNode>,
+  branchOrder: number
 ) {
   computedXCommits.forEach((commit, n) => {
     // if the commit does not have any children, then it's the head of a branch, and it should be at a new column
     if (commit.children.length === 0) {
-      columns.push([{ start: commit.x, end: Infinity, endCommit: commit }]);
+      columns.push([
+        { start: commit.x, end: Infinity, endCommit: commit, branchOrder },
+      ]);
+      branchOrder++;
       commit.y = columns.length - 1;
       return;
     }
@@ -82,12 +86,14 @@ function computePositionY(
             start: last.start,
             end: Infinity,
             endCommit: commit,
+            branchOrder: last.branchOrder,
           });
         } else {
           columns[child.y].push({
             start: last.start,
             end: commit.x - 1,
             endCommit: commit,
+            branchOrder: last.branchOrder,
           });
         }
       });
@@ -113,9 +119,10 @@ function computePositionY(
     if (col === -1) {
       // minChildX + 1 so it will be extended by the merge curve
       columns.push([
-        { start: minChildX + 1, end: Infinity, endCommit: commit },
+        { start: minChildX + 1, end: Infinity, endCommit: commit, branchOrder },
       ]);
       commit.y = columns.length - 1;
+      branchOrder++;
       return;
     }
     commit.y = col;
@@ -123,7 +130,9 @@ function computePositionY(
       start: minChildX + 1,
       end: Infinity,
       endCommit: commit,
+      branchOrder,
     });
+    branchOrder++;
     return;
   });
   return { computedXCommits, columns };
@@ -139,12 +148,13 @@ export function computePosition(commits: CommitNode[]) {
   });
 
   const columns: BranchPathType[][] = [];
+  let branchOrder = 0;
 
   const { sortedCommits: computedX } = computePositionX(
     commits,
     commitsMap,
     seen
   );
-  computePositionY(computedX, columns, commitsMap);
+  computePositionY(computedX, columns, commitsMap, branchOrder);
   return { columns, commitsMap };
 }

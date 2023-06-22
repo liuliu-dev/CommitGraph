@@ -16,6 +16,7 @@ export type BranchPathType = {
   start: number;
   end: number;
   endCommit: CommitNode;
+  branchOrder: number;
 };
 
 export type BranchHeadType = {

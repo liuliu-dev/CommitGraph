@@ -17,7 +17,7 @@ export default function CommitDetails({ commit }: Props) {
       <div style={{ color: commit.commitColor }}>
         <span className={css.bold}>{`${hashBr} - ${committer} - ${date}`}</span>
       </div>
-      <div className={css.msg}>{excerpt(message, 100)}</div>
+      <div className={css.msg}>{excerpt(message, 200)}</div>
     </div>
   );
 }

@@ -45,83 +45,84 @@ export default function CommitGraph({
       (commitSpacing + nodeRadius * 2) +
     nodeRadius * 4 +
     3;
-  let branchCount = 0;
 
   return (
     <div className={css.container}>
-      <svg width={width} height={height}>
-        {columns.map((column, i) => {
-          return column.map((c) => {
-            const branchColor = branchColors[branchCount % branchColors.length];
-            branchCount++;
-            setCommitNodeColor(c, i, commitsMap, branchColor);
-            const end =
-              c.end === Infinity ? commitsMap.get(c.endCommit.hash).x : c.end;
-            return (
-              <BranchPath
-                key={`branch-path-${i}-${c.start}-${c.end}`}
-                start={c.start}
-                end={end}
-                commitSpacing={commitSpacing}
-                branchSpacing={branchSpacing}
-                branchColor={branchColor}
-                branchOrder={i}
-                nodeRadius={nodeRadius}
-              />
+      <div className={css.svg}>
+        <svg width={width} height={height}>
+          {columns.map((column, i) => {
+            return column.map((c) => {
+              const branchColor =
+                branchColors[c.branchOrder % branchColors.length];
+              setCommitNodeColor(c, i, commitsMap, branchColor);
+              const end =
+                c.end === Infinity ? commitsMap.get(c.endCommit.hash).x : c.end;
+              return (
+                <BranchPath
+                  key={`branch-path-${i}-${c.start}-${c.end}`}
+                  start={c.start}
+                  end={end}
+                  commitSpacing={commitSpacing}
+                  branchSpacing={branchSpacing}
+                  branchColor={branchColor}
+                  branchOrder={i}
+                  nodeRadius={nodeRadius}
+                />
+              );
+            });
+          })}
+          {Array.from(commitsMap.values()).map((commit) => {
+            const mergedCurves = getMergedFromBranchHeadPositions(
+              commit,
+              commitsMap,
+              branchSpacing,
+              commitSpacing,
+              nodeRadius
             );
-          });
-        })}
-        {Array.from(commitsMap.values()).map((commit) => {
-          const mergedCurves = getMergedFromBranchHeadPositions(
-            commit,
-            commitsMap,
-            branchSpacing,
-            commitSpacing,
-            nodeRadius
-          );
 
-          const newBranchCurves = getNewBranchToPath(
-            commit,
-            commitsMap,
-            branchSpacing,
-            commitSpacing,
-            nodeRadius
-          );
+            const newBranchCurves = getNewBranchToPath(
+              commit,
+              commitsMap,
+              branchSpacing,
+              commitSpacing,
+              nodeRadius
+            );
 
-          return (
-            <>
-              {newBranchCurves &&
-                newBranchCurves.map((c) => {
-                  return (
-                    <CurvePath
-                      key={`${commit.hash}-curved-up-path-${c[0]}`}
-                      commit={commit}
-                      curve={c}
-                    />
-                  );
-                })}
-              {mergedCurves &&
-                mergedCurves.map((curve) => {
-                  return (
-                    <CurvePath
-                      key={`${commit.hash}-curved-down-path-${curve[0]}}`}
-                      commit={commit}
-                      curve={curve}
-                    />
-                  );
-                })}
+            return (
+              <>
+                {newBranchCurves &&
+                  newBranchCurves.map((c) => {
+                    return (
+                      <CurvePath
+                        key={`${commit.hash}-curved-up-path-${c[0]}`}
+                        commit={commit}
+                        curve={c}
+                      />
+                    );
+                  })}
+                {mergedCurves &&
+                  mergedCurves.map((curve) => {
+                    return (
+                      <CurvePath
+                        key={`${commit.hash}-curved-down-path-${curve[0]}}`}
+                        commit={commit}
+                        curve={curve}
+                      />
+                    );
+                  })}
 
-              <CommitDot
-                key={`${commit.hash}-dot`}
-                commit={commit}
-                commitSpacing={commitSpacing}
-                branchSpacing={branchSpacing}
-                nodeRadius={nodeRadius}
-              />
-            </>
-          );
-        })}
-      </svg>
+                <CommitDot
+                  key={`${commit.hash}-dot`}
+                  commit={commit}
+                  commitSpacing={commitSpacing}
+                  branchSpacing={branchSpacing}
+                  nodeRadius={nodeRadius}
+                />
+              </>
+            );
+          })}
+        </svg>
+      </div>
 
       {Array.from(commitsMap.values()).map((commit) => {
         const { y } = getCommitDotPosition(
@@ -133,7 +134,7 @@ export default function CommitGraph({
         const branch = branchHeads.filter((b) => b.commitHash === commit.hash);
         return (
           <div
-            style={{ left: width + 20, top: y - nodeRadius * 2 }}
+            style={{ top: y - nodeRadius * 2 }}
             className={css.commitInfoContainer}
           >
             <CommitDetails commit={commit} />

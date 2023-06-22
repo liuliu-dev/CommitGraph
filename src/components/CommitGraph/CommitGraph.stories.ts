@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import CommitGraph from "./index";
 import {
+  half,
   notPaintedWellInDoltHub,
   threeBranches,
   twoBranches,
@@ -67,6 +68,16 @@ export const TwoCommits: Story = {
   args: {
     commits: getCommits(twoCommits),
     branchHeads: [],
+    ...style,
+  },
+};
+
+export const halfPage: Story = {
+  args: {
+    commits: getCommits(half),
+    branchHeads: [
+      { branchName: "main", commitHash: "eogh9klv062daesg5s9hpa925budqe7l" },
+    ],
     ...style,
   },
 };
