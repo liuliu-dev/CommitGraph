@@ -2,15 +2,20 @@ import React, { use, useState } from "react";
 import { CommitNode } from "../../helpers/types";
 import { computePosition } from "./computePosition";
 import BranchPath from "../BranchPath";
-import { setCommitNodeColor } from "../../helpers/utils";
-import CurvePath from "../CurvePath";
+import {
+  setBranchAndCommitColor,
+  setCommitNodeColor,
+} from "../../helpers/utils";
+import CurvePath from "../Curves/CurvePath";
 import CommitDetails from "../CommitDetails";
 import css from "./index.module.css";
 import {
   getMergedFromBranchHeadPositions,
   getNewBranchToPath,
-} from "../CurvePath/utils";
+} from "../Curves/utils";
 import CommitDot from "../CommitDot";
+import Branches from "../Branches";
+import Curves from "../Curves";
 export type Props = {
   commits: CommitNode[];
 
@@ -41,85 +46,40 @@ export default function CommitGraph({
       (commitSpacing + nodeRadius * 2) +
     nodeRadius * 4 +
     3;
-  let branchCount = 0;
+  setBranchAndCommitColor(columns, branchColors, commitsMap);
+  const commitsArray = Array.from(commitsMap.values());
 
   return (
     <div className={css.container}>
       <svg width={width} height={height}>
-        {columns.map((column, i) => {
-          return column.map((c) => {
-            const branchColor = branchColors[branchCount % branchColors.length];
-            branchCount++;
-            setCommitNodeColor(c, i, commitsMap, branchColor);
-            const end =
-              c.end === Infinity ? commitsMap.get(c.endCommit.hash).x : c.end;
-            return (
-              <BranchPath
-                key={`branch-path-${i}-${c.start}-${c.end}`}
-                start={c.start}
-                end={end}
-                commitSpacing={commitSpacing}
-                branchSpacing={branchSpacing}
-                branchColor={branchColor}
-                branchOrder={i}
-                nodeRadius={nodeRadius}
-              />
-            );
-          });
-        })}
-        {Array.from(commitsMap.values()).map((commit) => {
-          const mergedCurves = getMergedFromBranchHeadPositions(
-            commit,
-            commitsMap,
-            branchSpacing,
-            commitSpacing,
-            nodeRadius
-          );
-
-          const newBranchCurves = getNewBranchToPath(
-            commit,
-            commitsMap,
-            branchSpacing,
-            commitSpacing,
-            nodeRadius
-          );
-
+        <Branches
+          columns={columns}
+          commitsMap={commitsMap}
+          commitSpacing={commitSpacing}
+          branchSpacing={branchSpacing}
+          nodeRadius={nodeRadius}
+        />
+        <Curves
+          commitsMap={commitsMap}
+          commitsArray={commitsArray}
+          commitSpacing={commitSpacing}
+          branchSpacing={branchSpacing}
+          nodeRadius={nodeRadius}
+        />
+        {commitsArray.map((commit) => {
           return (
-            <>
-              {newBranchCurves &&
-                newBranchCurves.map((c) => {
-                  return (
-                    <CurvePath
-                      key={`${commit.hash}-curved-up-path-${c[0]}`}
-                      commit={commit}
-                      curve={c}
-                    />
-                  );
-                })}
-              {mergedCurves &&
-                mergedCurves.map((curve) => {
-                  return (
-                    <CurvePath
-                      key={`${commit.hash}-curved-down-path-${curve[0]}}`}
-                      commit={commit}
-                      curve={curve}
-                    />
-                  );
-                })}
-
-              <CommitDot
-                key={`${commit.hash}-dot`}
-                commit={commit}
-                commitSpacing={commitSpacing}
-                branchSpacing={branchSpacing}
-                nodeRadius={nodeRadius}
-              />
-            </>
+            <CommitDot
+              key={`${commit.hash}-dot`}
+              commit={commit}
+              commitSpacing={commitSpacing}
+              branchSpacing={branchSpacing}
+              nodeRadius={nodeRadius}
+            />
           );
         })}
       </svg>
 
-      {Array.from(commitsMap.values()).map((commit) => (
+      {commitsArray.map((commit) => (
         <CommitDetails
           commit={commit}
           branchSpacing={branchSpacing}

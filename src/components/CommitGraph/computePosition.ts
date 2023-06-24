@@ -73,9 +73,6 @@ function computePositionY(
 
       // update the column to put the new commit node in
       branchChildren.forEach((child) => {
-        if (child.y < 0) {
-          console.log(child.hash);
-        }
         const last = columns[child.y].pop();
         if (child.y === commit.y) {
           columns[child.y].push({
@@ -97,12 +94,10 @@ function computePositionY(
 
     const mergeChildrenY: number[] = [];
     const mergeChildrenX: number[] = [];
-    commit.children
-      .filter((child) => commitsMap.get(child)!.parents[0] !== commit.hash)
-      .forEach((child) => {
-        mergeChildrenY.push(commitsMap.get(child)!.y);
-        mergeChildrenX.push(commitsMap.get(child)!.x);
-      });
+    commit.children.forEach((child) => {
+      mergeChildrenY.push(commitsMap.get(child)!.y);
+      mergeChildrenX.push(commitsMap.get(child)!.x);
+    });
 
     // if the commit is the second parent of its children (merge), find the child with the smallest x
     const minChildX = Math.min(...mergeChildrenX);

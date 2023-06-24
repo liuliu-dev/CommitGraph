@@ -2,7 +2,7 @@ import React from "react";
 import { CommitNode } from "../../helpers/types";
 import { getCommitDotPosition } from "../CommitDot/utils";
 import css from "./index.module.css";
-import { excerpt } from "../CurvePath/utils";
+import { excerpt } from "../Curves/utils";
 
 type Props = {
   commit: CommitNode;

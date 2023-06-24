@@ -66,3 +66,19 @@ export function setCommitNodeColor(
     }
   });
 }
+
+export function setBranchAndCommitColor(
+  columns: BranchPathType[][],
+  branchColors: string[],
+  commitsMap: Map<string, CommitNode>
+) {
+  let branchCount = 0;
+  columns.map((column, i) => {
+    column.map((c) => {
+      const branchColor = branchColors[branchCount % branchColors.length];
+      c.color = branchColor;
+      branchCount++;
+      setCommitNodeColor(c, i, commitsMap, branchColor);
+    });
+  });
+}

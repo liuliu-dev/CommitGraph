@@ -11,3 +11,5 @@
 
 #logs
 ./storybook.log
+
+.DS_Store

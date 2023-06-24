@@ -16,4 +16,5 @@ export type BranchPathType = {
   start: number;
   end: number;
   endCommit: CommitNode;
+  color?: string;
 };
