@@ -9,4 +9,12 @@ export type CommitNode = {
   message?: string;
   x: number;
   y: number;
+  commitColor?: string;
+};
+
+export type BranchPathType = {
+  start: number;
+  end: number;
+  endCommit: CommitNode;
+  color?: string;
 };

@@ -1,4 +1,4 @@
-import { CommitNode } from "./types";
+import { CommitNode, BranchPathType } from "./types";
 import React from "react";
 
 type Commit = {
@@ -48,4 +48,37 @@ export function hexToColorMatrixVariant(hex?: string): string {
   const g = parseInt(hex.substring(3, 5), 16) / 255;
   const b = parseInt(hex.substring(5, 7), 16) / 255;
   return `0 0 0 0 ${r} 0 0 0 0 ${g} 0 0 0 0 ${b} 0 0 0 0.5 0`;
+}
+
+export function setCommitNodeColor(
+  branch: BranchPathType,
+  columnNumber: number,
+  commitsMap: Map<string, CommitNode>,
+  branchColor: string
+) {
+  commitsMap.forEach((commit) => {
+    if (
+      commit.y === columnNumber &&
+      branch.start <= commit.x &&
+      branch.end >= commit.x
+    ) {
+      commit.commitColor = branchColor;
+    }
+  });
+}
+
+export function setBranchAndCommitColor(
+  columns: BranchPathType[][],
+  branchColors: string[],
+  commitsMap: Map<string, CommitNode>
+) {
+  let branchCount = 0;
+  columns.map((column, i) => {
+    column.map((c) => {
+      const branchColor = branchColors[branchCount % branchColors.length];
+      c.color = branchColor;
+      branchCount++;
+      setCommitNodeColor(c, i, commitsMap, branchColor);
+    });
+  });
 }

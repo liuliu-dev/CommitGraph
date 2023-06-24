@@ -1,0 +1,10 @@
+.container {
+  font-family: "Source Sans Pro";
+  position: absolute;
+  font-size: small;
+}
+
+.msg {
+  margin-top: 6px;
+  color: #5d6280;
+}
