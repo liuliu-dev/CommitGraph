@@ -62,13 +62,13 @@ function computeColumns(
       (child) => commitsMap.get(child)!.parents[0] === commit.hash
     );
 
-    const isFirstCommitOnBranch = commit.children.length === 0;
+    const isLastCommitOnBranch = commit.children.length === 0;
     const isChildOfNonMergeCommit = branchChildren.length > 0;
 
     let commitY: number = -1;
 
     // Update columns based on the commit type
-    if (isFirstCommitOnBranch) {
+    if (isLastCommitOnBranch) {
       // Put commit as a new column
       columns.push([
         { start: index, end: Infinity, endCommitHash: commit.hash },
