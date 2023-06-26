@@ -8,8 +8,12 @@
   width: calc(20vw);
 }
 .commitInfoContainer {
-  display: flex;
-  align-items: baseline;
   position: absolute;
   left: calc(20vw + 1rem);
+}
+
+.details {
+  position: absolute;
+  display: flex;
+  align-items: baseline;
 }

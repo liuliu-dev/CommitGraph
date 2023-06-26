@@ -1,22 +1,18 @@
 import React, { use, useState } from "react";
-import { BranchHeadType, CommitNode } from "../../helpers/types";
+import { BranchType, CommitNode } from "../../helpers/types";
 import { computePosition } from "./computePosition";
-import BranchPath from "../BranchPath";
-import { setCommitNodeColor } from "../../helpers/utils";
-import CurvePath from "../CurvePath";
+import { setBranchAndCommitColor } from "../../helpers/utils";
 import CommitDetails from "../CommitDetails";
 import css from "./index.module.css";
-import {
-  getMergedFromBranchHeadPositions,
-  getNewBranchToPath,
-} from "../CurvePath/utils";
 import CommitDot from "../CommitDot";
+import Branches from "../Branches";
+import Curves from "../Curves";
 import BranchLabel from "../BranchLabel";
 import { getCommitDotPosition } from "../CommitDot/utils";
 
 export type Props = {
   commits: CommitNode[];
-  branchHeads: BranchHeadType[];
+  branchHeads: BranchType[];
   commitSpacing: number;
   branchSpacing: number;
   branchColors: string[];
@@ -45,108 +41,63 @@ export default function CommitGraph({
       (commitSpacing + nodeRadius * 2) +
     nodeRadius * 4 +
     3;
+  setBranchAndCommitColor(columns, branchColors, commitsMap);
+  const commitsArray = Array.from(commitsMap.values());
 
   return (
     <div className={css.container}>
-      <div className={css.svg}>
-        <svg width={width} height={height}>
-          {columns.map((column, i) => {
-            return column.map((c) => {
-              const branchColor =
-                branchColors[c.branchOrder % branchColors.length];
-              setCommitNodeColor(c, i, commitsMap, branchColor);
-              const end =
-                c.end === Infinity ? commitsMap.get(c.endCommit.hash).x : c.end;
-              return (
-                <BranchPath
-                  key={`branch-path-${i}-${c.start}-${c.end}`}
-                  start={c.start}
-                  end={end}
-                  commitSpacing={commitSpacing}
-                  branchSpacing={branchSpacing}
-                  branchColor={branchColor}
-                  branchOrder={i}
-                  nodeRadius={nodeRadius}
+      <svg width={width} height={height}>
+        <Branches
+          columns={columns}
+          commitsMap={commitsMap}
+          commitSpacing={commitSpacing}
+          branchSpacing={branchSpacing}
+          nodeRadius={nodeRadius}
+        />
+        <Curves
+          commitsMap={commitsMap}
+          commitsArray={commitsArray}
+          commitSpacing={commitSpacing}
+          branchSpacing={branchSpacing}
+          nodeRadius={nodeRadius}
+        />
+        {commitsArray.map((commit) => {
+          return (
+            <CommitDot
+              key={`${commit.hash}-dot`}
+              commit={commit}
+              commitSpacing={commitSpacing}
+              branchSpacing={branchSpacing}
+              nodeRadius={nodeRadius}
+            />
+          );
+        })}
+      </svg>
+      <div className={css.commitInfoContainer}>
+        {commitsArray.map((commit) => {
+          const { y } = getCommitDotPosition(
+            branchSpacing,
+            commitSpacing,
+            nodeRadius,
+            commit
+          );
+          const branch = branchHeads.filter(
+            (b) => b.headCommitHash === commit.hash
+          );
+
+          return (
+            <div style={{ top: y - nodeRadius * 2 }} className={css.details}>
+              <CommitDetails commit={commit} />
+              {!!branch.length && (
+                <BranchLabel
+                  branchName={branch[0].branchName}
+                  branchColor={commit.commitColor}
                 />
-              );
-            });
-          })}
-          {Array.from(commitsMap.values()).map((commit) => {
-            const mergedCurves = getMergedFromBranchHeadPositions(
-              commit,
-              commitsMap,
-              branchSpacing,
-              commitSpacing,
-              nodeRadius
-            );
-
-            const newBranchCurves = getNewBranchToPath(
-              commit,
-              commitsMap,
-              branchSpacing,
-              commitSpacing,
-              nodeRadius
-            );
-
-            return (
-              <>
-                {newBranchCurves &&
-                  newBranchCurves.map((c) => {
-                    return (
-                      <CurvePath
-                        key={`${commit.hash}-curved-up-path-${c[0]}`}
-                        commit={commit}
-                        curve={c}
-                      />
-                    );
-                  })}
-                {mergedCurves &&
-                  mergedCurves.map((curve) => {
-                    return (
-                      <CurvePath
-                        key={`${commit.hash}-curved-down-path-${curve[0]}}`}
-                        commit={commit}
-                        curve={curve}
-                      />
-                    );
-                  })}
-
-                <CommitDot
-                  key={`${commit.hash}-dot`}
-                  commit={commit}
-                  commitSpacing={commitSpacing}
-                  branchSpacing={branchSpacing}
-                  nodeRadius={nodeRadius}
-                />
-              </>
-            );
-          })}
-        </svg>
+              )}
+            </div>
+          );
+        })}
       </div>
-
-      {Array.from(commitsMap.values()).map((commit) => {
-        const { y } = getCommitDotPosition(
-          branchSpacing,
-          commitSpacing,
-          nodeRadius,
-          commit
-        );
-        const branch = branchHeads.filter((b) => b.commitHash === commit.hash);
-        return (
-          <div
-            style={{ top: y - nodeRadius * 2 }}
-            className={css.commitInfoContainer}
-          >
-            <CommitDetails commit={commit} />
-            {!!branch.length && (
-              <BranchLabel
-                branchName={branch[0].branchName}
-                branchColor={commit.commitColor}
-              />
-            )}
-          </div>
-        );
-      })}
     </div>
   );
 }

@@ -46,10 +46,13 @@ export const ThreeBranches: Story = {
   args: {
     commits: getCommits(threeBranches),
     branchHeads: [
-      { branchName: "main", commitHash: "bgpqkjvf2mqoi9lq4upamdj0ke7e8iuo" },
+      {
+        branchName: "main",
+        headCommitHash: "bgpqkjvf2mqoi9lq4upamdj0ke7e8iuo",
+      },
       {
         branchName: "liuliu/workspace-1667427424",
-        commitHash: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
+        headCommitHash: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
       },
     ],
     ...style,
@@ -76,7 +79,10 @@ export const halfPage: Story = {
   args: {
     commits: getCommits(half),
     branchHeads: [
-      { branchName: "main", commitHash: "eogh9klv062daesg5s9hpa925budqe7l" },
+      {
+        branchName: "main",
+        headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
+      },
     ],
     ...style,
   },
@@ -86,7 +92,10 @@ export const Multiple: Story = {
   args: {
     commits: getCommits(notPaintedWellInDoltHub),
     branchHeads: [
-      { branchName: "main", commitHash: "eogh9klv062daesg5s9hpa925budqe7l" },
+      {
+        branchName: "main",
+        headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
+      },
     ],
     ...style,
   },

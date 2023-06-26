@@ -15,11 +15,13 @@ export type CommitNode = {
 export type BranchPathType = {
   start: number;
   end: number;
-  endCommit: CommitNode;
+  endCommitHash: string;
+  endCommit?: CommitNode;
+  color?: string;
   branchOrder: number;
 };
 
-export type BranchHeadType = {
+export type BranchType = {
   branchName: string;
-  commitHash: string;
+  headCommitHash: string;
 };

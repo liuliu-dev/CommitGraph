@@ -1,17 +1,16 @@
 import { BranchPathType, CommitNode } from "../../helpers/types";
 
-function computePositionX(
+function topologicalOrderCommits(
   commits: CommitNode[],
-  commitsMap: Map<string, CommitNode>,
-  seen: Map<string, boolean>
-) {
+  commitsMap: Map<string, CommitNode>
+): string[] {
   // sort commits by committer date from latest to oldest
   const commitsSortByCommitterDate = commits.sort(
     (a, b) => b.committerDate.getTime() - a.committerDate.getTime()
   );
 
-  let sortedCommits: CommitNode[] = [];
-  let i = 0;
+  let sortedCommits: string[] = [];
+  const seen = new Map<string, boolean>();
 
   function dfs(commit: CommitNode) {
     const commitHash = commit.hash;
@@ -22,139 +21,170 @@ function computePositionX(
     commit.children.forEach((children) => {
       dfs(commitsMap.get(children)!);
     });
-    commit.x = i;
-    i++;
-    sortedCommits.push(commit);
-    return { i, sortedCommits, seen };
+    sortedCommits.push(commitHash);
   }
 
   // compute topological order of commits
   commitsSortByCommitterDate.forEach((commit) => {
     dfs(commit);
   });
-  return { sortedCommits, commitsMap };
+
+  return sortedCommits;
 }
 
-function checkOverlap(
-  startCol: number,
-  gap: number[],
-  columns: BranchPathType[][]
+function computeColumns(
+  orderedCommitHashes: string[],
+  commitsMap: Map<string, CommitNode>
 ) {
-  for (let i = startCol + 1; i < columns.length; i++) {
-    const column = columns[i];
-    const last = column[column.length - 1];
+  // Branch positions organized as columns, each column can have multiple branches
+  const columns: BranchPathType[][] = [];
+  // Column position of each commit
+  const commitYs: Map<string, number> = new Map();
 
-    if (gap[0] >= last.end) {
-      return i;
-    }
+  const commitXs = new Map<string, number>(
+    orderedCommitHashes.map((commitHash, index) => [commitHash, index])
+  );
+
+  function updateColumns(col: number, end: number, endCommitHash: string) {
+    columns[col][columns[col].length - 1] = {
+      ...columns[col][columns[col].length - 1],
+      end,
+      endCommitHash,
+    };
   }
-  return -1;
-}
 
-function computePositionY(
-  computedXCommits: CommitNode[],
-  columns: BranchPathType[][],
-  commitsMap: Map<string, CommitNode>,
-  branchOrder: number
-) {
-  computedXCommits.forEach((commit, n) => {
-    // if the commit does not have any children, then it's the head of a branch, and it should be at a new column
-    if (commit.children.length === 0) {
+  // branch order is used to determine the color of the branch
+  let branchOrder: number = 0;
+
+  // Compute column position of each commit by topological order
+  // So the child commit will always be computed before its parent commit
+  orderedCommitHashes.forEach((commitHash, index) => {
+    const commit = commitsMap.get(commitHash)!;
+
+    const branchChildren = commit.children.filter(
+      (child) => commitsMap.get(child)!.parents[0] === commit.hash
+    );
+
+    const isLastCommitOnBranch = commit.children.length === 0;
+    const isChildOfNonMergeCommit = branchChildren.length > 0;
+
+    let commitY: number = -1;
+
+    // Update columns based on the commit type
+    if (isLastCommitOnBranch) {
+      // Put commit as a new column
       columns.push([
-        { start: commit.x, end: Infinity, endCommit: commit, branchOrder },
+        {
+          start: index,
+          end: Infinity,
+          endCommitHash: commit.hash,
+          branchOrder,
+        },
       ]);
       branchOrder++;
-      commit.y = columns.length - 1;
-      return;
-    }
-    const branchChildren = commit.children
-      .filter((child) => commitsMap.get(child)!.parents[0] === commit.hash)
-      .map((child) => commitsMap.get(child)!);
+      commitY = columns.length - 1;
+    } else if (isChildOfNonMergeCommit) {
+      // Put commit to its left most column of its children (non-merge commit)
 
-    // if the commit is the first parent of its children (extension of a branch), then it should be at the same y as the left most child, and delete other children's y from the forbiddenY map
-    if (branchChildren.length > 0) {
-      commit.y = Math.min(...branchChildren.map((child) => child.y));
+      const branchChildrenYs = branchChildren.map((childHash) =>
+        commitYs.get(childHash)
+      );
 
-      // update the column to put the new commit node in
-      branchChildren.forEach((child) => {
-        if (child.y < 0) {
-          console.log(child.hash);
+      // Set the commit to the left most column of its children
+      commitY = Math.min(...branchChildrenYs);
+
+      // Update the left most column
+      updateColumns(commitY, Infinity, commit.hash);
+
+      // Update other columns with the commit as the end commit
+      branchChildrenYs
+        .filter((childY) => childY !== commitY)
+        .forEach((childY) => {
+          updateColumns(childY!, index - 1, commit.hash);
+        });
+    } else {
+      // Find a column so the commit can connect to its children (merge commit) without overlapping with existing branches on columns
+      // Otherwise, put the commit as a new column
+
+      // Highest pos of child commit
+      let minChildX: number = Infinity;
+      // Right most pos of child commit
+      let maxChildY: number = -1;
+
+      commit.children.forEach((child) => {
+        const childX = commitXs.get(child)!;
+        const childY = commitYs.get(child)!;
+
+        if (childX < minChildX) {
+          minChildX = childX;
         }
-        const last = columns[child.y].pop();
-        if (child.y === commit.y) {
-          columns[child.y].push({
-            start: last.start,
+
+        if (childY > maxChildY) {
+          maxChildY = childY;
+        }
+      });
+
+      const colFitAtEnd = columns.slice(maxChildY + 1).findIndex((column) => {
+        return minChildX >= column[column.length - 1].end;
+      });
+
+      const col = colFitAtEnd === -1 ? -1 : maxChildY + 1 + colFitAtEnd;
+
+      if (col === -1) {
+        // minChildX + 1 so it will be extended by the merge curve
+        columns.push([
+          {
+            start: minChildX + 1,
             end: Infinity,
-            endCommit: commit,
-            branchOrder: last.branchOrder,
-          });
-        } else {
-          columns[child.y].push({
-            start: last.start,
-            end: commit.x - 1,
-            endCommit: commit,
-            branchOrder: last.branchOrder,
-          });
-        }
-      });
-
-      return;
+            endCommitHash: commit.hash,
+            branchOrder,
+          },
+        ]);
+        branchOrder++;
+        commitY = columns.length - 1;
+      } else {
+        commitY = col;
+        columns[col].push({
+          start: minChildX + 1,
+          end: Infinity,
+          endCommitHash: commit.hash,
+          branchOrder,
+        });
+        branchOrder++;
+      }
     }
 
-    const mergeChildrenY: number[] = [];
-    const mergeChildrenX: number[] = [];
-    commit.children
-      .filter((child) => commitsMap.get(child)!.parents[0] !== commit.hash)
-      .forEach((child) => {
-        mergeChildrenY.push(commitsMap.get(child)!.y);
-        mergeChildrenX.push(commitsMap.get(child)!.x);
-      });
-
-    // if the commit is the second parent of its children (merge), find the child with the smallest x
-    const minChildX = Math.min(...mergeChildrenX);
-    const maxChildY = Math.max(...mergeChildrenY);
-
-    const gap = [minChildX, commit.x];
-    const col = checkOverlap(maxChildY, gap, columns);
-    if (col === -1) {
-      // minChildX + 1 so it will be extended by the merge curve
-      columns.push([
-        { start: minChildX + 1, end: Infinity, endCommit: commit, branchOrder },
-      ]);
-      commit.y = columns.length - 1;
-      branchOrder++;
-      return;
-    }
-    commit.y = col;
-    columns[col].push({
-      start: minChildX + 1,
-      end: Infinity,
-      endCommit: commit,
-      branchOrder,
-    });
-    branchOrder++;
-    return;
+    commitYs.set(commitHash, commitY);
   });
-  return { computedXCommits, columns };
+
+  return { columns, commitYs };
 }
 
 export function computePosition(commits: CommitNode[]) {
-  const seen = new Map<string, boolean>();
+  const commitsMap = new Map<string, CommitNode>(
+    commits.map((commit) => [commit.hash, commit])
+  );
 
-  const commitsMap = new Map<string, CommitNode>();
-  // create a map of commits
-  commits.forEach((commit) => {
-    commitsMap.set(commit.hash, commit);
+  const orderedCommitHashes = topologicalOrderCommits(commits, commitsMap);
+  const { columns, commitYs } = computeColumns(orderedCommitHashes, commitsMap);
+
+  // To be compatible with exisiting data structure used in render
+  // Add position info to commits and end commit to columns
+  const commitsMapWithPos = new Map<string, CommitNode>(
+    orderedCommitHashes.map((commitHash, ix) => [
+      commitHash,
+      { ...commitsMap.get(commitHash), x: ix, y: commitYs.get(commitHash)! },
+    ])
+  );
+
+  const columnsWithEndCommit = columns.map((column) => {
+    return column.map((branchPath) => {
+      return {
+        ...branchPath,
+        endCommit: commitsMapWithPos.get(branchPath.endCommitHash),
+      };
+    });
   });
 
-  const columns: BranchPathType[][] = [];
-  let branchOrder = 0;
-
-  const { sortedCommits: computedX } = computePositionX(
-    commits,
-    commitsMap,
-    seen
-  );
-  computePositionY(computedX, columns, commitsMap, branchOrder);
-  return { columns, commitsMap };
+  return { columns: columnsWithEndCommit, commitsMap: commitsMapWithPos };
 }
