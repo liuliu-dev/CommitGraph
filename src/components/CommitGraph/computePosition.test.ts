@@ -1,11 +1,9 @@
-import exp from "constants";
 import {
   notPaintedWellInDoltHub,
   threeBranches,
   twoBranches,
   twoCommits,
 } from "../../helpers/sampleCommits";
-import { BranchPathType } from "../../helpers/types";
 import { getCommits } from "../../helpers/utils";
 import { computePosition } from "./computePosition";
 
