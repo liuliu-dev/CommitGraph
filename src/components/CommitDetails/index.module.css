@@ -1,7 +1,12 @@
 .container {
   font-family: "Source Sans Pro";
-  position: absolute;
   font-size: small;
+  width: calc(50vw);
+  max-width: 500px;
+}
+
+.bold {
+  font-weight: 600;
 }
 
 .msg {

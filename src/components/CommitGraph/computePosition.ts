@@ -53,6 +53,9 @@ function computeColumns(
     };
   }
 
+  // branch order is used to determine the color of the branch
+  let branchOrder: number = 0;
+
   // Compute column position of each commit by topological order
   // So the child commit will always be computed before its parent commit
   orderedCommitHashes.forEach((commitHash, index) => {
@@ -71,8 +74,14 @@ function computeColumns(
     if (isLastCommitOnBranch) {
       // Put commit as a new column
       columns.push([
-        { start: index, end: Infinity, endCommitHash: commit.hash },
+        {
+          start: index,
+          end: Infinity,
+          endCommitHash: commit.hash,
+          branchOrder,
+        },
       ]);
+      branchOrder++;
       commitY = columns.length - 1;
     } else if (isChildOfNonMergeCommit) {
       // Put commit to its left most column of its children (non-merge commit)
@@ -128,8 +137,10 @@ function computeColumns(
             start: minChildX + 1,
             end: Infinity,
             endCommitHash: commit.hash,
+            branchOrder,
           },
         ]);
+        branchOrder++;
         commitY = columns.length - 1;
       } else {
         commitY = col;
@@ -137,7 +148,9 @@ function computeColumns(
           start: minChildX + 1,
           end: Infinity,
           endCommitHash: commit.hash,
+          branchOrder,
         });
+        branchOrder++;
       }
     }
 

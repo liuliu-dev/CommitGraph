@@ -18,4 +18,10 @@ export type BranchPathType = {
   endCommitHash: string;
   endCommit?: CommitNode;
   color?: string;
+  branchOrder: number;
+};
+
+export type BranchType = {
+  branchName: string;
+  headCommitHash: string;
 };

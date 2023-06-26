@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import CommitGraph from "./index";
 import {
+  half,
   notPaintedWellInDoltHub,
   threeBranches,
   twoBranches,
@@ -44,6 +45,16 @@ const style = {
 export const ThreeBranches: Story = {
   args: {
     commits: getCommits(threeBranches),
+    branchHeads: [
+      {
+        branchName: "main",
+        headCommitHash: "bgpqkjvf2mqoi9lq4upamdj0ke7e8iuo",
+      },
+      {
+        branchName: "liuliu/workspace-1667427424",
+        headCommitHash: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
+      },
+    ],
     ...style,
   },
 };
@@ -51,6 +62,7 @@ export const ThreeBranches: Story = {
 export const TwoBranches: Story = {
   args: {
     commits: getCommits(twoBranches),
+    branchHeads: [],
     ...style,
   },
 };
@@ -58,6 +70,20 @@ export const TwoBranches: Story = {
 export const TwoCommits: Story = {
   args: {
     commits: getCommits(twoCommits),
+    branchHeads: [],
+    ...style,
+  },
+};
+
+export const halfPage: Story = {
+  args: {
+    commits: getCommits(half),
+    branchHeads: [
+      {
+        branchName: "main",
+        headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
+      },
+    ],
     ...style,
   },
 };
@@ -65,6 +91,12 @@ export const TwoCommits: Story = {
 export const Multiple: Story = {
   args: {
     commits: getCommits(notPaintedWellInDoltHub),
+    branchHeads: [
+      {
+        branchName: "main",
+        headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
+      },
+    ],
     ...style,
   },
 };

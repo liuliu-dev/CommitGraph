@@ -1,0 +1,12 @@
+.outer {
+  font-size: small;
+  border: 1px solid;
+  width: fit-content;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  border-radius: 50px;
+  margin-left: 2rem;
+  font-weight: 600;
+}

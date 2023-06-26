@@ -1,24 +1,18 @@
 import React, { use, useState } from "react";
-import { CommitNode } from "../../helpers/types";
+import { BranchType, CommitNode } from "../../helpers/types";
 import { computePosition } from "./computePosition";
-import BranchPath from "../BranchPath";
-import {
-  setBranchAndCommitColor,
-  setCommitNodeColor,
-} from "../../helpers/utils";
-import CurvePath from "../Curves/CurvePath";
+import { setBranchAndCommitColor } from "../../helpers/utils";
 import CommitDetails from "../CommitDetails";
 import css from "./index.module.css";
-import {
-  getMergedFromBranchHeadPositions,
-  getNewBranchToPath,
-} from "../Curves/utils";
 import CommitDot from "../CommitDot";
 import Branches from "../Branches";
 import Curves from "../Curves";
+import BranchLabel from "../BranchLabel";
+import { getCommitDotPosition } from "../CommitDot/utils";
+
 export type Props = {
   commits: CommitNode[];
-
+  branchHeads: BranchType[];
   commitSpacing: number;
   branchSpacing: number;
   branchColors: string[];
@@ -31,6 +25,7 @@ export default function CommitGraph({
   branchSpacing,
   branchColors,
   nodeRadius,
+  branchHeads,
 }: Props) {
   const { columns, commitsMap } = computePosition(commits);
   const width = columns.length * (branchSpacing + nodeRadius * 2) + 3;
@@ -47,47 +42,64 @@ export default function CommitGraph({
     nodeRadius * 4 +
     3;
   setBranchAndCommitColor(columns, branchColors, commitsMap);
-  const commitsArray = Array.from(commitsMap.values());
+  const commitsNodes = Array.from(commitsMap.values());
 
   return (
     <div className={css.container}>
-      <svg width={width} height={height}>
-        <Branches
-          columns={columns}
-          commitsMap={commitsMap}
-          commitSpacing={commitSpacing}
-          branchSpacing={branchSpacing}
-          nodeRadius={nodeRadius}
-        />
-        <Curves
-          commitsMap={commitsMap}
-          commitsArray={commitsArray}
-          commitSpacing={commitSpacing}
-          branchSpacing={branchSpacing}
-          nodeRadius={nodeRadius}
-        />
-        {commitsArray.map((commit) => {
+      <div className={css.svg}>
+        <svg width={width} height={height}>
+          <Branches
+            columns={columns}
+            commitsMap={commitsMap}
+            commitSpacing={commitSpacing}
+            branchSpacing={branchSpacing}
+            nodeRadius={nodeRadius}
+          />
+          <Curves
+            commitsMap={commitsMap}
+            commits={commitsNodes}
+            commitSpacing={commitSpacing}
+            branchSpacing={branchSpacing}
+            nodeRadius={nodeRadius}
+          />
+          {commitsNodes.map((commit) => {
+            return (
+              <CommitDot
+                key={`${commit.hash}-dot`}
+                commit={commit}
+                commitSpacing={commitSpacing}
+                branchSpacing={branchSpacing}
+                nodeRadius={nodeRadius}
+              />
+            );
+          })}
+        </svg>
+      </div>
+      <div className={css.commitInfoContainer}>
+        {commitsNodes.map((commit) => {
+          const { y } = getCommitDotPosition(
+            branchSpacing,
+            commitSpacing,
+            nodeRadius,
+            commit
+          );
+          const branch = branchHeads.filter(
+            (b) => b.headCommitHash === commit.hash
+          );
+
           return (
-            <CommitDot
-              key={`${commit.hash}-dot`}
-              commit={commit}
-              commitSpacing={commitSpacing}
-              branchSpacing={branchSpacing}
-              nodeRadius={nodeRadius}
-            />
+            <div style={{ top: y - nodeRadius * 2 }} className={css.details}>
+              <CommitDetails commit={commit} />
+              {!!branch.length && (
+                <BranchLabel
+                  branchName={branch[0].branchName}
+                  branchColor={commit.commitColor}
+                />
+              )}
+            </div>
           );
         })}
-      </svg>
-
-      {commitsArray.map((commit) => (
-        <CommitDetails
-          commit={commit}
-          branchSpacing={branchSpacing}
-          commitSpacing={commitSpacing}
-          nodeRadius={nodeRadius}
-          left={width + 20}
-        />
-      ))}
+      </div>
     </div>
   );
 }
