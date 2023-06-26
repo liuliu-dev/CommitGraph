@@ -42,39 +42,41 @@ export default function CommitGraph({
     nodeRadius * 4 +
     3;
   setBranchAndCommitColor(columns, branchColors, commitsMap);
-  const commitsArray = Array.from(commitsMap.values());
+  const commitsNodes = Array.from(commitsMap.values());
 
   return (
     <div className={css.container}>
-      <svg width={width} height={height}>
-        <Branches
-          columns={columns}
-          commitsMap={commitsMap}
-          commitSpacing={commitSpacing}
-          branchSpacing={branchSpacing}
-          nodeRadius={nodeRadius}
-        />
-        <Curves
-          commitsMap={commitsMap}
-          commitsArray={commitsArray}
-          commitSpacing={commitSpacing}
-          branchSpacing={branchSpacing}
-          nodeRadius={nodeRadius}
-        />
-        {commitsArray.map((commit) => {
-          return (
-            <CommitDot
-              key={`${commit.hash}-dot`}
-              commit={commit}
-              commitSpacing={commitSpacing}
-              branchSpacing={branchSpacing}
-              nodeRadius={nodeRadius}
-            />
-          );
-        })}
-      </svg>
+      <div className={css.svg}>
+        <svg width={width} height={height}>
+          <Branches
+            columns={columns}
+            commitsMap={commitsMap}
+            commitSpacing={commitSpacing}
+            branchSpacing={branchSpacing}
+            nodeRadius={nodeRadius}
+          />
+          <Curves
+            commitsMap={commitsMap}
+            commitsArray={commitsNodes}
+            commitSpacing={commitSpacing}
+            branchSpacing={branchSpacing}
+            nodeRadius={nodeRadius}
+          />
+          {commitsNodes.map((commit) => {
+            return (
+              <CommitDot
+                key={`${commit.hash}-dot`}
+                commit={commit}
+                commitSpacing={commitSpacing}
+                branchSpacing={branchSpacing}
+                nodeRadius={nodeRadius}
+              />
+            );
+          })}
+        </svg>
+      </div>
       <div className={css.commitInfoContainer}>
-        {commitsArray.map((commit) => {
+        {commitsNodes.map((commit) => {
           const { y } = getCommitDotPosition(
             branchSpacing,
             commitSpacing,
