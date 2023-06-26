@@ -57,7 +57,7 @@ export default function CommitGraph({
           />
           <Curves
             commitsMap={commitsMap}
-            commitsArray={commitsNodes}
+            commits={commitsNodes}
             commitSpacing={commitSpacing}
             branchSpacing={branchSpacing}
             nodeRadius={nodeRadius}

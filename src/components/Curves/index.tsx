@@ -4,7 +4,7 @@ import CurvePath from "./CurvePath";
 import { getMergedFromBranchHeadPositions, getNewBranchToPath } from "./utils";
 
 type Props = {
-  commitsArray: CommitNode[];
+  commits: CommitNode[];
   commitsMap: Map<string, CommitNode>;
   commitSpacing: number;
   branchSpacing: number;
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function Curves({
-  commitsArray,
+  commits,
   commitsMap,
   commitSpacing,
   branchSpacing,
@@ -20,7 +20,7 @@ export default function Curves({
 }: Props) {
   return (
     <>
-      {commitsArray.map((commit) => {
+      {commits.map((commit) => {
         const mergedCurves = getMergedFromBranchHeadPositions(
           commit,
           commitsMap,
