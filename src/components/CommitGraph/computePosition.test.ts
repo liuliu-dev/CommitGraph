@@ -14,6 +14,7 @@ type BranchPathTestType = {
   end: number;
   endCommit: CommitNodeWithPos;
   color?: string;
+  branchOrder?: number;
 };
 
 type CommitNodeWithPos = {
@@ -38,6 +39,7 @@ describe("computePosition", () => {
             x: 26,
             y: 0,
           },
+          branchOrder: 0,
         },
       ],
       [
@@ -49,6 +51,7 @@ describe("computePosition", () => {
             x: 10,
             y: 0,
           },
+          branchOrder: 1,
         },
         {
           start: 12,
@@ -58,6 +61,7 @@ describe("computePosition", () => {
             x: 15,
             y: 1,
           },
+          branchOrder: 4,
         },
       ],
       [
@@ -69,6 +73,7 @@ describe("computePosition", () => {
             x: 10,
             y: 0,
           },
+          branchOrder: 2,
         },
         {
           start: 20,
@@ -78,6 +83,7 @@ describe("computePosition", () => {
             x: 27,
             y: 2,
           },
+          branchOrder: 5,
         },
       ],
       [
@@ -89,6 +95,7 @@ describe("computePosition", () => {
             x: 10,
             y: 0,
           },
+          branchOrder: 3,
         },
         {
           start: 21,
@@ -98,6 +105,7 @@ describe("computePosition", () => {
             x: 28,
             y: 3,
           },
+          branchOrder: 6,
         },
       ],
       [
@@ -109,6 +117,7 @@ describe("computePosition", () => {
             x: 29,
             y: 4,
           },
+          branchOrder: 7,
         },
       ],
     ];
@@ -156,6 +165,7 @@ describe("computePosition", () => {
             y: v.endCommit.y,
             hash: v.endCommit.hash,
           },
+          branchOrder: v.branchOrder,
         }))
       )
     ).toEqual(expectedColumns);
@@ -183,6 +193,7 @@ describe("computePosition", () => {
             x: 28,
             y: 0,
           },
+          branchOrder: 0,
         },
       ],
       [
@@ -194,6 +205,7 @@ describe("computePosition", () => {
             x: 10,
             y: 0,
           },
+          branchOrder: 1,
         },
       ],
       [
@@ -205,6 +217,7 @@ describe("computePosition", () => {
             x: 13,
             y: 0,
           },
+          branchOrder: 2,
         },
       ],
     ];
@@ -219,6 +232,7 @@ describe("computePosition", () => {
             y: v.endCommit.y,
             hash: v.endCommit.hash,
           },
+          branchOrder: v.branchOrder,
         }))
       )
     ).toEqual(expectedColumns);
@@ -278,6 +292,7 @@ describe("computePosition", () => {
             x: 8,
             y: 0,
           },
+          branchOrder: 0,
         },
       ],
       [
@@ -289,6 +304,7 @@ describe("computePosition", () => {
             x: 6,
             y: 0,
           },
+          branchOrder: 1,
         },
       ],
     ];
@@ -315,6 +331,7 @@ describe("computePosition", () => {
             y: v.endCommit.y,
             hash: v.endCommit.hash,
           },
+          branchOrder: v.branchOrder,
         }))
       )
     ).toEqual(expectedColumns);
@@ -342,6 +359,7 @@ describe("computePosition", () => {
             x: 1,
             y: 0,
           },
+          branchOrder: 0,
         },
       ],
     ];
@@ -361,6 +379,7 @@ describe("computePosition", () => {
             y: v.endCommit.y,
             hash: v.endCommit.hash,
           },
+          branchOrder: v.branchOrder,
         }))
       )
     ).toEqual(expectedColumns);
