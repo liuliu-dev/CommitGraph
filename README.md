@@ -46,7 +46,18 @@ const MyComponent = () => {
     // }
   ];
 
-  return <CommitGraph commits={commits} branchHeads={branchHeads} />;
+  return (
+    <CommitGraph
+      commits={commits}
+      branchHeads={branchHeads}
+      style={{
+        commitSpacing: 50,
+        branchSpacing: 20,
+        branchColors: ["#FF0000", "#00FF00", "#0000FF"],
+        nodeRadius: 2,
+      }}
+    />
+  );
 };
 
 export default MyComponent;
@@ -74,3 +85,12 @@ An array of branch head objects representing the branch heads in the commit grap
 
 - `branchName` (string): The name of the branch.
 - `headCommitHash` (string): The commit hash at the head of the branch.
+
+### `style` (object, optional)
+
+An optional object specifying the styling options for the commit graph. The `style` object should have the following properties:
+
+- `commitSpacing` (number): The vertical spacing between commits.
+- `branchSpacing` (number): The horizontal spacing between branches.
+- `branchColors` (array of strings): An array of colors to be used for different branches. Default: `['#FF0000', '#00FF00', '#0000FF']`.
+- `nodeRadius` (number): The radius of the commit node circles.
