@@ -1,3 +1,17 @@
+export type Commit = {
+  hash: string;
+  ownerName: string;
+  repoName: string;
+  committer: {
+    username: string;
+    displayName: string;
+    emailAddress: string;
+  };
+  message: string;
+  parents: string[];
+  committedAt: number;
+};
+
 export type CommitNode = {
   hash: string;
   children: string[];
@@ -24,4 +38,11 @@ export type BranchPathType = {
 export type BranchType = {
   branchName: string;
   headCommitHash: string;
+};
+
+export type GraphStyle = {
+  commitSpacing: number;
+  branchSpacing: number;
+  branchColors: string[];
+  nodeRadius: number;
 };
