@@ -11,11 +11,16 @@ export default function CommitDetails({ commit }: Props) {
   const hashBr = commit.hash.slice(0, 7);
   const committer = commit.committer;
   const message = commit.message;
+  const commitHashAuthorDate = `${hashBr} - ${committer} - ${date}`;
 
   return (
     <div className={css.container}>
       <div style={{ color: commit.commitColor }}>
-        <span className={css.bold}>{`${hashBr} - ${committer} - ${date}`}</span>
+        {commit.commitLink ? (
+          <a className={css.bold}>{commitHashAuthorDate}</a>
+        ) : (
+          <span className={css.bold}>{commitHashAuthorDate}</span>
+        )}
       </div>
       <div className={css.msg}>{excerpt(message, 200)}</div>
     </div>

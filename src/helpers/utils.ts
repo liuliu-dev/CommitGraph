@@ -38,6 +38,7 @@ export function getCommits(commits: Commit[]): CommitNode[] {
       committer: commit.committer.displayName,
       message: commit.message,
       committerDate: new Date(commit.committedAt),
+      commitLink: commit.commitLink,
       x: -1,
       y: -1,
     };

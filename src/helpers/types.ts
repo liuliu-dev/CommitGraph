@@ -10,6 +10,7 @@ export type Commit = {
   message: string;
   parents: string[];
   committedAt: number;
+  commitLink?: string;
 };
 
 export type CommitNode = {
@@ -24,6 +25,7 @@ export type CommitNode = {
   x: number;
   y: number;
   commitColor?: string;
+  commitLink?: string;
 };
 
 export type BranchPathType = {
