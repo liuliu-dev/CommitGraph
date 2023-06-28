@@ -74,10 +74,14 @@ An array of commit objects representing the commit history. Each commit object s
 - `hash` (string): The unique hash identifier of the commit.
 - `ownerName` (string): The name of the repository owner.
 - `repoName` (string): The name of the repository.
-- `committer` (string): The name of the person who made the commit.
+- `committer` (object): The person who made the commit, it has following properties:
+  - `username` (string)
+  - `displayName` (string)
+  - `emailAddress` (string)
 - `message` (string): The commit message.
 - `parents` (array of strings): An array of commit hashes representing the parent commits.
 - `committedAt` (timestamp): The timestamp when the commit was made.
+- `commitLink` (string, optional): the external link to the commit.
 
 ### `branchHeads` (array)
 
