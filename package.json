@@ -1,4 +1,25 @@
 {
+  "name": "commit-graph",
+  "private": true,
+  "version": "1.0.0",
+  "author": "Liu Liu <liuliu.developer@gmail.com>",
+  "description": "A React component to visualize a commit graph.",
+  "contributors": [
+    {
+      "name": "Xiang Zhu",
+      "email": "zxwind@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liuliu-dev/CommitGraph"
+  },
+  "license": "MIT",
+  "keywords": [
+    "commit",
+    "graph",
+    "react"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "rollup -c --bundleConfigAsCjs",
