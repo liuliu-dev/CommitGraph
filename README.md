@@ -104,3 +104,11 @@ An optional object specifying the styling options for the commit graph. The `sty
 - `branchSpacing` (number): The horizontal spacing between branches.
 - `branchColors` (array of strings): An array of colors to be used for different branches. Default: `['#FF0000', '#00FF00', '#0000FF']`.
 - `nodeRadius` (number): The radius of the commit node circles.
+
+## Storybook
+
+You can view the demo by running storybook:
+
+```shell
+npm run storybook
+```
