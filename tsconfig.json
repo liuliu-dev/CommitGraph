@@ -20,6 +20,11 @@
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/**/*.test.ts",
+    "src/**/**/*.stories.ts",
+    "src/**/sampleCommits.ts"
+  ]
 }

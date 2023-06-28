@@ -159,9 +159,9 @@ describe("computePosition", () => {
           start: v.start,
           end: v.end,
           endCommit: {
-            x: v.endCommit.x,
-            y: v.endCommit.y,
-            hash: v.endCommit.hash,
+            x: v.endCommit?.x,
+            y: v.endCommit?.y,
+            hash: v.endCommit?.hash,
           },
           branchOrder: v.branchOrder,
         }))
@@ -171,8 +171,8 @@ describe("computePosition", () => {
     expect(commitsMap.size).toBe(expectedCommitsMap.size);
 
     commitsMap.forEach((v, k) => {
-      expect(expectedCommitsMap.get(k).x).toBe(v.x);
-      expect(expectedCommitsMap.get(k).y).toBe(v.y);
+      expect(expectedCommitsMap.get(k)?.x).toBe(v.x);
+      expect(expectedCommitsMap.get(k)?.y).toBe(v.y);
     });
   });
 
@@ -226,9 +226,9 @@ describe("computePosition", () => {
           start: v.start,
           end: v.end,
           endCommit: {
-            x: v.endCommit.x,
-            y: v.endCommit.y,
-            hash: v.endCommit.hash,
+            x: v.endCommit?.x,
+            y: v.endCommit?.y,
+            hash: v.endCommit?.hash,
           },
           branchOrder: v.branchOrder,
         }))
@@ -270,8 +270,8 @@ describe("computePosition", () => {
     expect(commitsMap.size).toBe(expectedCommitsMap.size);
 
     commitsMap.forEach((v, k) => {
-      expect(expectedCommitsMap.get(k).x).toBe(v.x);
-      expect(expectedCommitsMap.get(k).y).toBe(v.y);
+      expect(expectedCommitsMap.get(k)?.x).toBe(v.x);
+      expect(expectedCommitsMap.get(k)?.y).toBe(v.y);
     });
   });
 
@@ -325,9 +325,9 @@ describe("computePosition", () => {
           start: v.start,
           end: v.end,
           endCommit: {
-            x: v.endCommit.x,
-            y: v.endCommit.y,
-            hash: v.endCommit.hash,
+            x: v.endCommit?.x,
+            y: v.endCommit?.y,
+            hash: v.endCommit?.hash,
           },
           branchOrder: v.branchOrder,
         }))
@@ -337,8 +337,8 @@ describe("computePosition", () => {
     expect(commitsMap.size).toBe(expectedCommitsMap.size);
 
     commitsMap.forEach((v, k) => {
-      expect(expectedCommitsMap.get(k).x).toBe(v.x);
-      expect(expectedCommitsMap.get(k).y).toBe(v.y);
+      expect(expectedCommitsMap.get(k)?.x).toBe(v.x);
+      expect(expectedCommitsMap.get(k)?.y).toBe(v.y);
     });
   });
 
@@ -373,9 +373,9 @@ describe("computePosition", () => {
           start: v.start,
           end: v.end,
           endCommit: {
-            x: v.endCommit.x,
-            y: v.endCommit.y,
-            hash: v.endCommit.hash,
+            x: v.endCommit?.x,
+            y: v.endCommit?.y,
+            hash: v.endCommit?.hash,
           },
           branchOrder: v.branchOrder,
         }))
@@ -385,8 +385,8 @@ describe("computePosition", () => {
     expect(commitsMap.size).toBe(expectedCommitsMap.size);
 
     commitsMap.forEach((v, k) => {
-      expect(expectedCommitsMap.get(k).x).toBe(v.x);
-      expect(expectedCommitsMap.get(k).y).toBe(v.y);
+      expect(expectedCommitsMap.get(k)?.x).toBe(v.x);
+      expect(expectedCommitsMap.get(k)?.y).toBe(v.y);
     });
   });
 });
