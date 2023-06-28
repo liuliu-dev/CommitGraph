@@ -44,7 +44,7 @@ const style = {
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const ThreeBranches: Story = {
   args: {
-    commits: getCommits(threeBranches),
+    commits: threeBranches,
     branchHeads: [
       {
         branchName: "main",
@@ -55,48 +55,48 @@ export const ThreeBranches: Story = {
         headCommitHash: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
       },
     ],
-    ...style,
+    style,
   },
 };
 
 export const TwoBranches: Story = {
   args: {
-    commits: getCommits(twoBranches),
+    commits: twoBranches,
     branchHeads: [],
-    ...style,
+    style,
   },
 };
 
 export const TwoCommits: Story = {
   args: {
-    commits: getCommits(twoCommits),
+    commits: twoCommits,
     branchHeads: [],
-    ...style,
+    style,
   },
 };
 
 export const halfPage: Story = {
   args: {
-    commits: getCommits(half),
+    commits: half,
     branchHeads: [
       {
         branchName: "main",
         headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
       },
     ],
-    ...style,
+    style,
   },
 };
 
 export const Multiple: Story = {
   args: {
-    commits: getCommits(notPaintedWellInDoltHub),
+    commits: notPaintedWellInDoltHub,
     branchHeads: [
       {
         branchName: "main",
         headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
       },
     ],
-    ...style,
+    style,
   },
 };

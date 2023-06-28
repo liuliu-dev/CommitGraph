@@ -1,7 +1,11 @@
 import React, { use, useState } from "react";
-import { BranchType, CommitNode } from "../../helpers/types";
+import { BranchType, Commit, GraphStyle } from "../../helpers/types";
 import { computePosition } from "./computePosition";
-import { setBranchAndCommitColor } from "../../helpers/utils";
+import {
+  defaultStyle,
+  getCommits,
+  setBranchAndCommitColor,
+} from "../../helpers/utils";
 import CommitDetails from "../CommitDetails";
 import css from "./index.module.css";
 import CommitDot from "../CommitDot";
@@ -11,23 +15,18 @@ import BranchLabel from "../BranchLabel";
 import { getCommitDotPosition } from "../CommitDot/utils";
 
 export type Props = {
-  commits: CommitNode[];
+  commits: Commit[];
   branchHeads: BranchType[];
-  commitSpacing: number;
-  branchSpacing: number;
-  branchColors: string[];
-  nodeRadius: number;
+  style?: GraphStyle;
 };
 
-export default function CommitGraph({
-  commits,
-  commitSpacing,
-  branchSpacing,
-  branchColors,
-  nodeRadius,
-  branchHeads,
-}: Props) {
-  const { columns, commitsMap } = computePosition(commits);
+export default function CommitGraph({ commits, style, branchHeads }: Props) {
+  const commitNodes = getCommits(commits);
+  const { commitSpacing, branchSpacing, branchColors, nodeRadius } = {
+    ...defaultStyle,
+    ...style,
+  };
+  const { columns, commitsMap } = computePosition(commitNodes);
   const width = columns.length * (branchSpacing + nodeRadius * 2) + 3;
 
   const height =

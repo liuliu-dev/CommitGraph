@@ -1,18 +1,22 @@
-import { CommitNode, BranchPathType } from "./types";
+import { CommitNode, BranchPathType, Commit } from "./types";
 import React from "react";
 
-type Commit = {
-  hash: string;
-  ownerName: string;
-  repoName: string;
-  committer: {
-    username: string;
-    displayName: string;
-    emailAddress: string;
-  };
-  message: string;
-  parents: string[];
-  committedAt: number;
+export const defaultStyle = {
+  commitSpacing: 90,
+  branchSpacing: 20,
+  nodeRadius: 2,
+  branchColors: [
+    "#010A40",
+    "#FC42C9",
+    "#3D91F0",
+    "#29E3C1",
+    "#C5A15A",
+    "#FA7978",
+    "#5D6280",
+    "#5AC58D",
+    "#5C5AC5",
+    "#EB7340",
+  ],
 };
 
 export function getCommits(commits: Commit[]): CommitNode[] {
@@ -34,6 +38,7 @@ export function getCommits(commits: Commit[]): CommitNode[] {
       committer: commit.committer.displayName,
       message: commit.message,
       committerDate: new Date(commit.committedAt),
+      commitLink: commit.commitLink,
       x: -1,
       y: -1,
     };
