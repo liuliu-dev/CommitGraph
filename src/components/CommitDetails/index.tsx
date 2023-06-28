@@ -17,7 +17,9 @@ export default function CommitDetails({ commit }: Props) {
     <div className={css.container}>
       <div style={{ color: commit.commitColor }}>
         {commit.commitLink ? (
-          <a className={css.bold}>{commitHashAuthorDate}</a>
+          <a href={commit.commitLink} className={css.bold}>
+            {commitHashAuthorDate}
+          </a>
         ) : (
           <span className={css.bold}>{commitHashAuthorDate}</span>
         )}
