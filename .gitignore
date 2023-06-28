@@ -13,3 +13,5 @@
 ./storybook.log
 
 .DS_Store
+
+/dist
