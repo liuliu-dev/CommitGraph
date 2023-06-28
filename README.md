@@ -30,10 +30,16 @@ const MyComponent = () => {
     //   hash: 'commit-hash',
     //   ownerName: 'repository-owner',
     //   repoName: 'repository-name',
-    //   committer: 'committer-name',
+    //   committer:
+    //   {
+    //       username: 'committer-username',
+    //       displayName: 'committer-displayName',
+    //       emailAddress: 'committer@email.com',
+    //   }
     //   message: 'commit-message',
     //   parents: ['parent-commit-hash-1', 'parent-commit-hash-2'],
     //   committedAt: timestamp,
+    //   commitLink: 'https://mywebsite.com/repository-owner/repository-name/main/commit-hash',
     // }
   ];
 
