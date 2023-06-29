@@ -36,7 +36,8 @@ export function getMergedFromBranchHeadPositions(
       const height =
         Math.abs(parent.x - commit.x) * (commitSpacing + nodeRadius * 4);
       const width =
-        Math.abs(parent.y - commit.y + 1) * (branchSpacing + nodeRadius * 4);
+        Math.abs(parent.y - commit.y + 1) * (branchSpacing + nodeRadius * 4) +
+        4;
 
       const end = getPositionsBySpacing(
         branchSpacing,

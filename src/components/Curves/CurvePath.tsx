@@ -8,7 +8,7 @@ type Props = {
   curve: CurveReturnType;
 };
 
-export default function CurvePath({ commit, curve }: Props) {
+export default function CurvePath({ curve }: Props) {
   return (
     <>
       <g filter={`url(#${curve.id})`}>

@@ -1,7 +1,6 @@
 .container {
   font-family: "Source Sans Pro";
   font-size: small;
-  width: calc(50vw);
   max-width: 500px;
 }
 

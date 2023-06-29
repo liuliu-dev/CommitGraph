@@ -3,9 +3,9 @@ export type Commit = {
   ownerName: string;
   repoName: string;
   committer: {
-    username: string;
+    username?: string | null;
     displayName: string;
-    emailAddress: string;
+    emailAddress?: string;
   };
   message: string;
   parents: string[];

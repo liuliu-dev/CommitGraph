@@ -3,14 +3,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CommitGraph from "./index";
 import {
   half,
+  multipleBranches,
   notPaintedWellInDoltHub,
   threeBranches,
   twoBranches,
   twoCommits,
 } from "../../helpers/sampleCommits";
-import { getCommits } from "../../helpers/utils";
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof CommitGraph> = {
   title: "Example/CommitGraph",
   component: CommitGraph,
@@ -97,6 +96,14 @@ export const Multiple: Story = {
         headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
       },
     ],
+    style,
+  },
+};
+
+export const Multiple2: Story = {
+  args: {
+    commits: multipleBranches,
+    branchHeads: [],
     style,
   },
 };

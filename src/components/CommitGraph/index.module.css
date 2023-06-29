@@ -4,21 +4,9 @@
   flex-direction: column;
 }
 
-.svg {
-  width: calc(18vw);
-  overflow-x: scroll;
-  /* Hide scrollbar for IE, Edge, and Firefox */
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    @apply hidden;
-  }
-}
-
 .commitInfoContainer {
   position: absolute;
-  left: calc(18vw + 1rem);
+  width: 100%;
 }
 
 .details {
