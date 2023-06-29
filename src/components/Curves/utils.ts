@@ -97,7 +97,7 @@ export function getNewBranchToPath(
       const height =
         Math.abs(child.x - commit.x) * (commitSpacing + nodeRadius * 4);
       const width =
-        Math.abs(child.y - commit.y + 1) * (branchSpacing + nodeRadius * 4);
+        Math.abs(child.y - commit.y + 1) * (branchSpacing + nodeRadius * 4) + 4;
 
       newBranchToPositions.push({
         path: curvePath(start, [end[0], end[1] + nodeRadius * 3]),
