@@ -36,8 +36,7 @@ export function getMergedFromBranchHeadPositions(
       const height =
         Math.abs(parent.x - commit.x) * (commitSpacing + nodeRadius * 4);
       const width =
-        Math.abs(parent.y - commit.y + 1) * (branchSpacing + nodeRadius * 4) +
-        4;
+        Math.abs(parent.y - commit.y) * (branchSpacing + nodeRadius * 4);
 
       const end = getPositionsBySpacing(
         branchSpacing,
@@ -53,8 +52,8 @@ export function getMergedFromBranchHeadPositions(
           0,
           7
         )}`,
-        x: commit.y,
-        y: commit.x * commitSpacing,
+        x: start[0],
+        y: start[1],
         width,
         height,
       });
@@ -97,17 +96,17 @@ export function getNewBranchToPath(
       const height =
         Math.abs(child.x - commit.x) * (commitSpacing + nodeRadius * 4);
       const width =
-        Math.abs(child.y - commit.y + 1) * (branchSpacing + nodeRadius * 4) + 4;
+        Math.abs(child.y - commit.y) * (branchSpacing + nodeRadius * 4) + 4;
 
       newBranchToPositions.push({
-        path: curvePath(start, [end[0], end[1] + nodeRadius * 3]),
+        path: curvePath(start, [end[0], end[1] + nodeRadius * 2]),
         pathColor: child.commitColor,
         id: `filter_${commit.hash.slice(0, 7)}_curved_path_${child.hash.slice(
           0,
           7
         )}`,
-        x: child.y,
-        y: child.x * commitSpacing,
+        x: start[0],
+        y: end[1],
         width,
         height,
       });

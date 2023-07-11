@@ -5,6 +5,7 @@
 }
 
 .commitInfoContainer {
+  left: calc(18vw + 2rem);
   position: absolute;
   width: 100%;
 }
@@ -13,4 +14,14 @@
   position: absolute;
   display: flex;
   align-items: baseline;
+  width: 100%;
+}
+
+.svg {
+  max-width: calc(18vw);
+  overflow-x: auto;
+  transform: rotateX(180deg);
+}
+.svg svg {
+  transform: rotateX(180deg);
 }
