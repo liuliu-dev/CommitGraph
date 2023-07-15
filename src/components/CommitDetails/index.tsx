@@ -1,12 +1,14 @@
 import React from "react";
-import { CommitNode } from "../../helpers/types";
+import { BranchType, CommitNode } from "../../helpers/types";
 import css from "./index.module.css";
 import { excerpt } from "../Curves/utils";
+import BranchLabel from "../BranchLabel";
 
 type Props = {
   commit: CommitNode;
+  branch: BranchType[];
 };
-export default function CommitDetails({ commit }: Props) {
+export default function CommitDetails({ commit, branch }: Props) {
   const date = new Date(commit.committerDate).toLocaleDateString();
   const hashBr = commit.hash.slice(0, 7);
   const committer = commit.committer;
@@ -15,7 +17,13 @@ export default function CommitDetails({ commit }: Props) {
 
   return (
     <div className={css.container}>
-      <div style={{ color: commit.commitColor }}>
+      <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
+        {!!branch.length && (
+          <BranchLabel
+            branchName={branch[0].branchName}
+            branchColor={commit.commitColor}
+          />
+        )}
         {commit.commitLink ? (
           <a href={commit.commitLink} className={css.bold}>
             {commitHashAuthorDate}
