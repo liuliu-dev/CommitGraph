@@ -74,7 +74,10 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
           })}
         </svg>
       </div>
-      <div className={css.commitInfoContainer}>
+      <div
+        className={css.commitInfoContainer}
+        style={{ left: width > 500 ? 530 : width + 30 }}
+      >
         {commitsNodes.map((commit) => {
           const { y } = getCommitDotPosition(
             branchSpacing,
@@ -88,13 +91,7 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
 
           return (
             <div style={{ top: y - nodeRadius * 2 }} className={css.details}>
-              <CommitDetails commit={commit} />
-              {!!branch.length && (
-                <BranchLabel
-                  branchName={branch[0].branchName}
-                  branchColor={commit.commitColor}
-                />
-              )}
+              <CommitDetails commit={commit} branch={branch} />
             </div>
           );
         })}
