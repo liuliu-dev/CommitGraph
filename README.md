@@ -1,5 +1,7 @@
 # Commit Graph
 
+![readme-header](https://github.com/liuliu-dev/CommitGraph/blob/main/example.png)
+
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
