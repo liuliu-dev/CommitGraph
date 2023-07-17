@@ -5,6 +5,11 @@
   width: 80%;
 }
 
+.labelAndLink {
+  display: flex;
+  align-items: center;
+}
+
 .bold {
   font-weight: 600;
 }
