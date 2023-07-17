@@ -14,7 +14,7 @@ You can install the Commit Graph package via npm:
 npm install commit-graph
 ```
 
-## Usage
+## Quick Start
 
 Import the CommitGraph component and use it in your React application as follows:
 
@@ -23,33 +23,35 @@ import React from "react";
 import CommitGraph from "commit-graph";
 
 const MyComponent = () => {
+  // Array of commit objects
+  // Example commit object:
   const commits = [
-    // Array of commit objects
-    // Example commit object:
-    // {
-    //   hash: 'commit-hash',
-    //   ownerName: 'repository-owner',
-    //   repoName: 'repository-name',
-    //   committer:
-    //   {
-    //       username: 'committer-username',
-    //       displayName: 'committer-displayName',
-    //       emailAddress: 'committer@email.com',
-    //   }
-    //   message: 'commit-message',
-    //   parents: ['parent-commit-hash-1', 'parent-commit-hash-2'],
-    //   committedAt: timestamp,
-    //   commitLink: 'https://mywebsite.com/repository-owner/repository-name/main/commit-hash',
-    // }
+    {
+      hash: 'commit-hash',
+      ownerName: 'repository-owner',
+      repoName: 'repository-name',
+      committer:
+      {
+        displayName: 'committer-displayName',
+       }
+      message: 'commit-message',
+      parents: ['parent-commit-hash-1', 'parent-commit-hash-2'],
+      committedAt: timestamp,
+      commitLink: 'https://github.com/repository-owner/repository-name/main/commit-hash',
+    }
   ];
 
+  // Array of branch head objects
+  // Example branch head object:
   const branchHeads = [
-    // Array of branch head objects
-    // Example branch head object:
-    // {
-    //   branchName: 'branch-name',
-    //   headCommitHash: 'commit-hash',
-    // }
+    {
+      branchName: "branch-name-1",
+      headCommitHash: "commit-hash-1",
+    },
+    {
+      branchName: "branch-name-2",
+      headCommitHash: "commit-hash-2",
+    },
   ];
 
   return (

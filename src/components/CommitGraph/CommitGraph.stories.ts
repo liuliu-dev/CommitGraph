@@ -50,7 +50,11 @@ export const ThreeBranches: Story = {
         headCommitHash: "bgpqkjvf2mqoi9lq4upamdj0ke7e8iuo",
       },
       {
-        branchName: "liuliu/workspace-1667427424",
+        branchName: "feature-branch",
+        headCommitHash: "bgpv9t0smfear03um03737mrkggb84o2",
+      },
+      {
+        branchName: "another-branch",
         headCommitHash: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
       },
     ],
@@ -94,6 +98,14 @@ export const Multiple: Story = {
       {
         branchName: "main",
         headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
+      },
+      {
+        branchName: "feature branch 1",
+        headCommitHash: "9qvpdadg0ktrhg674trki4lt48rp3djp",
+      },
+      {
+        branchName: "feature branch 2",
+        headCommitHash: "mau2aqr6977bc6ogr0dm8f9u3518j66q",
       },
     ],
     style,
