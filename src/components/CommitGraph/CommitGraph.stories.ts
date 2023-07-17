@@ -115,7 +115,20 @@ export const Multiple: Story = {
 export const Multiple2: Story = {
   args: {
     commits: multipleBranches,
-    branchHeads: [],
+    branchHeads: [
+      {
+        branchName: "main",
+        headCommitHash: "16f398rmboomr4tgeb8emenogtbqpmiv",
+      },
+      {
+        branchName: "feature-branch",
+        headCommitHash: "ubu61jhc3qp1d28035ee3kd105ao10q1",
+      },
+      {
+        branchName: "another-branch",
+        headCommitHash: "jpm4mg8btdnkcaolo5iqj7u36s4sk08s",
+      },
+    ],
     style,
   },
 };
