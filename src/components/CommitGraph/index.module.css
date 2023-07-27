@@ -6,8 +6,8 @@
 
 .commitInfoContainer {
   position: absolute;
-  width: 58%;
-  left: 42%;
+  width: 68%;
+  left: 32%;
 }
 
 .details {
@@ -18,7 +18,7 @@
 }
 
 .svg {
-  max-width: 40%;
+  max-width: 30%;
   overflow-x: scroll;
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */

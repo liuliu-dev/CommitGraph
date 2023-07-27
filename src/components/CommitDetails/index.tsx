@@ -1,8 +1,8 @@
 import React from "react";
 import { BranchType, CommitNode } from "../../helpers/types";
-import css from "./index.module.css";
-import { excerpt } from "../Curves/utils";
 import BranchLabel from "../BranchLabel";
+import { excerpt } from "../Curves/utils";
+import css from "./index.module.css";
 
 type Props = {
   commit: CommitNode;
@@ -25,7 +25,11 @@ export default function CommitDetails({ commit, branch }: Props) {
           />
         )}
         {commit.commitLink ? (
-          <a href={commit.commitLink} className={css.bold}>
+          <a
+            style={{ color: commit.commitColor }}
+            href={commit.commitLink}
+            className={css.bold}
+          >
             {commitHashAuthorDate}
           </a>
         ) : (

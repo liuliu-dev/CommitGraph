@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import CommitGraph from "./index";
 import {
   half,
   multipleBranches,
@@ -10,6 +9,7 @@ import {
   twoBranches,
   twoCommits,
 } from "../../helpers/sampleCommits";
+import CommitGraph from "./index";
 
 const meta: Meta<typeof CommitGraph> = {
   title: "Example/CommitGraph",
@@ -41,6 +41,7 @@ const style = {
   ],
 };
 
+const branchColors = ["#5D6280", "#5AC58D", "#5C5AC5", "#EB7340"];
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const ThreeBranches: Story = {
   args: {
@@ -95,7 +96,12 @@ export const halfPage: Story = {
         headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
       },
     ],
-    style,
+    style: {
+      commitSpacing: 90,
+      branchSpacing: 20,
+      nodeRadius: 2,
+      branchColors,
+    },
   },
 };
 

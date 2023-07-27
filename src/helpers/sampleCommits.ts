@@ -1402,5 +1402,7 @@ export const oneCommit = [
     parents: [],
     hash: "h75emdge26r5c57p4rtn7qp7fn90jtic",
     committedAt: 1690305214000,
+    commitLink:
+      "https://dolthub.com/repositories/dolthub/scorewarrior_rubens_static2/commit/h75emdge26r5c57p4rtn7qp7fn90jtic",
   },
 ];
