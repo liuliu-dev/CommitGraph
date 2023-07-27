@@ -5,6 +5,7 @@ import {
   half,
   multipleBranches,
   notPaintedWellInDoltHub,
+  oneCommit,
   threeBranches,
   twoBranches,
   twoCommits,
@@ -67,6 +68,13 @@ export const TwoBranches: Story = {
     commits: twoBranches,
     branchHeads: [],
     style,
+  },
+};
+
+export const OneCommit: Story = {
+  args: {
+    commits: oneCommit,
+    branchHeads: [],
   },
 };
 

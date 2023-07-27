@@ -482,7 +482,7 @@ export const twoCommits = [
     },
     message:
       'Run SQL query: INSERT INTO `tablename` (`pk`, `col1`) VALUES (1026565493, "SAAS OS malware with pdf ATX framework have to WhatsApp but backlink we is that of MMS have")',
-    parents: ["uk7kremprd9cesia4c4lh51ub8b1cf6p"],
+    parents: [],
     hash: "4ttu5nqqifptnuqo6bk1hps3lu484jnu",
     committedAt: 1677867765000,
   },
@@ -1388,5 +1388,19 @@ export const multipleBranches = [
     parents: ["bg7c1miq9rpbhfhnlebtlmpdvt3u898j"],
     hash: "r60ng1cnm4q3tbkkfjcbj6a2b057ba1d",
     committedAt: 1654043113000,
+  },
+];
+
+export const oneCommit = [
+  {
+    ownerName: "dolthub",
+    repoName: "scorewarrior_rubens_static2",
+    committer: {
+      displayName: "liuliu",
+    },
+    message: "Initialize data repository",
+    parents: [],
+    hash: "h75emdge26r5c57p4rtn7qp7fn90jtic",
+    committedAt: 1690305214000,
   },
 ];
