@@ -33,7 +33,7 @@ export default function CurvePath({ curve }: Props) {
             result="hardAlpha"
           />
           <feOffset />
-          <feGaussianBlur stdDeviation="2.5" />
+          <feGaussianBlur stdDeviation="2" />
           <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"

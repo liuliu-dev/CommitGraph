@@ -1,18 +1,17 @@
-import React, { use, useState } from "react";
+import React from "react";
 import { BranchType, Commit, GraphStyle } from "../../helpers/types";
-import { computePosition } from "./computePosition";
 import {
   defaultStyle,
   getCommits,
   setBranchAndCommitColor,
 } from "../../helpers/utils";
-import CommitDetails from "../CommitDetails";
-import css from "./index.module.css";
-import CommitDot from "../CommitDot";
 import Branches from "../Branches";
-import Curves from "../Curves";
-import BranchLabel from "../BranchLabel";
+import CommitDetails from "../CommitDetails";
+import CommitDot from "../CommitDot";
 import { getCommitDotPosition } from "../CommitDot/utils";
+import Curves from "../Curves";
+import { computePosition } from "./computePosition";
+import css from "./index.module.css";
 
 export type Props = {
   commits: Commit[];
@@ -32,7 +31,7 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
   const height =
     Math.max(...Array.from(commitsMap.values()).map((c) => c.x)) *
       commitSpacing +
-    nodeRadius * 4 +
+    nodeRadius * 8 +
     64;
   setBranchAndCommitColor(columns, branchColors, commitsMap);
   const commitsNodes = Array.from(commitsMap.values());
@@ -68,10 +67,7 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
           })}
         </svg>
       </div>
-      <div
-        className={css.commitInfoContainer}
-        style={{ left: width > 500 ? 530 : width + 30 }}
-      >
+      <div className={css.commitInfoContainer}>
         {commitsNodes.map((commit) => {
           const { y } = getCommitDotPosition(
             branchSpacing,
