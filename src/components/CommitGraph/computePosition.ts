@@ -70,13 +70,16 @@ function computeColumns(
 
     let commitY: number = -1;
 
+    // for paint branch path
+    const isFirstCommit = commit.parents.length === 0;
+
     // Update columns based on the commit type
     if (isLastCommitOnBranch) {
       // Put commit as a new column
       columns.push([
         {
           start: index,
-          end: Infinity,
+          end: isFirstCommit ? index : Infinity,
           endCommitHash: commit.hash,
           branchOrder,
         },
@@ -94,7 +97,7 @@ function computeColumns(
       commitY = Math.min(...branchChildrenYs);
 
       // Update the left most column
-      updateColumns(commitY, Infinity, commit.hash);
+      updateColumns(commitY, isFirstCommit ? index : Infinity, commit.hash);
 
       // Update other columns with the commit as the end commit
       branchChildrenYs
@@ -135,7 +138,7 @@ function computeColumns(
         columns.push([
           {
             start: minChildX + 1,
-            end: Infinity,
+            end: isFirstCommit ? index : Infinity,
             endCommitHash: commit.hash,
             branchOrder,
           },
@@ -146,7 +149,7 @@ function computeColumns(
         commitY = col;
         columns[col].push({
           start: minChildX + 1,
-          end: Infinity,
+          end: isFirstCommit ? index : Infinity,
           endCommitHash: commit.hash,
           branchOrder,
         });

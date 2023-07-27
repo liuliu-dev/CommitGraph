@@ -18,12 +18,17 @@ export default function Branches({
   branchSpacing,
   nodeRadius,
 }: Props) {
+  // use the current end most commit's position to paint the other unfinished branches' path, so all the straight lines go to the end
+  const currentLastCommits =
+    Math.max(...Array.from(commitsMap.values()).map((c) => c.x)) *
+      commitSpacing +
+    nodeRadius * 4;
+
   return (
     <>
       {columns.map((column, i) => {
         return column.map((c) => {
-          const end =
-            c.end === Infinity ? commitsMap.get(c.endCommit.hash).x : c.end;
+          const end = c.end === Infinity ? currentLastCommits : c.end;
           return (
             <BranchPath
               key={`branch-path-${i}-${c.start}-${c.end}`}
