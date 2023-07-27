@@ -87,7 +87,7 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
 
           return (
             <div
-              style={{ top: y - nodeRadius * 2 }}
+              style={{ top: y - nodeRadius * 4 }}
               className={css.details}
               key={`commit-details-${commit.hash}`}
             >
