@@ -18,12 +18,6 @@ export default function CommitDetails({ commit, branch }: Props) {
   return (
     <div className={css.container}>
       <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
-        {!!branch.length && (
-          <BranchLabel
-            branchName={branch[0].branchName}
-            branchColor={commit.commitColor}
-          />
-        )}
         {commit.commitLink ? (
           <a
             style={{ color: commit.commitColor }}
@@ -35,8 +29,14 @@ export default function CommitDetails({ commit, branch }: Props) {
         ) : (
           <span className={css.bold}>{commitHashAuthorDate}</span>
         )}
+        {!!branch.length && (
+          <BranchLabel
+            branchName={branch[0].branchName}
+            branchColor={commit.commitColor}
+          />
+        )}
       </div>
-      <div className={css.msg}>{excerpt(message, 200)}</div>
+      <div className={css.msg}>{excerpt(message, 120)}</div>
     </div>
   );
 }

@@ -75,7 +75,7 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
         className={css.commitInfoContainer}
       >
         {commitsNodes.map((commit) => {
-          const { y } = getCommitDotPosition(
+          const { x, y } = getCommitDotPosition(
             branchSpacing,
             commitSpacing,
             nodeRadius,
@@ -86,12 +86,25 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
           );
 
           return (
-            <div
-              style={{ top: y - nodeRadius * 4 }}
-              className={css.details}
-              key={`commit-details-${commit.hash}`}
-            >
-              <CommitDetails commit={commit} branch={branch} />
+            <div className={css.wrapper}>
+              <div
+                style={{ top: y }}
+                className={css.details}
+                key={`commit-details-${commit.hash}`}
+              >
+                <CommitDetails commit={commit} branch={branch} />
+              </div>
+              <div
+                style={{
+                  left:
+                    width < 250
+                      ? -250 + nodeRadius * 2 + 1.5
+                      : -width + nodeRadius * 2 + 1.5,
+                  top: y - 3,
+                  height: nodeRadius * 2 + commitSpacing,
+                }}
+                className={css.block}
+              />
             </div>
           );
         })}
