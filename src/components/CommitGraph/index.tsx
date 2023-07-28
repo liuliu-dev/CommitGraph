@@ -102,6 +102,10 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
                       : -width + nodeRadius * 2 + 1.5,
                   top: y - 3,
                   height: nodeRadius * 2 + commitSpacing,
+                  width:
+                    width < 250
+                      ? `calc(100% + ${250 - nodeRadius * 2 - 1.5}px)`
+                      : `calc(100% + ${width - nodeRadius * 2 - 1.5}px)`,
                 }}
                 className={css.block}
               />

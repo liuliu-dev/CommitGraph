@@ -29,10 +29,10 @@
 
 .block {
   display: none;
-  width: 100%;
   opacity: 0;
   position: absolute;
   background-color: #010a40;
+  z-index: -1;
 }
 
 .wrapper:hover > .block {
