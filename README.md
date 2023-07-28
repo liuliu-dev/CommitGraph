@@ -53,6 +53,7 @@ const MyComponent = () => {
     {
       branchName: "branch-name-2",
       headCommitHash: "commit-hash-2",
+      branchLink:"https://github.com/repository-owner/repository-name/main",
     },
   ];
 
@@ -99,6 +100,7 @@ An array of branch head objects representing the branch heads in the commit grap
 
 - `branchName` (string): The name of the branch.
 - `headCommitHash` (string): The commit hash at the head of the branch.
+- `branchLink` (string, optional): The link to the branch.
 
 ### `style` (object, optional)
 

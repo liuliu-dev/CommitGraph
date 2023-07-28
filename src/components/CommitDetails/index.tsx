@@ -33,6 +33,7 @@ export default function CommitDetails({ commit, branch }: Props) {
           <BranchLabel
             branchName={branch[0].branchName}
             branchColor={commit.commitColor}
+            branchLink={branch[0].branchLink}
           />
         )}
       </div>

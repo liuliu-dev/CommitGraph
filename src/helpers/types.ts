@@ -40,6 +40,7 @@ export type BranchPathType = {
 export type BranchType = {
   branchName: string;
   headCommitHash: string;
+  branchLink?: string;
 };
 
 export type GraphStyle = {
