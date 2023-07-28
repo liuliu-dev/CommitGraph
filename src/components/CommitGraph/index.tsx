@@ -88,7 +88,7 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
           return (
             <div className={css.wrapper}>
               <div
-                style={{ top: y }}
+                style={{ top: `calc(${y}px - 2rem)` }}
                 className={css.details}
                 key={`commit-details-${commit.hash}`}
               >
@@ -96,12 +96,9 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
               </div>
               <div
                 style={{
-                  left:
-                    width < 250
-                      ? -250 + nodeRadius * 2 + 1.5
-                      : -width + nodeRadius * 2 + 1.5,
-                  top: y - 3,
-                  height: nodeRadius * 2 + commitSpacing,
+                  left: width < 250 ? -255 : -width - 5,
+                  top: `calc(${y}px - 2rem)`,
+                  height: "4rem",
                   width:
                     width < 250
                       ? `calc(100% + ${250 - nodeRadius * 2 - 1.5}px)`

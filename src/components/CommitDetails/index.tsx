@@ -36,7 +36,7 @@ export default function CommitDetails({ commit, branch }: Props) {
           />
         )}
       </div>
-      <div className={css.msg}>{excerpt(message, 120)}</div>
+      <div className={css.msg}>{excerpt(message, 80)}</div>
     </div>
   );
 }
