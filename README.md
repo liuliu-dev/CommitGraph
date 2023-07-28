@@ -1,6 +1,6 @@
 # Commit Graph
 
-![readme-header](https://github.com/liuliu-dev/CommitGraph/blob/main/example.png)
+![readme-header](https://github.com/liuliu-dev/CommitGraph/blob/main/graph.gif)
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
