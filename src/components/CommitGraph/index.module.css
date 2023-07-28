@@ -26,3 +26,16 @@
 .svg::-webkit-scrollbar {
   display: none;
 }
+
+.block {
+  display: none;
+  width: 100%;
+  opacity: 0;
+  position: absolute;
+  background-color: #010a40;
+}
+
+.wrapper:hover > .block {
+  display: block;
+  opacity: 0.03;
+}
