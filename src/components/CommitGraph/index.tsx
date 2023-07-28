@@ -35,6 +35,7 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
     64;
   setBranchAndCommitColor(columns, branchColors, commitsMap);
   const commitsNodes = Array.from(commitsMap.values());
+  const commitInfoLeftPosition = getCommitInfoLeftPosition(width);
 
   return (
     <div className={css.container}>
@@ -69,8 +70,8 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
       </div>
       <div
         style={{
-          left: width < 250 ? 250 : width,
-          width: width < 250 ? `calc(100% - 250px)` : `calc(100% - ${width}px)`,
+          left: commitInfoLeftPosition,
+          width: `calc(100% - ${commitInfoLeftPosition}px)`,
         }}
         className={css.commitInfoContainer}
       >
@@ -96,13 +97,12 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
               </div>
               <div
                 style={{
-                  left: width < 250 ? -255 : -width - 5,
+                  left: -commitInfoLeftPosition - 5,
                   top: `calc(${y}px - 2rem)`,
                   height: "4rem",
-                  width:
-                    width < 250
-                      ? `calc(100% + ${250 - nodeRadius * 2 - 1.5}px)`
-                      : `calc(100% + ${width - nodeRadius * 2 - 1.5}px)`,
+                  width: `calc(100% + ${
+                    commitInfoLeftPosition - nodeRadius * 2 - 1.5
+                  }px)`,
                 }}
                 className={css.block}
               />
@@ -112,4 +112,14 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
       </div>
     </div>
   );
+}
+
+function getCommitInfoLeftPosition(width: number) {
+  if (width < 250) {
+    return 250;
+  }
+  if (width < 500) {
+    return width + 10;
+  }
+  return 510;
 }
