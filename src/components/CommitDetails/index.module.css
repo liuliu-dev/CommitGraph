@@ -17,6 +17,14 @@
   font-weight: 600;
 }
 
+.link {
+  font-weight: 600;
+}
+
+.link:hover {
+  color: #1f6dc6;
+}
+
 .msg {
   margin-top: 6px;
   color: #5d6280;

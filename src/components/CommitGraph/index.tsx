@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BranchType, Commit, GraphStyle } from "../../helpers/types";
 import {
   defaultStyle,
@@ -12,6 +12,7 @@ import { getCommitDotPosition } from "../CommitDot/utils";
 import Curves from "../Curves";
 import { computePosition } from "./computePosition";
 import css from "./index.module.css";
+import cx from "classnames";
 
 export type Props = {
   commits: Commit[];
@@ -20,6 +21,9 @@ export type Props = {
 };
 
 export default function CommitGraph({ commits, style, branchHeads }: Props) {
+  const [showBlock, setShowBlock] = useState(false);
+  const [topPos, setTopPos] = useState(0);
+
   const commitNodes = getCommits(commits);
   const { commitSpacing, branchSpacing, branchColors, nodeRadius } = {
     ...defaultStyle,
@@ -63,6 +67,8 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
                 commitSpacing={commitSpacing}
                 branchSpacing={branchSpacing}
                 nodeRadius={nodeRadius}
+                setShowBlock={setShowBlock}
+                setTopPos={setTopPos}
               />
             );
           })}
@@ -87,29 +93,31 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
           );
 
           return (
-            <div className={css.wrapper}>
-              <div
-                style={{ top: `calc(${y}px - 2rem)` }}
-                className={css.details}
-                key={`commit-details-${commit.hash}`}
-              >
-                <CommitDetails commit={commit} branch={branch} />
-              </div>
-              <div
-                style={{
-                  left: -commitInfoLeftPosition - 5,
-                  top: `calc(${y}px - 2rem)`,
-                  height: "4rem",
-                  width: `calc(100% + ${
-                    commitInfoLeftPosition - nodeRadius * 2 - 1.5
-                  }px)`,
-                }}
-                className={css.block}
-              />
+            <div
+              style={{ top: `calc(${y}px - 2rem)` }}
+              className={css.details}
+              key={`commit-details-${commit.hash}`}
+              onMouseOver={() => {
+                setShowBlock(true), setTopPos(y);
+              }}
+              onMouseLeave={() => setShowBlock(false)}
+            >
+              <CommitDetails commit={commit} branch={branch} />
             </div>
           );
         })}
       </div>
+      <div
+        style={{
+          left: -5,
+          top: `calc(${topPos}px - 2rem)`,
+          height: "4rem",
+          width: `calc(100% + ${
+            commitInfoLeftPosition - nodeRadius * 2 - 1.5
+          }px)`,
+        }}
+        className={cx(css.block, { [css.showBlock]: showBlock })}
+      />
     </div>
   );
 }

@@ -30,14 +30,13 @@
 
 .block {
   display: none;
-  opacity: 0.5;
   position: absolute;
   background-color: #010a40;
   border-radius: 0.75rem;
   z-index: -1;
 }
 
-.wrapper:hover > .block {
+.showBlock {
   display: block;
   opacity: 0.03;
 }
