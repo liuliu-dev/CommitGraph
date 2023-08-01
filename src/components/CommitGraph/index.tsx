@@ -112,9 +112,7 @@ export default function CommitGraph({ commits, style, branchHeads }: Props) {
           left: -5,
           top: `calc(${topPos}px - 2rem)`,
           height: "4rem",
-          width: `calc(100% + ${
-            commitInfoLeftPosition - nodeRadius * 2 - 1.5
-          }px)`,
+          width: "100%",
         }}
         className={cx(css.block, { [css.showBlock]: showBlock })}
       />
