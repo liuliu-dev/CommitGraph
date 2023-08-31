@@ -2,7 +2,7 @@ import { CommitNode } from "../../helpers/types";
 
 export type CurveReturnType = {
   path: string;
-  pathColor: string;
+  stroke: string;
   id: string;
   width: number;
   height: number;
@@ -47,7 +47,7 @@ export function getMergedFromBranchHeadPositions(
       );
       mergedFromBranchHeadPositions.push({
         path: curvePath(start, end),
-        pathColor: parent.commitColor,
+        stroke: parent.commitColor,
         id: `filter_${commit.hash.slice(0, 7)}_curved_path_${parent.hash.slice(
           0,
           7
@@ -100,7 +100,7 @@ export function getNewBranchToPath(
 
       newBranchToPositions.push({
         path: curvePath(start, [end[0], end[1] + nodeRadius * 2]),
-        pathColor: child.commitColor,
+        stroke: child.commitColor,
         id: `filter_${commit.hash.slice(0, 7)}_curved_path_${child.hash.slice(
           0,
           7

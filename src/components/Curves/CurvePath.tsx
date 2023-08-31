@@ -14,7 +14,7 @@ export default function CurvePath({ curve }: Props) {
       <g filter={`url(#${curve.id})`}>
         <path
           d={curve.path}
-          stroke={curve.pathColor}
+          stroke={curve.stroke}
           strokeWidth="2"
           fill="none"
         />
@@ -37,7 +37,7 @@ export default function CurvePath({ curve }: Props) {
           <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
-            values={hexToColorMatrixVariant(curve.pathColor)}
+            values={hexToColorMatrixVariant(curve.stroke)}
           />
           <feBlend
             mode="normal"
