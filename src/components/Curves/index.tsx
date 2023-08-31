@@ -36,13 +36,11 @@ export default function Curves({
           commitSpacing,
           nodeRadius
         );
-          console.log(newBranchCurves)
-        return (
+         return (
           <>
             {newBranchCurves &&
               newBranchCurves.map((c) => {
-                console.log(`${commit.hash}-curved-up-path-${c.id}`)
-                return (
+                 return (
                   <CurvePath
                     key={`${commit.hash}-curved-up-path-${c.id}`}
                     commit={commit}
@@ -52,8 +50,7 @@ export default function Curves({
               })}
             {mergedCurves &&
               mergedCurves.map((curve) => {
-                console.log(`${commit.hash}-curved-down-path-${curve.id}`)
-                return (
+                 return (
                   <CurvePath
                     key={`${commit.hash}-curved-down-path-${curve.id}`}
                     commit={commit}
