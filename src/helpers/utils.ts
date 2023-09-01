@@ -21,24 +21,25 @@ export const defaultStyle = {
 
 export function getCommits(commits: Commit[]): CommitNode[] {
   const childrenMap: Map<string, Array<string>> = new Map();
-  commits.forEach((commit) => {
-    commit.parents.forEach((parent) => {
-      if (!!childrenMap[parent]) {
-        childrenMap[parent].push(commit.hash);
+  commits.forEach(commit => {
+    commit.parents.forEach(parent => {
+      if (childrenMap.get(parent)) {
+        childrenMap.get(parent)?.push(commit.hash);
       } else {
-        childrenMap[parent] = [commit.hash];
+        childrenMap.set(parent, [commit.hash]);
       }
     });
   });
-  return commits.map((commit) => {
+  return commits.map(commit => {
     return {
       hash: commit.hash,
       parents: commit.parents,
-      children: childrenMap[commit.hash] ?? [],
+      children: childrenMap.get(commit.hash) ?? [],
       committer: commit.committer.displayName,
       message: commit.message,
       committerDate: new Date(commit.committedAt),
       commitLink: commit.commitLink,
+      commitColor: "",
       x: -1,
       y: -1,
     };
@@ -59,9 +60,9 @@ export function setCommitNodeColor(
   branch: BranchPathType,
   columnNumber: number,
   commitsMap: Map<string, CommitNode>,
-  branchColor: string
+  branchColor: string,
 ) {
-  commitsMap.forEach((commit) => {
+  commitsMap.forEach(commit => {
     if (
       commit.y === columnNumber &&
       branch.start <= commit.x &&
@@ -75,10 +76,10 @@ export function setCommitNodeColor(
 export function setBranchAndCommitColor(
   columns: BranchPathType[][],
   branchColors: string[],
-  commitsMap: Map<string, CommitNode>
+  commitsMap: Map<string, CommitNode>,
 ) {
   columns.map((column, i) => {
-    column.map((c) => {
+    column.map(c => {
       const branchColor = branchColors[c.branchOrder % branchColors.length];
       c.color = branchColor;
       setCommitNodeColor(c, i, commitsMap, branchColor);

@@ -13,7 +13,7 @@ export default function CommitDetails({ commit, branch }: Props) {
   const date = new Date(commit.committerDate).toLocaleDateString();
   const hashBr = commit.hash.slice(0, 7);
   const committer = commit.committer;
-  const message = commit.message;
+  const message = commit.message || "";
   const commitHashAuthorDate = `${hashBr} - ${committer} - ${date}`;
   const [color, setColor] = useState(commit.commitColor);
 

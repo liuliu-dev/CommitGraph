@@ -4,7 +4,7 @@ export function getCommitDotPosition(
   branchSpacing: number,
   commitSpacing: number,
   nodeRadius: number,
-  commit: CommitNode
+  commit: CommitNode,
 ) {
   const x = branchSpacing * commit.y + nodeRadius * 4;
   const y = commitSpacing * commit.x + nodeRadius * 4;

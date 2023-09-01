@@ -2,11 +2,11 @@ import { BranchPathType, CommitNode } from "../../helpers/types";
 
 function topologicalOrderCommits(
   commits: CommitNode[],
-  commitsMap: Map<string, CommitNode>
+  commitsMap: Map<string, CommitNode>,
 ): string[] {
   // sort commits by committer date from latest to oldest
   const commitsSortByCommitterDate = commits.sort(
-    (a, b) => b.committerDate.getTime() - a.committerDate.getTime()
+    (a, b) => b.committerDate.getTime() - a.committerDate.getTime(),
   );
 
   let sortedCommits: string[] = [];
@@ -18,14 +18,14 @@ function topologicalOrderCommits(
       return;
     }
     seen.set(commitHash, true);
-    commit.children.forEach((children) => {
+    commit.children.forEach(children => {
       dfs(commitsMap.get(children)!);
     });
     sortedCommits.push(commitHash);
   }
 
   // compute topological order of commits
-  commitsSortByCommitterDate.forEach((commit) => {
+  commitsSortByCommitterDate.forEach(commit => {
     dfs(commit);
   });
 
@@ -34,7 +34,7 @@ function topologicalOrderCommits(
 
 function computeColumns(
   orderedCommitHashes: string[],
-  commitsMap: Map<string, CommitNode>
+  commitsMap: Map<string, CommitNode>,
 ) {
   // Branch positions organized as columns, each column can have multiple branches
   const columns: BranchPathType[][] = [];
@@ -42,7 +42,7 @@ function computeColumns(
   const commitYs: Map<string, number> = new Map();
 
   const commitXs = new Map<string, number>(
-    orderedCommitHashes.map((commitHash, index) => [commitHash, index])
+    orderedCommitHashes.map((commitHash, index) => [commitHash, index]),
   );
 
   function updateColumns(col: number, end: number, endCommitHash: string) {
@@ -62,7 +62,7 @@ function computeColumns(
     const commit = commitsMap.get(commitHash)!;
 
     const branchChildren = commit.children.filter(
-      (child) => commitsMap.get(child)!.parents[0] === commit.hash
+      child => commitsMap.get(child)!.parents[0] === commit.hash,
     );
 
     const isLastCommitOnBranch = commit.children.length === 0;
@@ -89,9 +89,9 @@ function computeColumns(
     } else if (isChildOfNonMergeCommit) {
       // Put commit to its left most column of its children (non-merge commit)
 
-      const branchChildrenYs = branchChildren.map((childHash) =>
-        commitYs.get(childHash)
-      );
+      const branchChildrenYs = branchChildren
+        .map(childHash => commitYs.get(childHash))
+        .filter(y => y !== undefined) as number[];
 
       // Set the commit to the left most column of its children
       commitY = Math.min(...branchChildrenYs);
@@ -101,8 +101,8 @@ function computeColumns(
 
       // Update other columns with the commit as the end commit
       branchChildrenYs
-        .filter((childY) => childY !== commitY)
-        .forEach((childY) => {
+        .filter(childY => childY !== commitY)
+        .forEach(childY => {
           updateColumns(childY!, index - 1, commit.hash);
         });
     } else {
@@ -114,7 +114,7 @@ function computeColumns(
       // Right most pos of child commit
       let maxChildY: number = -1;
 
-      commit.children.forEach((child) => {
+      commit.children.forEach(child => {
         const childX = commitXs.get(child)!;
         const childY = commitYs.get(child)!;
 
@@ -127,7 +127,7 @@ function computeColumns(
         }
       });
 
-      const colFitAtEnd = columns.slice(maxChildY + 1).findIndex((column) => {
+      const colFitAtEnd = columns.slice(maxChildY + 1).findIndex(column => {
         return minChildX >= column[column.length - 1].end;
       });
 
@@ -165,7 +165,7 @@ function computeColumns(
 
 export function computePosition(commits: CommitNode[]) {
   const commitsMap = new Map<string, CommitNode>(
-    commits.map((commit) => [commit.hash, commit])
+    commits.map(commit => [commit.hash, commit]),
   );
 
   const orderedCommitHashes = topologicalOrderCommits(commits, commitsMap);
@@ -176,12 +176,16 @@ export function computePosition(commits: CommitNode[]) {
   const commitsMapWithPos = new Map<string, CommitNode>(
     orderedCommitHashes.map((commitHash, ix) => [
       commitHash,
-      { ...commitsMap.get(commitHash), x: ix, y: commitYs.get(commitHash)! },
-    ])
+      {
+        ...commitsMap.get(commitHash),
+        x: ix,
+        y: commitYs.get(commitHash)!,
+      } as CommitNode,
+    ]),
   );
 
-  const columnsWithEndCommit = columns.map((column) => {
-    return column.map((branchPath) => {
+  const columnsWithEndCommit = columns.map(column => {
+    return column.map(branchPath => {
       return {
         ...branchPath,
         endCommit: commitsMapWithPos.get(branchPath.endCommitHash),

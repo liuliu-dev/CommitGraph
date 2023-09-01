@@ -154,8 +154,8 @@ describe("computePosition", () => {
     ]);
 
     expect(
-      columns.map((c) =>
-        c.map((v) => ({
+      columns.map(c =>
+        c.map(v => ({
           start: v.start,
           end: v.end,
           endCommit: {
@@ -164,8 +164,8 @@ describe("computePosition", () => {
             hash: v.endCommit?.hash,
           },
           branchOrder: v.branchOrder,
-        }))
-      )
+        })),
+      ),
     ).toEqual(expectedColumns);
 
     expect(commitsMap.size).toBe(expectedCommitsMap.size);
@@ -221,8 +221,8 @@ describe("computePosition", () => {
     ];
 
     expect(
-      columns.map((c) =>
-        c.map((v) => ({
+      columns.map(c =>
+        c.map(v => ({
           start: v.start,
           end: v.end,
           endCommit: {
@@ -231,8 +231,8 @@ describe("computePosition", () => {
             hash: v.endCommit?.hash,
           },
           branchOrder: v.branchOrder,
-        }))
-      )
+        })),
+      ),
     ).toEqual(expectedColumns);
 
     const expectedCommitsMap = new Map<string, CommitNodeWithPos>([
@@ -320,8 +320,8 @@ describe("computePosition", () => {
     ]);
 
     expect(
-      columns.map((c) =>
-        c.map((v) => ({
+      columns.map(c =>
+        c.map(v => ({
           start: v.start,
           end: v.end,
           endCommit: {
@@ -330,8 +330,8 @@ describe("computePosition", () => {
             hash: v.endCommit?.hash,
           },
           branchOrder: v.branchOrder,
-        }))
-      )
+        })),
+      ),
     ).toEqual(expectedColumns);
 
     expect(commitsMap.size).toBe(expectedCommitsMap.size);
@@ -368,8 +368,8 @@ describe("computePosition", () => {
     ]);
 
     expect(
-      columns.map((c) =>
-        c.map((v) => ({
+      columns.map(c =>
+        c.map(v => ({
           start: v.start,
           end: v.end,
           endCommit: {
@@ -378,8 +378,8 @@ describe("computePosition", () => {
             hash: v.endCommit?.hash,
           },
           branchOrder: v.branchOrder,
-        }))
-      )
+        })),
+      ),
     ).toEqual(expectedColumns);
 
     expect(commitsMap.size).toBe(expectedCommitsMap.size);

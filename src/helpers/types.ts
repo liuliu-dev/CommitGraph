@@ -24,7 +24,7 @@ export type CommitNode = {
   message?: string;
   x: number;
   y: number;
-  commitColor?: string;
+  commitColor: string;
   commitLink?: string;
 };
 

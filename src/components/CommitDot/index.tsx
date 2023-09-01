@@ -24,7 +24,7 @@ export default function CommitDot({
     branchSpacing,
     commitSpacing,
     nodeRadius,
-    commit
+    commit,
   );
   const filterId = `filter_${commit.hash}_node`;
 
@@ -33,10 +33,10 @@ export default function CommitDot({
       <g
         filter={`url(#${filterId})`}
         fill={commit.commitColor}
-        onMouseOver={() => {
-          setShowBlock(true), setTopPos(y);
-        }}
-        onMouseLeave={() => setShowBlock(false)}
+        // onMouseOver={() => {
+        //   setShowBlock(true), setTopPos(y);
+        // }}
+        // onMouseLeave={() => setShowBlock(false)}
       >
         <circle
           cx={x}

@@ -23,7 +23,7 @@ const meta: Meta<typeof CommitGraph> = {
 export default meta;
 type Story = StoryObj<typeof CommitGraph>;
 
-const style = {
+const graphStyle = {
   commitSpacing: 90,
   branchSpacing: 20,
   nodeRadius: 2,
@@ -60,7 +60,7 @@ export const ThreeBranches: Story = {
         headCommitHash: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
       },
     ],
-    style,
+    graphStyle,
   },
 };
 
@@ -68,7 +68,7 @@ export const TwoBranches: Story = {
   args: {
     commits: twoBranches,
     branchHeads: [],
-    style,
+    graphStyle,
   },
 };
 
@@ -83,7 +83,7 @@ export const TwoCommits: Story = {
   args: {
     commits: twoCommits,
     branchHeads: [],
-    style,
+    graphStyle,
   },
 };
 
@@ -96,7 +96,7 @@ export const halfPage: Story = {
         headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
       },
     ],
-    style: {
+    graphStyle: {
       commitSpacing: 90,
       branchSpacing: 20,
       nodeRadius: 2,
@@ -122,7 +122,7 @@ export const Multiple: Story = {
         headCommitHash: "mau2aqr6977bc6ogr0dm8f9u3518j66q",
       },
     ],
-    style,
+    graphStyle,
   },
 };
 
@@ -143,6 +143,6 @@ export const Multiple2: Story = {
         headCommitHash: "jpm4mg8btdnkcaolo5iqj7u36s4sk08s",
       },
     ],
-    style,
+    graphStyle,
   },
 };

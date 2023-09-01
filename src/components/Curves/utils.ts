@@ -15,10 +15,10 @@ export function getMergedFromBranchHeadPositions(
   commitsMap: Map<string, CommitNode>,
   branchSpacing: number,
   commitSpacing: number,
-  nodeRadius: number
+  nodeRadius: number,
 ): CurveReturnType[] {
   if (commit.parents.length < 2) {
-    return null;
+    return [];
   }
   let mergedFromBranchHeadPositions: CurveReturnType[] = [];
 
@@ -30,7 +30,7 @@ export function getMergedFromBranchHeadPositions(
         commitSpacing,
         nodeRadius,
         commit.x,
-        commit.y
+        commit.y,
       );
       const endPoint = commit.x + 1 > parent.x ? parent.x : commit.x + 1;
       const height =
@@ -43,14 +43,14 @@ export function getMergedFromBranchHeadPositions(
         commitSpacing,
         nodeRadius,
         endPoint,
-        parent.y
+        parent.y,
       );
       mergedFromBranchHeadPositions.push({
         path: curvePath(start, end),
         stroke: parent.commitColor,
         id: `filter_${commit.hash.slice(0, 7)}_curved_path_${parent.hash.slice(
           0,
-          7
+          7,
         )}`,
         x: start[0],
         y: start[1],
@@ -67,13 +67,13 @@ export function getNewBranchToPath(
   commitsMap: Map<string, CommitNode>,
   branchSpacing: number,
   commitSpacing: number,
-  nodeRadius: number
+  nodeRadius: number,
 ): Array<CurveReturnType> {
   if (commit.children.length < 2) {
-    return null;
+    return [];
   }
   let newBranchToPositions: Array<CurveReturnType> = [];
-  commit.children.forEach((c) => {
+  commit.children.forEach(c => {
     const child = commitsMap.get(c)!;
     if (child.parents[0] === commit.hash && child.y !== commit.y) {
       const start = getPositionsBySpacing(
@@ -81,7 +81,7 @@ export function getNewBranchToPath(
         commitSpacing,
         nodeRadius,
         commit.x,
-        commit.y
+        commit.y,
       );
 
       const endPoint = commit.x - 1 > child.x ? commit.x - 1 : child.x;
@@ -91,7 +91,7 @@ export function getNewBranchToPath(
         commitSpacing,
         nodeRadius,
         endPoint,
-        child.y
+        child.y,
       );
       const height =
         Math.abs(child.x - commit.x) * (commitSpacing + nodeRadius * 4);
@@ -103,7 +103,7 @@ export function getNewBranchToPath(
         stroke: child.commitColor,
         id: `filter_${commit.hash.slice(0, 7)}_curved_path_${child.hash.slice(
           0,
-          7
+          7,
         )}`,
         x: start[0],
         y: end[1],
@@ -133,7 +133,7 @@ function getPositionsBySpacing(
   commitSpacing: number,
   nodeRadius: number,
   x: number,
-  y: number
+  y: number,
 ) {
   const realX = branchSpacing * y + nodeRadius * 4;
   const realY = commitSpacing * x + nodeRadius * 2;

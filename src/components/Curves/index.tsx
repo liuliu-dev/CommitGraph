@@ -20,13 +20,13 @@ export default function Curves({
 }: Props) {
   return (
     <>
-      {commits.map((commit) => {
+      {commits.map(commit => {
         const mergedCurves = getMergedFromBranchHeadPositions(
           commit,
           commitsMap,
           branchSpacing,
           commitSpacing,
-          nodeRadius
+          nodeRadius,
         );
 
         const newBranchCurves = getNewBranchToPath(
@@ -34,13 +34,13 @@ export default function Curves({
           commitsMap,
           branchSpacing,
           commitSpacing,
-          nodeRadius
+          nodeRadius,
         );
-         return (
+        return (
           <>
             {newBranchCurves &&
-              newBranchCurves.map((c) => {
-                 return (
+              newBranchCurves.map(c => {
+                return (
                   <CurvePath
                     key={`${commit.hash}-curved-up-path-${c.id}`}
                     commit={commit}
@@ -49,8 +49,8 @@ export default function Curves({
                 );
               })}
             {mergedCurves &&
-              mergedCurves.map((curve) => {
-                 return (
+              mergedCurves.map(curve => {
+                return (
                   <CurvePath
                     key={`${commit.hash}-curved-down-path-${curve.id}`}
                     commit={commit}

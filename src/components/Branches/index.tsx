@@ -1,6 +1,5 @@
 import React from "react";
 import { BranchPathType, CommitNode } from "../../helpers/types";
-import { setCommitNodeColor } from "../../helpers/utils";
 import BranchPath from "./BranchPath";
 
 type Props = {
@@ -9,6 +8,7 @@ type Props = {
   branchSpacing: number;
   nodeRadius: number;
   commitsMap: Map<string, CommitNode>;
+  branchColors: string[];
 };
 
 export default function Branches({
@@ -17,17 +17,17 @@ export default function Branches({
   commitSpacing,
   branchSpacing,
   nodeRadius,
+  branchColors,
 }: Props) {
   // use the current end most commit's position to paint the other unfinished branches' path, so all the straight lines go to the end
   const currentLastCommits =
-    Math.max(...Array.from(commitsMap.values()).map((c) => c.x)) *
-      commitSpacing +
+    Math.max(...Array.from(commitsMap.values()).map(c => c.x)) * commitSpacing +
     nodeRadius * 4;
 
   return (
     <>
       {columns.map((column, i) => {
-        return column.map((c) => {
+        return column.map(c => {
           const end = c.end === Infinity ? currentLastCommits : c.end;
           return (
             <BranchPath
@@ -36,7 +36,9 @@ export default function Branches({
               end={end}
               commitSpacing={commitSpacing}
               branchSpacing={branchSpacing}
-              branchColor={c.color}
+              branchColor={
+                c.color || branchColors[c.branchOrder % branchColors.length]
+              }
               branchOrder={i}
               nodeRadius={nodeRadius}
             />
