@@ -29,14 +29,11 @@
 }
 
 .block {
-  display: none;
   position: absolute;
   background-color: #010a40;
   border-radius: 0.75rem;
   z-index: -1;
-}
-
-.showBlock {
-  display: block;
+  height: 4rem;
+  width: 100%;
   opacity: 0.03;
 }

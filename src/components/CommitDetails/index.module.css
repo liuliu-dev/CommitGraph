@@ -29,3 +29,8 @@
   margin-top: 6px;
   color: #5d6280;
 }
+
+.tooltip {
+  opacity: 1;
+  z-index: 10;
+}

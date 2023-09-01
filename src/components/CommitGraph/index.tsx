@@ -70,8 +70,6 @@ export default function CommitGraph({
                 commitSpacing={commitSpacing}
                 branchSpacing={branchSpacing}
                 nodeRadius={nodeRadius}
-                setShowBlock={setShowBlock}
-                setTopPos={setTopPos}
               />
             );
           })}
@@ -94,18 +92,25 @@ export default function CommitGraph({
           const branch = branchHeads.filter(
             b => b.headCommitHash === commit.hash,
           );
-
+          const mouseOver = () => {
+            setShowBlock(true);
+            setTopPos(y);
+          };
+          const mouseLeave = () => {
+            setShowBlock(false);
+          };
           return (
             <div
               style={{ top: `calc(${y}px - 2rem)` }}
               className={css.details}
               key={`commit-details-${commit.hash}`}
-              onMouseOver={() => {
-                setShowBlock(true);
-              }}
-              onMouseLeave={() => setShowBlock(false)}
             >
-              <CommitDetails commit={commit} branch={branch} />
+              <CommitDetails
+                commit={commit}
+                branch={branch}
+                mouseOver={mouseOver}
+                mouseLeave={mouseLeave}
+              />
             </div>
           );
         })}
@@ -114,7 +119,7 @@ export default function CommitGraph({
         <div
           style={{
             left: -5,
-            top: 0,
+            top: `calc(${topPos}px - 2rem)`,
             height: "4rem",
             width: "100%",
           }}

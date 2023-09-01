@@ -19,3 +19,7 @@ All notable changes to this project will be documented in this file.
 ## [1.4.8] - 2023-08-31
 
 -- **Fixed:** Enforce types.
+
+## [1.6.0] - 2023-09-01
+
+-- **Fixed:** Fixed crashes on dolt hosted pages caused by mouseOver and mouseLeave.

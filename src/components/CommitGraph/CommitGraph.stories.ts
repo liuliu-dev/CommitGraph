@@ -24,7 +24,7 @@ export default meta;
 type Story = StoryObj<typeof CommitGraph>;
 
 const graphStyle = {
-  commitSpacing: 90,
+  commitSpacing: 72,
   branchSpacing: 20,
   nodeRadius: 2,
   branchColors: [

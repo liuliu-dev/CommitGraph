@@ -1,11 +1,9 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React  from "react";
 import { CommitNode } from "../../helpers/types";
 import { hexToColorMatrixVariant } from "../../helpers/utils";
 import { getCommitDotPosition } from "./utils";
 
 type Props = {
-  setShowBlock: (value: boolean) => void;
-  setTopPos: (value: number) => void;
   commit: CommitNode;
   commitSpacing: number;
   branchSpacing: number;
@@ -17,8 +15,6 @@ export default function CommitDot({
   commitSpacing,
   branchSpacing,
   nodeRadius,
-  setShowBlock,
-  setTopPos,
 }: Props) {
   const { x, y } = getCommitDotPosition(
     branchSpacing,
@@ -30,14 +26,7 @@ export default function CommitDot({
 
   return (
     <>
-      <g
-        filter={`url(#${filterId})`}
-        fill={commit.commitColor}
-        // onMouseOver={() => {
-        //   setShowBlock(true), setTopPos(y);
-        // }}
-        // onMouseLeave={() => setShowBlock(false)}
-      >
+      <g filter={`url(#${filterId})`} fill={commit.commitColor}>
         <circle
           cx={x}
           cy={y}

@@ -8,8 +8,16 @@ import { Tooltip } from "react-tooltip";
 type Props = {
   commit: CommitNode;
   branch: BranchType[];
+  mouseOver: () => void;
+  mouseLeave: () => void;
 };
-export default function CommitDetails({ commit, branch }: Props) {
+
+export default function CommitDetails({
+  commit,
+  branch,
+  mouseLeave,
+  mouseOver,
+}: Props) {
   const date = new Date(commit.committerDate).toLocaleDateString();
   const hashBr = commit.hash.slice(0, 7);
   const committer = commit.committer;
@@ -18,7 +26,11 @@ export default function CommitDetails({ commit, branch }: Props) {
   const [color, setColor] = useState(commit.commitColor);
 
   return (
-    <div className={css.container}>
+    <div
+      className={css.container}
+      onMouseOver={mouseOver}
+      onMouseLeave={mouseLeave}
+    >
       <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
         {commit.commitLink ? (
           <a
@@ -44,12 +56,14 @@ export default function CommitDetails({ commit, branch }: Props) {
       <div
         data-tooltip-content={message}
         data-tooltip-id={`commit-${commit.hash}-msg`}
-        data-tooltip-place="bottom-start"
+        data-tooltip-place="bottom-end"
         className={css.msg}
       >
         {excerpt(message, 80)}
       </div>
-      {message.length > 80 && <Tooltip id={`commit-${commit.hash}-msg`} />}
+      {message.length > 80 && (
+        <Tooltip id={`commit-${commit.hash}-msg`} className={css.tooltip} />
+      )}
     </div>
   );
 }
