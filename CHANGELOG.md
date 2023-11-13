@@ -23,3 +23,7 @@ All notable changes to this project will be documented in this file.
 ## [1.6.0] - 2023-09-01
 
 -- **Fixed:** Fixed crashes on dolt hosted pages caused by mouseOver and mouseLeave.
+
+## [1.6.1] - 2023-11-13
+
+-- **Fixed:** Fixed commit message tooltip gets cut off.
