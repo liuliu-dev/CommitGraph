@@ -23,3 +23,8 @@ All notable changes to this project will be documented in this file.
 ## [1.6.0] - 2023-09-01
 
 -- **Fixed:** Fixed crashes on dolt hosted pages caused by mouseOver and mouseLeave.
+
+
+## [1.6.4] - 2023-11-16
+
+-- **Fixed:** Fixed tooltip width.
