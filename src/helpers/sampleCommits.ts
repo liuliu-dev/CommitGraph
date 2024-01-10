@@ -1406,3 +1406,57 @@ export const oneCommit = [
       "https://dolthub.com/repositories/dolthub/scorewarrior_rubens_static2/commit/h75emdge26r5c57p4rtn7qp7fn90jtic",
   },
 ];
+
+
+export const multipleCommitsOnMain=[
+  {
+       ownerName: "liuliu",
+      repoName: "test1",
+      committer: {
+           displayName: "liuliu",
+       },
+      message: "test created with data from 97MB.csv",
+      parents: [
+          "7d9i7jtnff94juae9pe35p41tiuqreag"
+      ],
+      hash: "p40jvld9vigbpmphe75vkf5ensk408bg",
+      committedAt: 1701712846000,
+   },
+  {
+       ownerName: "liuliu",
+      repoName: "test1",
+      committer: {
+          displayName: "liuliu",
+      },
+      message: "Run SQL query:  create trigger `adds_one` before insert on `tablename` for each row set new.pk = new.pk + 1 ;",
+      parents: [
+          "46qse40pb6tmspsg2832d12f1oblnglk"
+      ],
+      hash: "7d9i7jtnff94juae9pe35p41tiuqreag",
+      committedAt: 1690914310000,
+   },
+  {
+       ownerName: "liuliu",
+      repoName: "test1",
+      committer: {
+          displayName: "tbantle",
+      },
+      message: "Run SQL query: CREATE TABLE tablename (\n  pk INT,\n  col1 VARCHAR(255),\n  PRIMARY KEY (pk)\n);",
+      parents: [
+          "5uog9l95gkr215v75ioed220driib008"
+      ],
+      hash: "46qse40pb6tmspsg2832d12f1oblnglk",
+      committedAt: 1681745246000,
+   },
+  {
+       ownerName: "liuliu",
+      repoName: "test1",
+      committer: {
+           displayName: "tbantle",
+      },
+      message: "Initialize data repository",
+      parents: [],
+      hash: "5uog9l95gkr215v75ioed220driib008",
+      committedAt: 1681745245000,
+   }
+]

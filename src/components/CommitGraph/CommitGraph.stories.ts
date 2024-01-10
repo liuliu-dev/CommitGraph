@@ -8,6 +8,7 @@ import {
   threeBranches,
   twoBranches,
   twoCommits,
+  multipleCommitsOnMain
 } from "../../helpers/sampleCommits";
 import CommitGraph from "./index";
 
@@ -143,6 +144,36 @@ export const Multiple2: Story = {
         headCommitHash: "jpm4mg8btdnkcaolo5iqj7u36s4sk08s",
       },
     ],
+    graphStyle,
+  },
+};
+
+
+export const MultipleOnMain: Story = {
+  args: {
+    commits: multipleCommitsOnMain,
+    branchHeads: [
+      {
+          branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamea",
+          headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
+       },
+      {
+          branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnameb",
+          headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
+       },
+       {
+        branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamec",
+        headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
+     },
+    {
+        branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamed",
+        headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
+     },
+      {
+          branchName: "main",
+          headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
+       }
+  ],
     graphStyle,
   },
 };

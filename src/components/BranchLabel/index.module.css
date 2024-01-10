@@ -10,3 +10,23 @@
   font-weight: 600;
   margin-right: 1rem;
 }
+
+
+.branches{
+  position: relative;;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.dropdown{
+  position: absolute;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.dropdownItem{
+  margin-bottom: 0.5rem;
+}

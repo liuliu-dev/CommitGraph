@@ -45,13 +45,10 @@ export default function CommitDetails({
         ) : (
           <span className={css.bold}>{commitHashAuthorDate}</span>
         )}
-        {!!branch.length && (
-          <BranchLabel
-            branchName={branch[0].branchName}
-            branchColor={commit.commitColor}
-            branchLink={branch[0].branchLink}
-          />
-        )}
+        <BranchLabel
+                 branchColor={commit.commitColor}
+                branches={branch}
+               /> 
       </div>
       <div
         data-tooltip-content={message}
