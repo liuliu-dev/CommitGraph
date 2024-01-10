@@ -56,13 +56,13 @@ export default function CommitDetails({
       <div
         data-tooltip-content={message}
         data-tooltip-id={`commit-${commit.hash}-msg`}
-        data-tooltip-place="bottom-end"
+        data-tooltip-place="bottom"
         className={css.msg}
       >
         {excerpt(message, 80)}
       </div>
       {message.length > 80 && (
-        <Tooltip id={`commit-${commit.hash}-msg`} className={css.tooltip} style={{ width:"100%"}}  />
+        <Tooltip id={`commit-${commit.hash}-msg`} className={css.tooltip}/>
       )}
     </div>
   );
