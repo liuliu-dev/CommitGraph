@@ -50,11 +50,14 @@ export default function BranchLabel({
   return (
     <div className={css.branches}>
     {!!branches.length&&(
-    <div  onMouseOver={() => setShowDropdown(true)} onMouseLeave={()=>setShowDropdown(false)}><Item
-          branchName={branches[len-1].branchName}
-          branchColor={ branchColor}
-          branchLink={branches[len-1].branchLink}
-        /></div>)
+      <div  onMouseOver={() => setShowDropdown(true)} onMouseLeave={()=>setShowDropdown(false)} className={css.firstBranch}>
+        <Item
+            branchName={branches[len-1].branchName}
+            branchColor={ branchColor}
+            branchLink={branches[len-1].branchLink}
+          />
+          {len>1&&<div className={css.number}>+{len-1}</div>}
+        </div>)
     }
     {showDropdown &&
     <div className={css.dropdown}>{branches.slice(0,len-1).map((b) => (

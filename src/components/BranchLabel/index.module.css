@@ -1,4 +1,4 @@
-.outer {
+.outer,.number{
   font-size: small;
   border: 1px solid;
   width: fit-content;
@@ -8,9 +8,11 @@
   line-height: 1.5rem;
   border-radius: 50px;
   font-weight: 600;
-  margin-right: 1rem;
 }
 
+.number{
+  margin-left: 0.5rem;
+}
 
 .branches{
   position: relative;;
@@ -30,3 +32,9 @@
 .dropdownItem{
   margin-bottom: 0.5rem;
 }
+
+.firstBranch{
+  display: flex;
+  align-items: center;
+}
+ 
