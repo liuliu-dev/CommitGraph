@@ -37,3 +37,7 @@ All notable changes to this project will be documented in this file.
 ## [1.6.12] - 2024-01-10
 
 -- **UI Enhancement:** Show all the branches on the same commit.
+
+## [1.6.13] - 2024-01-11
+
+-- **UI Enhancement:** Add branch number next to the label.
