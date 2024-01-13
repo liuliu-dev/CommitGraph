@@ -106,28 +106,28 @@ export const halfPage: Story = {
   },
 };
 
-export const Multiple: Story = {
-  args: {
-    commits: notPaintedWellInDoltHub,
-    branchHeads: [
-      {
-        branchName: "main",
-        headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
-      },
-      {
-        branchName: "feature branch 1",
-        headCommitHash: "9qvpdadg0ktrhg674trki4lt48rp3djp",
-      },
-      {
-        branchName: "feature branch 2",
-        headCommitHash: "mau2aqr6977bc6ogr0dm8f9u3518j66q",
-      },
-    ],
-    graphStyle,
-  },
-};
+// export const Multiple: Story = {
+//   args: {
+//     commits: notPaintedWellInDoltHub,
+//     branchHeads: [
+//       {
+//         branchName: "main",
+//         headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
+//       },
+//       {
+//         branchName: "feature branch 1",
+//         headCommitHash: "9qvpdadg0ktrhg674trki4lt48rp3djp",
+//       },
+//       {
+//         branchName: "feature branch 2",
+//         headCommitHash: "mau2aqr6977bc6ogr0dm8f9u3518j66q",
+//       },
+//     ],
+//     graphStyle,
+//   },
+// };
 
-export const Multiple2: Story = {
+export const Multiple: Story = {
   args: {
     commits: multipleBranches,
     branchHeads: [
