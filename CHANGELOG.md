@@ -42,6 +42,6 @@ All notable changes to this project will be documented in this file.
 
 -- **UI Enhancement:** Add branch number next to the label.
 
-## [1.6.14.4] - 2024-01-31
+## [1.6.15] - 2024-01-31
 
 -- **UI Fix** Fix branch name exceeds border.
