@@ -59,7 +59,7 @@ export default function BranchLabel({
           {len>1&&<div className={css.number}>+{len-1}</div>}
         </div>)
     }
-    {true &&
+    {showDropdown &&
     <div className={css.dropdown}>{branches.slice(0,len-1).map((b) => (
       <Item
         branchName={b.branchName}
