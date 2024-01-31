@@ -8,6 +8,7 @@
   line-height: 1.5rem;
   border-radius: 50px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .number{

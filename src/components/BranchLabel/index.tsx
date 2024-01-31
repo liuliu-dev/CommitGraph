@@ -47,7 +47,7 @@ export default function BranchLabel({
   }
   const [showDropdown, setShowDropdown] =  useState(false)
   const len=branches.length
-  return (
+   return (
     <div className={css.branches}>
     {!!branches.length&&(
       <div  onMouseOver={() => setShowDropdown(true)} onMouseLeave={()=>setShowDropdown(false)} className={css.firstBranch}>
@@ -59,7 +59,7 @@ export default function BranchLabel({
           {len>1&&<div className={css.number}>+{len-1}</div>}
         </div>)
     }
-    {showDropdown &&
+    {true &&
     <div className={css.dropdown}>{branches.slice(0,len-1).map((b) => (
       <Item
         branchName={b.branchName}

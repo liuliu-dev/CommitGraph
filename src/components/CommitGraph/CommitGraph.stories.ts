@@ -155,22 +155,27 @@ export const MultipleOnMain: Story = {
     branchHeads: [
       {
           branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamea",
+          branchLink: "https://www.google.com",
           headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
        },
       {
           branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnameb",
+          branchLink: "https://www.google.com",
           headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
        },
        {
         branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamec",
+        branchLink: "https://www.google.com",
         headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
      },
     {
         branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamed",
+        branchLink: "https://www.google.com",
         headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
      },
       {
           branchName: "main",
+          branchLink: "https://www.google.com",
           headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
        }
   ],
