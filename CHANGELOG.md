@@ -28,11 +28,9 @@ All notable changes to this project will be documented in this file.
 
 -- **Fixed:** Fixed commit message tooltip gets cut off.
 
-
 ## [1.6.4] - 2023-11-16
 
 -- **Fixed:** Fixed tooltip width.
-
 
 ## [1.6.12] - 2024-01-10
 
@@ -45,3 +43,7 @@ All notable changes to this project will be documented in this file.
 ## [1.6.15] - 2024-01-31
 
 -- **UI Fix** Fix branch name exceeds border.
+
+## [1.6.16] - 2024-02-19
+
+-- Bump dependencies.
