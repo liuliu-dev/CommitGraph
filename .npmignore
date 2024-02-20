@@ -1,2 +1,6 @@
 # exclude image for README
 graph.gif
+
+.next/
+.rollup.cache/
+node_modules/
