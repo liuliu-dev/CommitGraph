@@ -168,6 +168,6 @@ npm run storybook
 
 ## Use Case: DoltHub
 
-**`CommitGraph`** is utilized by (DoltHub)[https://www.dolthub.com/repositories/dolthub/us-jails/commits/main/graph] to visualize database commit log histories.
+**`CommitGraph`** is utilized by [DoltHub](https://www.dolthub.com/repositories/dolthub/us-jails/commits/main/graph) to visualize database commit log histories.
 
 
