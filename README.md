@@ -8,11 +8,13 @@
 
 The Commit Graph package is a React component designed to visualize commit graphs in an interactive and informative way, showcasing commit history within a repository. This package supports dynamic loading and visualization of commit history, including features like pagination to manage large datasets efficiently.
 
+
 ## Features
 
 - **Interactive Commit Graph Visualization:** Render the commit history as an interactive graph, providing a clear and informative view of repository activities.
 - **Customizable Styles:** Offers extensive styling options for the commit graph, including node colors, spacing, and more, to match your project's design.
 - **Manual Pagination Integration Support:** While **CommitGraph** itself does not provide built-in pagination, it is designed to work seamlessly with manual pagination implementations. This flexibility ensures that CommitGraph can handle large datasets effectively, maintaining performance and accuracy in data representation as more commits are dynamically loaded into the graph.
+
 
 ## Installation
 
@@ -21,6 +23,7 @@ Install the Commit Graph package via npm:
 ```shell
 npm install commit-graph
 ```
+
 
 ## Quick Start
 
@@ -77,6 +80,7 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
+
 ## Props
 
 The `CommitGraph` component accepts the following props:
@@ -113,6 +117,7 @@ An optional object specifying the styling options for the commit graph. The `gra
 - `branchSpacing` (number): The horizontal spacing between branches.
 - `branchColors` (array of strings): An array of colors to be used for different branches. Default: `['#FF0000', '#00FF00', '#0000FF']`.
 - `nodeRadius` (number): The radius of the commit node circles.
+
 
 ## Pagination Integration
 
