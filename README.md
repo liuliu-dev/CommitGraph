@@ -164,3 +164,10 @@ Explore the Commit Graph component and its features by running storybook:
 ```shell
 npm run storybook
 ```
+
+
+## Use Case: DoltHub
+
+**`CommitGraph`** is utilized by (DoltHub)[https://www.dolthub.com/repositories/dolthub/us-jails/commits/main/graph] to visualize database commit log histories.
+
+
