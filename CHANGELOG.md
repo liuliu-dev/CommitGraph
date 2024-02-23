@@ -47,3 +47,7 @@ All notable changes to this project will be documented in this file.
 ## [1.6.16] - 2024-02-19
 
 -- Bump dependencies.
+
+## [1.6.19] - 2024-02-23
+
+-- **UI Enhancement:** Right align the branches list.

@@ -154,17 +154,17 @@ export const MultipleOnMain: Story = {
     commits: multipleCommitsOnMain,
     branchHeads: [
       {
-          branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamea",
+          branchName: "a",
           branchLink: "https://www.google.com",
           headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
        },
       {
-          branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnameb",
+          branchName: "bb",
           branchLink: "https://www.google.com",
           headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
        },
        {
-        branchName: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamec",
+        branchName: "longnamelongnamelongnamelongnamec",
         branchLink: "https://www.google.com",
         headCommitHash: "p40jvld9vigbpmphe75vkf5ensk408bg",
      },

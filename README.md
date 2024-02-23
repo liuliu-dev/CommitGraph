@@ -7,13 +7,13 @@
 ## Overview
 
 The Commit Graph package is a React component designed to visualize commit graphs in an interactive and informative way, showcasing commit history within a repository. This package supports dynamic loading and visualization of commit history, including features like pagination to manage large datasets efficiently.
-**`CommitGraph`** is utilized by [DoltHub](https://www.dolthub.com/repositories/dolthub/us-jails/commits/main/graph) to visualize database commit log histories.
+`CommitGraph` is utilized by [DoltHub](https://www.dolthub.com/repositories/dolthub/us-jails/commits/main/graph) to visualize database commit log histories.
 
 
 ## Features
 
 - **Interactive Commit Graph Visualization:** Render the commit history as an interactive graph, providing a clear and informative view of repository activities.
-- **Customizable Styles:** Offers extensive styling options for the commit graph, including node colors, spacing, and more, to match your project's design.
+- **Customizable Styles:** Offers extensive styling options for the commit log graph, including node colors, spacing, and more, to match your project's design.
 - **Manual Pagination Integration Support:** While **CommitGraph** itself does not provide built-in pagination, it is designed to work seamlessly with manual pagination implementations. This flexibility ensures that CommitGraph can handle large datasets effectively, maintaining performance and accuracy in data representation as more commits are dynamically loaded into the graph.
 
 
@@ -122,7 +122,7 @@ An optional object specifying the styling options for the commit graph. The `gra
 
 ## Pagination Integration
 
-**`CommitGraph`** supports dynamic data loading and can seamlessly integrate with pagination libraries such as **`react-infinite-scroller`** for efficient handling of large commit histories. Here's an example of how to implement pagination with **`CommitGraph`**:
+`CommitGraph` supports dynamic data loading and can seamlessly integrate with pagination libraries such as [`react-infinite-scroller`](https://github.com/danbovey/react-infinite-scroller) for efficient handling of large commit histories. Here's an example of how to implement pagination with `CommitGraph`:
 
 ### Example: Integrating Infinite Scroll
 First, install `react-infinite-scroller`:
