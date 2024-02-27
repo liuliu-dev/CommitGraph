@@ -13,6 +13,20 @@ export type Commit = {
   commitLink?: string;
 };
 
+export type GitCommit = {
+  sha: string;
+  author: { login: string };
+  commit: {
+    author: { name: string; email: string };
+    message: string;
+    committer: { date: string };
+  };
+  parents: any[];
+  html_url: string;
+};
+
+export type GitBranch = { name: string; commit: { sha: string; url: string } };
+
 export type CommitNode = {
   hash: string;
   children: string[];
