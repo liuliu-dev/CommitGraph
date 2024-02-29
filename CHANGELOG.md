@@ -51,3 +51,7 @@ All notable changes to this project will be documented in this file.
 ## [1.6.19] - 2024-02-23
 
 -- **UI Enhancement:** Right align the branches list.
+
+## [1.6.20] - 2024-02-29
+
+-- **UI Enhancement:** Add support for RGB color.

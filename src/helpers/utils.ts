@@ -46,7 +46,7 @@ export function getCommits(commits: Commit[]): CommitNode[] {
   });
 }
 
-export function hexToColorMatrixVariant(hex?: string): string {
+function hexToColorMatrixVariant(hex?: string): string {
   if (!hex) {
     return "";
   }
@@ -54,6 +54,22 @@ export function hexToColorMatrixVariant(hex?: string): string {
   const g = parseInt(hex.substring(3, 5), 16) / 255;
   const b = parseInt(hex.substring(5, 7), 16) / 255;
   return `0 0 0 0 ${r} 0 0 0 0 ${g} 0 0 0 0 ${b} 0 0 0 0.5 0`;
+}
+
+function rgbColorToMatrixVariant(rgb: string): string {
+  const [r, g, b] = rgb.toLowerCase()
+    .replace("rgb(", "")
+    .replace(")", "")
+    .split(",")
+    .map(x => parseInt(x) / 255);
+  return `0 0 0 0 ${r} 0 0 0 0 ${g} 0 0 0 0 ${b} 0 0 0 0.5 0`;
+}
+
+export function convertColorToMatrixVariant(color: string): string {
+  if (color.startsWith("#")) {
+    return hexToColorMatrixVariant(color);
+  }
+  return rgbColorToMatrixVariant(color);
 }
 
 export function setCommitNodeColor(

@@ -1,6 +1,6 @@
 import React  from "react";
 import { CommitNode } from "../../helpers/types";
-import { hexToColorMatrixVariant } from "../../helpers/utils";
+import { convertColorToMatrixVariant } from "../../helpers/utils";
 import { getCommitDotPosition } from "./utils";
 
 type Props = {
@@ -63,7 +63,7 @@ export default function CommitDot({
           <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
-            values={hexToColorMatrixVariant(commit.commitColor)}
+            values={convertColorToMatrixVariant(commit.commitColor)}
           />
           <feBlend
             mode="normal"

@@ -1,4 +1,4 @@
-import { hexToColorMatrixVariant } from "../../helpers/utils";
+import { convertColorToMatrixVariant } from "../../helpers/utils";
 import React from "react";
 
 type Props = {
@@ -22,7 +22,7 @@ export default function BranchPath({
 }: Props) {
   const height = Math.abs(end - start) * (commitSpacing + nodeRadius * 4);
   const x = nodeRadius * 4 + branchOrder * branchSpacing - 1;
-  const matrixColor = hexToColorMatrixVariant(branchColor);
+  const matrixColor = convertColorToMatrixVariant(branchColor);
 
   return (
     <>
