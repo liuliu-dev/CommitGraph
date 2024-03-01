@@ -4,7 +4,7 @@ updates:
   directory: "/src"
   schedule:
     interval: weekly
-    time: "9:30"
+    time: "09:30"
     timezone: America/Los_Angeles
   open-pull-requests-limit: 10
   reviewers:
