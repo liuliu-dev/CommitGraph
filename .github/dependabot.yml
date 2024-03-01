@@ -1,0 +1,13 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/src"
+  schedule:
+    interval: weekly
+    time: "9:30"
+    timezone: America/Los_Angeles
+  open-pull-requests-limit: 10
+  reviewers:
+  - liuliu-dev
+  labels:
+  - dependencies
