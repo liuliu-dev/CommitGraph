@@ -42,8 +42,43 @@ const graphStyle = {
   ],
 };
 
+const rgbColorStyle={
+  commitSpacing: 72,
+  branchSpacing: 20,
+  nodeRadius: 2,
+  branchColors: [
+    "rgb(1, 10, 64)",
+    "rgb(252, 66, 201)",
+    "rgb(61, 145, 240)",
+    "rgb(41, 227, 193)",
+    "rgb(197, 161, 90)",
+    "rgb(250, 121, 120)",
+    "rgb(93, 98, 128)",
+    "rgb(90, 197, 141)",
+    "rgb(92, 90, 197)",
+    "rgb(235, 115, 64)",
+  ],
+};
+
+
 const branchColors = ["#5D6280", "#5AC58D", "#5C5AC5", "#EB7340"];
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+
+export const OneCommit: Story = {
+  args: {
+    commits: oneCommit,
+    branchHeads: [],
+  },
+};
+
+export const TwoCommits: Story = {
+  args: {
+    commits: twoCommits,
+    branchHeads: [],
+    graphStyle,
+  },
+};
+
 export const ThreeBranches: Story = {
   args: {
     commits: threeBranches,
@@ -73,38 +108,24 @@ export const TwoBranches: Story = {
   },
 };
 
-export const OneCommit: Story = {
-  args: {
-    commits: oneCommit,
-    branchHeads: [],
-  },
-};
 
-export const TwoCommits: Story = {
-  args: {
-    commits: twoCommits,
-    branchHeads: [],
-    graphStyle,
-  },
-};
-
-export const halfPage: Story = {
-  args: {
-    commits: half,
-    branchHeads: [
-      {
-        branchName: "main",
-        headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
-      },
-    ],
-    graphStyle: {
-      commitSpacing: 90,
-      branchSpacing: 20,
-      nodeRadius: 2,
-      branchColors,
-    },
-  },
-};
+// export const halfPage: Story = {
+//   args: {
+//     commits: half,
+//     branchHeads: [
+//       {
+//         branchName: "main",
+//         headCommitHash: "eogh9klv062daesg5s9hpa925budqe7l",
+//       },
+//     ],
+//     graphStyle: {
+//       commitSpacing: 90,
+//       branchSpacing: 20,
+//       nodeRadius: 2,
+//       branchColors,
+//     },
+//   },
+// };
 
 // export const Multiple: Story = {
 //   args: {
@@ -127,7 +148,7 @@ export const halfPage: Story = {
 //   },
 // };
 
-export const Multiple: Story = {
+export const ComplicateGraph: Story = {
   args: {
     commits: multipleBranches,
     branchHeads: [
@@ -149,7 +170,7 @@ export const Multiple: Story = {
 };
 
 
-export const MultipleOnMain: Story = {
+export const MultipleBranchesOnSameCommit: Story = {
   args: {
     commits: multipleCommitsOnMain,
     branchHeads: [
@@ -182,3 +203,4 @@ export const MultipleOnMain: Story = {
     graphStyle,
   },
 };
+ 

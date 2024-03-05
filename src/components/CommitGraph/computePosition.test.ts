@@ -185,7 +185,7 @@ describe("computePosition", () => {
       [
         {
           start: 0,
-          end: Infinity,
+          end: 28,
           endCommit: {
             hash: "qsmqckjvmlf7emqotdl67edm88shs73k",
             x: 28,
@@ -284,7 +284,7 @@ describe("computePosition", () => {
       [
         {
           start: 0,
-          end: Infinity,
+          end: 8,
           endCommit: {
             hash: "bg3k6inb0vu1lcivcj0kijb3lb3hrirj",
             x: 8,
@@ -351,7 +351,7 @@ describe("computePosition", () => {
       [
         {
           start: 0,
-          end: Infinity,
+          end: 1,
           endCommit: {
             hash: "4ttu5nqqifptnuqo6bk1hps3lu484jnu",
             x: 1,

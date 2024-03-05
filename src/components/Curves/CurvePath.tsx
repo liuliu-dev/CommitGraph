@@ -1,6 +1,6 @@
 import React from "react";
 import { CommitNode } from "../../helpers/types";
-import { hexToColorMatrixVariant } from "../../helpers/utils";
+import { convertColorToMatrixVariant } from "../../helpers/utils";
 import { CurveReturnType } from "./utils";
 
 type Props = {
@@ -37,7 +37,7 @@ export default function CurvePath({ curve }: Props) {
           <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
-            values={hexToColorMatrixVariant(curve.stroke)}
+            values={convertColorToMatrixVariant(curve.stroke)}
           />
           <feBlend
             mode="normal"
