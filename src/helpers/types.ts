@@ -1,16 +1,19 @@
+ type ParentCommit = {
+  sha: string;
+};
+
 export type Commit = {
-  hash: string;
-  ownerName: string;
-  repoName: string;
-  committer: {
-    username?: string | null;
-    displayName: string;
-    emailAddress?: string;
+  sha: string;
+  commit: {
+    author: {
+      name: string;
+      date: string | number | Date;
+      email?: string;
+    };
+    message: string;
   };
-  message: string;
-  parents: string[];
-  committedAt: number;
-  commitLink?: string;
+  parents: ParentCommit[];
+  html_url?: string;
 };
 
 export type CommitNode = {
@@ -18,7 +21,7 @@ export type CommitNode = {
   children: string[];
   parents: string[];
   committer: string;
-  committerDate: Date;
+  commitDate: Date;
   author?: string;
   authorDate?: Date;
   message?: string;
@@ -37,10 +40,12 @@ export type BranchPathType = {
   branchOrder: number;
 };
 
-export type BranchType = {
-  branchName: string;
-  headCommitHash: string;
-  branchLink?: string;
+export type Branch = {
+  name: string;
+   commit : {
+      sha : string,
+   },
+   link?:  string ,
 };
 
 export type GraphStyle = {

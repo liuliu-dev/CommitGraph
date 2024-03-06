@@ -59,3 +59,12 @@ All notable changes to this project will be documented in this file.
 ## [1.7.0] -- 2024-03-04
 
 -- **Bump Dependencies**
+
+## [1.8.0] -- 2024-03-06
+
+### Changed
+- Modified prop types to align with the GitHub commit and branch object schema.
+
+### Added
+- Added support for pagination.
+- Introduced a GitHub log graph example in Storybook.
