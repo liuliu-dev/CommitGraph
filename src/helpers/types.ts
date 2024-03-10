@@ -1,4 +1,4 @@
- type ParentCommit = {
+type ParentCommit = {
   sha: string;
 };
 
@@ -42,10 +42,10 @@ export type BranchPathType = {
 
 export type Branch = {
   name: string;
-   commit : {
-      sha : string,
-   },
-   link?:  string ,
+  commit: {
+    sha: string;
+  };
+  link?: string;
 };
 
 export type GraphStyle = {

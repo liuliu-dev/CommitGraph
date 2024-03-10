@@ -12,7 +12,7 @@ import { getCommitDotPosition } from "../CommitDot/utils";
 import Curves from "../Curves";
 import { computePosition } from "./computePosition";
 import css from "./index.module.css";
-import WithPagination from "./WithPagination";
+import WithInfiniteScroll from "./WithInfiniteScroll";
 
 export type Props = {
   commits: Commit[];
@@ -90,9 +90,7 @@ export default function CommitGraph({
             nodeRadius,
             commit,
           );
-          const branch = branchHeads.filter(
-            b => b.commit.sha === commit.hash,
-          );
+          const branch = branchHeads.filter(b => b.commit.sha === commit.hash);
           const mouseOver = () => {
             setShowBlock(true);
             setTopPos(y);
@@ -141,4 +139,4 @@ function getCommitInfoLeftPosition(width: number) {
   return 510;
 }
 
-CommitGraph.WithPagination = WithPagination;
+CommitGraph.WithInfiniteScroll = WithInfiniteScroll;

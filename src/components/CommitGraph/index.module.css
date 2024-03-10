@@ -41,6 +41,5 @@
 .scrollContainer {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
+  height: calc(100% - 100px);
 }

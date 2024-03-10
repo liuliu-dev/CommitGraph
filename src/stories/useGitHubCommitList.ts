@@ -5,18 +5,18 @@ type ReturnType = {
   commits: Commit[];
   hasMore: boolean;
   loadMore: () => Promise<void>;
-  getBranches:() => Promise<Branch[]| undefined>;
 };
 
 export function useGitHubCommitList(
   ownerName: string,
   repoName: string,
   token?: string,
-):  ReturnType  {
+): ReturnType {
   const [commits, setCommits] = useState<Commit[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const apiCommitsUrl = `https://api.github.com/repos/${ownerName}/${repoName}/commits?page=${page}`;
+  const pageSize = 30;
+  const apiCommitsUrl = `https://api.github.com/repos/${ownerName}/${repoName}/commits?page=${page}&per_page=${pageSize}`;
   const headers = new Headers({
     Authorization: token || "",
   });
@@ -30,7 +30,7 @@ export function useGitHubCommitList(
         if (res.ok) {
           const data = await res.json();
           const newCommits: Commit[] = data as Commit[];
-          const newHasMore = data.length === 30;
+          const newHasMore = data.length === pageSize;
           const allCommits = (commits ?? []).concat(newCommits);
           setCommits(allCommits);
           if (newHasMore) {
@@ -44,24 +44,8 @@ export function useGitHubCommitList(
     }
   };
 
-  const getBranches = async () => {
-     const apiUrl = `https://api.github.com/repos/${ownerName}/${repoName}/branches`;
- 
-    try {
-      const response = await fetch(apiUrl, { headers });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      return data as Branch[];
-    } catch (error) {
-      console.error("Fetching branches failed:", error);
-    }
-  };
- 
   return {
     commits,
-    getBranches,
     loadMore,
     hasMore,
   };

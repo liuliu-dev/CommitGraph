@@ -1,7 +1,8 @@
 import CommitGraph from "../components/CommitGraph";
 import { Branch } from "../helpers/types";
+import { useGitHubBranchList } from "./useGitHubBranchList";
 import { useGitHubCommitList } from "./useGitHubCommitList";
-import React, { use, useEffect, useState } from "react";
+import React from "react";
 
 type Props = {
   repoName: string;
@@ -9,26 +10,21 @@ type Props = {
 };
 
 export default function GitHubCommitStory({ repoName, ownerName }: Props) {
-  const { commits, hasMore, loadMore,getBranches } = useGitHubCommitList(
+  const { commits, hasMore, loadMore } = useGitHubCommitList(
     ownerName,
     repoName,
   );
-  const [branchHeads, setBranchHeads] = useState<Branch[]| undefined>([]);
-  useEffect(() => {
-  try {
-    getBranches().then((branches) => {
-      setBranchHeads(branches);
-    });
-  }catch (e) {
-    console.error("Fetching branches failed:", e);
-  }},[])
+  const { branches } = useGitHubBranchList(
+    ownerName,
+    repoName,
+  );
 
   return (
-    <CommitGraph.WithPagination
+    <CommitGraph.WithInfiniteScroll
       commits={commits}
       loadMore={loadMore}
       hasMore={hasMore}
-      branchHeads={branchHeads||[]}
+      branchHeads={branches}
     />
   );
 }

@@ -9,11 +9,10 @@ import {
   multipleCommitsOnMain,
 } from "../helpers/sampleCommits";
 import CommitGraph from "../components/CommitGraph/index";
- 
+
 const meta: Meta<typeof CommitGraph> = {
   title: "Example/DoltHub-CommitGraph",
   component: CommitGraph,
- 
 };
 
 export default meta;
@@ -79,21 +78,21 @@ export const ThreeBranches: Story = {
     branchHeads: [
       {
         name: "main",
-        commit : {
+        commit: {
           sha: "bgpqkjvf2mqoi9lq4upamdj0ke7e8iuo",
         },
       },
       {
         name: "feature-branch",
-        commit : {
+        commit: {
           sha: "bgpv9t0smfear03um03737mrkggb84o2",
-        }
+        },
       },
       {
         name: "another-branch",
-        commit : {
+        commit: {
           sha: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
-        }
+        },
       },
     ],
     graphStyle,
@@ -114,21 +113,21 @@ export const ComplicateGraph: Story = {
     branchHeads: [
       {
         name: "main",
-        commit : {
+        commit: {
           sha: "16f398rmboomr4tgeb8emenogtbqpmiv",
-        }
+        },
       },
       {
         name: "feature-branch",
-        commit : {
+        commit: {
           sha: "ubu61jhc3qp1d28035ee3kd105ao10q1",
-        }
+        },
       },
       {
         name: "another-branch",
-        commit : {
+        commit: {
           sha: "jpm4mg8btdnkcaolo5iqj7u36s4sk08s",
-        }
+        },
       },
     ],
     graphStyle,
@@ -142,38 +141,37 @@ export const MultipleBranchesOnSameCommit: Story = {
       {
         name: "a",
         link: "https://www.google.com",
-        commit : {
+        commit: {
           sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        }
+        },
       },
       {
         name: "bb",
         link: "https://www.google.com",
-        commit : {
+        commit: {
           sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        }
+        },
       },
       {
         name: "longnamelongnamelongnamelongnamec",
         link: "https://www.google.com",
-        commit : {
+        commit: {
           sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        }
+        },
       },
       {
-        name:
-          "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamed",
-          link: "https://www.google.com",
-        commit : {
+        name: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamed",
+        link: "https://www.google.com",
+        commit: {
           sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        }
+        },
       },
       {
         name: "main",
         link: "https://www.google.com",
-        commit : {
+        commit: {
           sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        }
+        },
       },
     ],
     graphStyle,

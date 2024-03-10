@@ -1,6 +1,6 @@
 {
   "name": "commit-graph",
-  "version": "1.8.0",
+  "version": "2.0.0",
   "author": "Liu Liu <liuliu.developer@gmail.com>",
   "description": "A React component to visualize a commit graph.",
   "contributors": [
@@ -29,7 +29,7 @@
     "test": "jest",
     "yalc:publish": "npm run build && yalc publish",
     "yalc:push": "npm run build && yalc push",
-    "prettier": "prettier  \"src/**/*.{js,jsx,ts,tsx}\"",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css}\"",
     "ci": "npm-run-all prettier lint test build"
   },
   "jest": {

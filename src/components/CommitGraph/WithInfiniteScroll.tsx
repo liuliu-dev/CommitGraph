@@ -11,21 +11,21 @@ type Props = {
   hasMore: boolean;
 };
 
-export default function WithPagination({
+export default function WithInfiniteScroll({
   commits,
   branchHeads,
   loadMore,
   hasMore,
 }: Props) {
   return (
-    <div id="main-content" className={css.scrollContainer}>
+    <div id="scroll-container" className={css.scrollContainer}>
       <InfiniteScroll
         loadMore={async () => loadMore()}
         hasMore={hasMore}
         useWindow={false}
         initialLoad={true}
         loader={<div>Loading graph...</div>}
-        getScrollParent={() => document.getElementById("main-content")}
+        getScrollParent={() => document.getElementById("scroll-container")}
       >
         <CommitGraph commits={commits} branchHeads={branchHeads} />
       </InfiniteScroll>

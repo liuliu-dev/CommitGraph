@@ -60,7 +60,7 @@ All notable changes to this project will be documented in this file.
 
 -- **Bump Dependencies**
 
-## [1.8.0] -- 2024-03-06
+## [2.0.0] -- 2024-03-08
 
 ### Changed
 - Modified prop types to align with the GitHub commit and branch object schema.
