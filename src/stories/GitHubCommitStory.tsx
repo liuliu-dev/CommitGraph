@@ -1,5 +1,4 @@
 import CommitGraph from "../components/CommitGraph";
-import { Branch } from "../helpers/types";
 import { useGitHubBranchList } from "./useGitHubBranchList";
 import { useGitHubCommitList } from "./useGitHubCommitList";
 import React from "react";
@@ -14,10 +13,7 @@ export default function GitHubCommitStory({ repoName, ownerName }: Props) {
     ownerName,
     repoName,
   );
-  const { branches } = useGitHubBranchList(
-    ownerName,
-    repoName,
-  );
+  const { branches } = useGitHubBranchList(ownerName, repoName);
 
   return (
     <CommitGraph.WithInfiniteScroll
