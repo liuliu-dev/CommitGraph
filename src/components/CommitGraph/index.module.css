@@ -37,3 +37,8 @@
   width: 100%;
   opacity: 0.03;
 }
+
+.scrollContainer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}

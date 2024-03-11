@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { CommitNode } from "../../helpers/types";
 import { convertColorToMatrixVariant } from "../../helpers/utils";
 import { getCommitDotPosition } from "./utils";

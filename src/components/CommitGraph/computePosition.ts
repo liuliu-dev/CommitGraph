@@ -6,7 +6,7 @@ function topologicalOrderCommits(
 ): string[] {
   // sort commits by committer date from latest to oldest
   const commitsSortByCommitterDate = commits.sort(
-    (a, b) => b.committerDate.getTime() - a.committerDate.getTime(),
+    (a, b) => b.commitDate.getTime() - a.commitDate.getTime(),
   );
 
   let sortedCommits: string[] = [];

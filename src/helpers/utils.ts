@@ -19,26 +19,26 @@ export const defaultStyle = {
   ],
 };
 
-export function getCommits(commits: Commit[]): CommitNode[] {
+export function formatCommits(commits: Commit[]): CommitNode[] {
   const childrenMap: Map<string, Array<string>> = new Map();
   commits.forEach(commit => {
     commit.parents.forEach(parent => {
-      if (childrenMap.get(parent)) {
-        childrenMap.get(parent)?.push(commit.hash);
+      if (childrenMap.get(parent.sha)) {
+        childrenMap.get(parent.sha)?.push(commit.sha);
       } else {
-        childrenMap.set(parent, [commit.hash]);
+        childrenMap.set(parent.sha, [commit.sha]);
       }
     });
   });
   return commits.map(commit => {
     return {
-      hash: commit.hash,
-      parents: commit.parents,
-      children: childrenMap.get(commit.hash) ?? [],
-      committer: commit.committer.displayName,
-      message: commit.message,
-      committerDate: new Date(commit.committedAt),
-      commitLink: commit.commitLink,
+      hash: commit.sha,
+      parents: commit.parents.map(p => p.sha),
+      children: childrenMap.get(commit.sha) ?? [],
+      committer: commit.commit.author.name,
+      message: commit.commit.message,
+      commitDate: new Date(commit.commit.author.date),
+      commitLink: commit.html_url,
       commitColor: "",
       x: -1,
       y: -1,
@@ -57,7 +57,8 @@ function hexToColorMatrixVariant(hex?: string): string {
 }
 
 function rgbColorToMatrixVariant(rgb: string): string {
-  const [r, g, b] = rgb.toLowerCase()
+  const [r, g, b] = rgb
+    .toLowerCase()
     .replace("rgb(", "")
     .replace(")", "")
     .split(",")

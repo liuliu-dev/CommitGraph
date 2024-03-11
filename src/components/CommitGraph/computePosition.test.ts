@@ -4,7 +4,7 @@ import {
   twoBranches,
   twoCommits,
 } from "../../helpers/sampleCommits";
-import { getCommits } from "../../helpers/utils";
+import { formatCommits } from "../../helpers/utils";
 import { computePosition } from "./computePosition";
 
 type BranchPathTestType = {
@@ -23,7 +23,7 @@ type CommitNodeWithPos = {
 
 describe("computePosition", () => {
   test("notPaintedWellInDoltHub", () => {
-    const nodes = getCommits(notPaintedWellInDoltHub);
+    const nodes = formatCommits(notPaintedWellInDoltHub);
 
     const { commitsMap, columns } = computePosition(nodes);
 
@@ -177,7 +177,7 @@ describe("computePosition", () => {
   });
 
   test("threeBranches", () => {
-    const nodes = getCommits(threeBranches);
+    const nodes = formatCommits(threeBranches);
 
     const { commitsMap, columns } = computePosition(nodes);
 
@@ -276,7 +276,7 @@ describe("computePosition", () => {
   });
 
   test("twoBranches", () => {
-    const nodes = getCommits(twoBranches);
+    const nodes = formatCommits(twoBranches);
 
     const { commitsMap, columns } = computePosition(nodes);
 
@@ -343,7 +343,7 @@ describe("computePosition", () => {
   });
 
   test("twoCommits", () => {
-    const nodes = getCommits(twoCommits);
+    const nodes = formatCommits(twoCommits);
 
     const { commitsMap, columns } = computePosition(nodes);
 

@@ -1,4 +1,5 @@
-.outer,.number{
+.outer,
+.number {
   font-size: small;
   border: 1px solid;
   width: fit-content;
@@ -11,18 +12,18 @@
   white-space: nowrap;
 }
 
-.number{
+.number {
   margin-left: 0.5rem;
 }
 
-.branches{
-  position: relative;;
+.branches {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
 
-.dropdown{
+.dropdown {
   position: absolute;
   top: 2rem;
   display: flex;
@@ -30,14 +31,13 @@
   align-items: flex-end;
 }
 
-.dropdownItem{
+.dropdownItem {
   margin-bottom: 0.5rem;
   background-color: white;
   z-index: 10;
 }
 
-.firstBranch{
+.firstBranch {
   display: flex;
   align-items: center;
 }
- 
