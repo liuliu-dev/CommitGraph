@@ -22,10 +22,8 @@ export default function WithInfiniteScroll({
       <InfiniteScroll
         loadMore={async () => loadMore()}
         hasMore={hasMore}
-        useWindow={false}
         initialLoad={true}
         loader={<div>Loading graph...</div>}
-        getScrollParent={() => document.getElementById("scroll-container")}
       >
         <CommitGraph commits={commits} branchHeads={branchHeads} />
       </InfiniteScroll>

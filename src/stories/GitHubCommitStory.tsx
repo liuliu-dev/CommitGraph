@@ -1,5 +1,4 @@
 import CommitGraph from "../components/CommitGraph";
-import { Branch } from "../helpers/types";
 import { useGitHubBranchList } from "./useGitHubBranchList";
 import { useGitHubCommitList } from "./useGitHubCommitList";
 import React from "react";
