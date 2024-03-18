@@ -14,10 +14,7 @@ export default function GitHubCommitStory({ repoName, ownerName }: Props) {
     ownerName,
     repoName,
   );
-  const { branches } = useGitHubBranchList(
-    ownerName,
-    repoName,
-  );
+  const { branches } = useGitHubBranchList(ownerName, repoName);
 
   return (
     <CommitGraph.WithInfiniteScroll
