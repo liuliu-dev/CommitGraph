@@ -59,3 +59,7 @@ All notable changes to this project will be documented in this file.
 ## [1.7.0] -- 2024-03-04
 
 -- **Bump Dependencies**
+
+## [1.7.1] -- 2024-05-01
+
+-- **Bump Dependencies**
