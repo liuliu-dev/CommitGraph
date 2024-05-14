@@ -1,6 +1,6 @@
 import React from "react";
 import CommitGraph from ".";
-import { Branch, Commit } from "../../helpers/types";
+import { Branch, Commit, GraphStyle } from "../../helpers/types";
 import InfiniteScroll from "react-infinite-scroller";
 import css from "./index.module.css";
 
@@ -10,6 +10,7 @@ type Props = {
   loadMore: () => void;
   hasMore: boolean;
   parentID?: string;
+  graphStyle?: GraphStyle;
 };
 
 export default function WithInfiniteScroll({
@@ -18,6 +19,7 @@ export default function WithInfiniteScroll({
   loadMore,
   hasMore,
   parentID,
+  graphStyle,
 }: Props) {
   return (
     <div id="scroll-container" className={css.scrollContainer}>
@@ -33,7 +35,7 @@ export default function WithInfiniteScroll({
         }
         getScrollParent={() => parentID?document.getElementById(parentID):null}
       >
-        <CommitGraph commits={commits} branchHeads={branchHeads} />
+        <CommitGraph commits={commits} branchHeads={branchHeads} graphStyle={graphStyle}/>
       </InfiniteScroll>
     </div>
   );
