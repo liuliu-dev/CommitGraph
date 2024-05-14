@@ -42,3 +42,7 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
+.loader {
+  padding: 10px 16px;
+}

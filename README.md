@@ -85,7 +85,7 @@ export default MyComponent;
 ### Common Props for CommitGraph and CommitGraph.WithInfiniteScroll
 
 - commits (array): An array of `Commit` objects representing the commit history.
-- branchHeads (array): An array of `Branch` objects representing the branch heads in the commit graph.
+- branchHeads (array): An array of `Branch` objects representing the branch heads in the commit-graph.
 
 ### Additional Props for CommitGraph.WithInfiniteScroll
 
@@ -140,7 +140,7 @@ Each Branch object should include the branch's name, the SHA of the latest commi
 
 ### `graphStyle` (object, optional)
 
-An optional object specifying the styling options for the commit graph. The `graphStyle` object should have the following properties:
+An optional object specifying the styling options for the commit-graph. The `graphStyle` object should have the following properties:
 
 - `commitSpacing` (number): The vertical spacing between commits.
 - `branchSpacing` (number): The horizontal spacing between branches.

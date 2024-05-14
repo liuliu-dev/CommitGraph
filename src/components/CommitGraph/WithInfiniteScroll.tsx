@@ -9,6 +9,7 @@ type Props = {
   branchHeads: Branch[];
   loadMore: () => void;
   hasMore: boolean;
+  parentID?: string;
 };
 
 export default function WithInfiniteScroll({
@@ -16,14 +17,21 @@ export default function WithInfiniteScroll({
   branchHeads,
   loadMore,
   hasMore,
+  parentID,
 }: Props) {
   return (
     <div id="scroll-container" className={css.scrollContainer}>
       <InfiniteScroll
-        loadMore={async () => loadMore()}
+        loadMore={loadMore}
         hasMore={hasMore}
-        initialLoad={true}
-        loader={<div>Loading graph...</div>}
+        useWindow={false}
+        initialLoad={false}
+        loader={
+          <div className={css.loader} key={0}>
+            Loading graph...
+          </div>
+        }
+        getScrollParent={() => parentID?document.getElementById(parentID):null}
       >
         <CommitGraph commits={commits} branchHeads={branchHeads} />
       </InfiniteScroll>

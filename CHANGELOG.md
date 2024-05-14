@@ -60,6 +60,10 @@ All notable changes to this project will be documented in this file.
 
 -- **Bump Dependencies**
 
+## [1.7.1] -- 2024-05-01
+
+-- **Bump Dependencies**
+
 ## [2.0.0] - 2024-03-08
 
 ### Breaking Changes
@@ -130,3 +134,4 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
     link: 'https://example.com/branch/main'
     }
   ```
+ 
