@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { Branch, Commit } from "../helpers/types";
+import { useEffect, useState } from "react";
+import {  Commit } from "../helpers/types";
 
 type ReturnType = {
   commits: Commit[];
   hasMore: boolean;
   loadMore: () => Promise<void>;
+  
 };
+
+
 
 export function useGitHubCommitList(
   ownerName: string,
@@ -20,6 +23,29 @@ export function useGitHubCommitList(
   const headers = new Headers({
     Authorization: token || "",
   });
+
+  const getCommits = async () => {
+    try {
+      const res = await fetch(apiCommitsUrl, { headers });
+      if (res.ok) {
+        const data = await res.json();
+        const newCommits: Commit[] = data as Commit[];
+        const newHasMore = data.length === pageSize;
+        setCommits(newCommits);
+        setHasMore(newHasMore);
+        if (newHasMore) {
+          setPage(page + 1);
+        }
+      }
+    } catch (e) {
+      console.error("Fetching commits failed:", e);
+    }
+  };
+ 
+  useEffect(() => {
+    getCommits();
+  }, []);
+
   const loadMore = async () => {
     if (!hasMore) {
       return;

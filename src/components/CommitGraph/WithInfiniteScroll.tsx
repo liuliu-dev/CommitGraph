@@ -21,12 +21,12 @@ export default function WithInfiniteScroll({
   parentID,
   graphStyle,
 }: Props) {
-  return (
+   return (
     <div id="scroll-container" className={css.scrollContainer}>
       <InfiniteScroll
         loadMore={loadMore}
         hasMore={hasMore}
-        useWindow={false}
+        useWindow={parentID?false:true}
         initialLoad={false}
         loader={
           <div className={css.loader} key={0}>

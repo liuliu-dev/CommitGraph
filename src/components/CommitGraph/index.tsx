@@ -36,10 +36,10 @@ export default function CommitGraph({
   const { columns, commitsMap } = computePosition(commitNodes);
   const width = columns.length * (branchSpacing + nodeRadius * 2) + 3;
   // the position of the last commit is Math.max(...Array.from(commitsMap.values()).map((c) => c.x)), and 64 is the height of the commit details.
-  const height =
+  const height =commitsMap.size?
     Math.max(...Array.from(commitsMap.values()).map(c => c.x)) * commitSpacing +
     nodeRadius * 8 +
-    64;
+    64:0;
   setBranchAndCommitColor(columns, branchColors, commitsMap);
   const commitsNodes = Array.from(commitsMap.values());
   const commitInfoLeftPosition = getCommitInfoLeftPosition(width);

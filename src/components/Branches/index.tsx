@@ -23,7 +23,7 @@ export default function Branches({
   const currentLastCommits =
     Math.max(...Array.from(commitsMap.values()).map(c => c.x)) * commitSpacing +
     nodeRadius * 4;
-
+  
   return (
     <>
       {columns.map((column, i) => {
@@ -31,7 +31,7 @@ export default function Branches({
           const end = c.end === Infinity ? currentLastCommits : c.end;
           return (
             <BranchPath
-              key={`branch-path-${i}-${c.start}-${c.end}`}
+              key={`branch-path-${i}-${c.start}-${end}`}
               start={c.start}
               end={end}
               commitSpacing={commitSpacing}
