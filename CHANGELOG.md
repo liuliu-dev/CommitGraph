@@ -63,3 +63,75 @@ All notable changes to this project will be documented in this file.
 ## [1.7.1] -- 2024-05-01
 
 -- **Bump Dependencies**
+
+## [2.0.0] - 2024-03-08
+
+### Breaking Changes
+
+- **Prop Types Modification**: The prop types have been modified to align with the GitHub commit and branch object schema. This change affects all components that utilize commit and branch prop types.
+
+### Added
+
+- Added support for infinite scroll, allowing for the dynamic loading of new commits as scrolling down.
+- A GitHub log graph example in Storybook, demonstrating the new features and how to implement them in your projects.
+
+### Migration Instructions
+
+#### Prop Types Modification
+
+If you are upgrading from a version prior to 2.0.0, please note the changes to prop types:
+
+- Ensure that your commit and branch data structures conform to the new schema expected by the updated components.
+
+##### Commit Type Changes
+
+- \*\*Migration example:
+
+  ```javascript
+  // Old commit format
+  {
+    hash: 'commitHash',
+    ownerName: 'owner',
+    repoName: 'repo',
+    committer: {
+      username: 'committerUsername',
+      displayName: 'Committer Name',
+      emailAddress: 'committer@example.com'
+    },
+    message: 'Commit message',
+    parents: ['parentHash1', 'parentHash2'],
+    committedAt: '2024-03-10',
+    commitLink: 'https://example.com/commit/commitHash'
+  }
+
+  // New commit format
+  {
+    sha: 'commitHash',
+    commit: {
+      author: {
+        name: 'Committer Name',
+        date: '2024-03-10', // or Date object or number
+        email: 'committer@example.com'
+      },
+      message: 'Commit message',
+    },
+    parents: [{ sha: 'parentHash1' }, { sha: 'parentHash2' }],
+    html_url: 'https://example.com/commit/commitHash'
+  }
+
+  // Old branch format
+  {
+    branchName: 'main',
+    headCommitHash: 'latestCommitHash',
+    branchLink: 'https://example.com/branch/main'
+  }
+  // New branch format
+  {
+    name: 'main',
+    commit: {
+      sha: 'latestCommitHash'
+    },
+    link: 'https://example.com/branch/main'
+    }
+  ```
+ 

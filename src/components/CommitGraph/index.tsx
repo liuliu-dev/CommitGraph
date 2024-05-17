@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { BranchType, Commit, GraphStyle } from "../../helpers/types";
+import { Branch, Commit, GraphStyle } from "../../helpers/types";
 import {
   defaultStyle,
-  getCommits,
+  formatCommits,
   setBranchAndCommitColor,
 } from "../../helpers/utils";
 import Branches from "../Branches";
@@ -12,10 +12,11 @@ import { getCommitDotPosition } from "../CommitDot/utils";
 import Curves from "../Curves";
 import { computePosition } from "./computePosition";
 import css from "./index.module.css";
+import WithInfiniteScroll from "./WithInfiniteScroll";
 
 export type Props = {
   commits: Commit[];
-  branchHeads: BranchType[];
+  branchHeads: Branch[];
   graphStyle?: GraphStyle;
 };
 
@@ -27,7 +28,7 @@ export default function CommitGraph({
   const [showBlock, setShowBlock] = useState(false);
   const [topPos, setTopPos] = useState(0);
 
-  const commitNodes = getCommits(commits);
+  const commitNodes = formatCommits(commits);
   const { commitSpacing, branchSpacing, branchColors, nodeRadius } = {
     ...defaultStyle,
     ...graphStyle,
@@ -35,10 +36,10 @@ export default function CommitGraph({
   const { columns, commitsMap } = computePosition(commitNodes);
   const width = columns.length * (branchSpacing + nodeRadius * 2) + 3;
   // the position of the last commit is Math.max(...Array.from(commitsMap.values()).map((c) => c.x)), and 64 is the height of the commit details.
-  const height =
+  const height =commitsMap.size?
     Math.max(...Array.from(commitsMap.values()).map(c => c.x)) * commitSpacing +
     nodeRadius * 8 +
-    64;
+    64:0;
   setBranchAndCommitColor(columns, branchColors, commitsMap);
   const commitsNodes = Array.from(commitsMap.values());
   const commitInfoLeftPosition = getCommitInfoLeftPosition(width);
@@ -89,9 +90,7 @@ export default function CommitGraph({
             nodeRadius,
             commit,
           );
-          const branch = branchHeads.filter(
-            b => b.headCommitHash === commit.hash,
-          );
+          const branch = branchHeads.filter(b => b.commit.sha === commit.hash);
           const mouseOver = () => {
             setShowBlock(true);
             setTopPos(y);
@@ -139,3 +138,5 @@ function getCommitInfoLeftPosition(width: number) {
   }
   return 510;
 }
+
+CommitGraph.WithInfiniteScroll = WithInfiniteScroll;

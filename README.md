@@ -6,62 +6,38 @@
 
 ## Overview
 
-The Commit Graph package is a React component designed to visualize commit graphs in an interactive and informative way, showcasing commit history within a repository. This package supports dynamic loading and visualization of commit history, including features like pagination to manage large datasets efficiently.
-`CommitGraph` is utilized by [DoltHub](https://www.dolthub.com/repositories/dolthub/transparency-in-pricing/commits/main/graph) to visualize database commit log histories.
+The Commit Graph package is a React component suite designed to visualize commit graphs in an interactive and informative way. It showcases commit history within a repository with support for infinite scroll loading.
 
+`CommitGraph` is utilized by platforms like [DoltHub](https://www.dolthub.com/repositories/dolthub/transparency-in-pricing/commits/main/graph) to visualize database commit log histories.
 
 ## Features
 
-- **Interactive Commit Graph Visualization:** Render the commit history as an interactive graph, providing a clear and informative view of repository activities.
-- **Customizable Styles:** Offers extensive styling options for the commit log graph, including node colors, spacing, and more, to match your project's design.
-- **Manual Pagination Integration Support:** While **CommitGraph** itself does not provide built-in pagination, it is designed to work seamlessly with manual pagination implementations. This flexibility ensures that CommitGraph can handle large datasets effectively, maintaining performance and accuracy in data representation as more commits are dynamically loaded into the graph.
-
+- **Interactive Commit Graph Visualization:** Render commit history as an interactive graph, offering a clear and detailed view of repository activities.
+- **Infinite Scroll Support:** `CommitGraph.WithInfiniteScroll` enhances user experience for large commit histories by dynamically loading new content as users scroll.
+- **Customizable Styles:** Extensive styling options for the commit log graph, including node colors, spacing, and more, to seamlessly match your project's design.
 
 ## Installation
-
-Install the Commit Graph package via npm:
 
 ```shell
 npm install commit-graph
 ```
 
-
 ## Quick Start
 
-To use the CommitGraph component in your React application, import it and pass your commit and branch head data as props:
+### Using CommitGraph
+
+For a basic implementation without infinite scroll:
 
 ```jsx
 import React from "react";
-import CommitGraph from "commit-graph";
+import { CommitGraph } from "commit-graph";
 
 const MyComponent = () => {
-   // Your commit and branch head data arrays
   const commits = [
-    {
-      hash: 'commit-hash',
-      ownerName: 'repository-owner',
-      repoName: 'repository-name',
-      committer:
-      {
-        displayName: 'committer-displayName',
-       }
-      message: 'commit-message',
-      parents: ['parent-commit-hash-1', 'parent-commit-hash-2'],
-      committedAt: timestamp,
-      commitLink: 'https://github.com/repository-owner/repository-name/main/commit-hash',
-    }
+    // Commits data according to the new Commit type
   ];
-
   const branchHeads = [
-    {
-      branchName: "branch-name-1",
-      headCommitHash: "commit-hash-1",
-    },
-    {
-      branchName: "branch-name-2",
-      headCommitHash: "commit-hash-2",
-      branchLink:"https://github.com/repository-owner/repository-name/main",
-    },
+    // Branch heads data according to the new Branch type
   ];
 
   return (
@@ -81,82 +57,95 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
+### Using CommitGraph.WithInfiniteScroll
+
+For implementations requiring infinite scroll to handle large commit histories:
+
+```jsx
+import React from "react";
+import { CommitGraph } from "commit-graph";
+
+const MyComponent = () => {
+  // Your commit and branch head data, loadMore function, and hasMore flag
+  return (
+    <CommitGraph.WithInfiniteScroll
+      commits={/* Your commits data */}
+      branchHeads={/* Your branch heads data */}
+      loadMore={/* Your loadMore function */}
+      hasMore={/* hasMore flag */}
+    />
+  );
+};
+
+export default MyComponent;
+```
 
 ## Props
 
-The `CommitGraph` component accepts the following props:
+### Common Props for CommitGraph and CommitGraph.WithInfiniteScroll
 
-### `commits` (array)
+- commits (array): An array of `Commit` objects representing the commit history.
+- branchHeads (array): An array of `Branch` objects representing the branch heads in the commit-graph.
 
-An array of commit objects representing the commit history. Each commit object should have the following properties:
+### Additional Props for CommitGraph.WithInfiniteScroll
 
-- `hash` (string): The unique hash identifier of the commit.
-- `ownerName` (string): The name of the repository owner.
-- `repoName` (string): The name of the repository.
-- `committer` (object): The person who made the commit, it has following properties:
-  - `username` (string)
-  - `displayName` (string)
-  - `emailAddress` (string)
-- `message` (string): The commit message.
-- `parents` (array of strings): An array of commit hashes representing the parent commits.
-- `committedAt` (timestamp): The timestamp when the commit was made.
-- `commitLink` (string, optional): the external link to the commit.
+- loadMore (function): Function to load more commits upon reaching the scroll end.
+- hasMore (boolean): Indicates whether more commits are available to load.
 
-### `branchHeads` (array)
+## Type Definitions
 
-An array of branch head objects representing the branch heads in the commit graph. Each branch head object should have the following properties:
+These type definitions should be used to structure the data passed to the commits and branchHeads props of both CommitGraph and CommitGraph.WithInfiniteScroll components, ensuring proper visualization of commit history and branch information.
 
-- `branchName` (string): The name of the branch.
-- `headCommitHash` (string): The commit hash at the head of the branch.
-- `branchLink` (string, optional): The link to the branch.
+### `Commit` Type
+
+The `Commit` type represents individual commits in the commit history. Each `Commit` object should conform to the following structure:
+
+```typescript
+type ParentCommit = {
+  sha: string;
+};
+
+export type Commit = {
+  sha: string;
+  commit: {
+    author: {
+      name: string; // The name of the commit author
+      date: string | number | Date; // The date of the commit
+      email?: string; // The email of the commit author (optional)
+    };
+    message: string; // The commit message
+  };
+  parents: ParentCommit[]; // An array of parent commits
+  html_url?: string; // The URL to view the commit (optional)
+};
+```
+
+This type definition includes the commit's SHA, author information, commit message, an array of parent commits, and an optional URL to the commit.
+
+### `Branch` Type
+
+The `Branch` type defines the structure for branches in the repository, each associated with a particular commit:
+
+```typescript
+export type Branch = {
+  name: string; // The name of the branch
+  commit: {
+    sha: string; // The SHA of the latest commit on the branch
+  };
+  link?: string; // A URL to the branch on GitHub (optional)
+};
+```
+
+Each Branch object should include the branch's name, the SHA of the latest commit on the branch, and an optional link to the branch.
 
 ### `graphStyle` (object, optional)
 
-An optional object specifying the styling options for the commit graph. The `graphStyle` object should have the following properties:
+An optional object specifying the styling options for the commit-graph. The `graphStyle` object should have the following properties:
 
 - `commitSpacing` (number): The vertical spacing between commits.
 - `branchSpacing` (number): The horizontal spacing between branches.
 - `branchColors` (array of strings): An array of colors to be used for different branches. Default: `['#FF0000', '#00FF00', '#0000FF']`.
 - `nodeRadius` (number): The radius of the commit node circles.
-
-
-## Pagination Integration
-
-`CommitGraph` supports dynamic data loading and can seamlessly integrate with pagination libraries such as [`react-infinite-scroller`](https://github.com/danbovey/react-infinite-scroller) for efficient handling of large commit histories. Here's an example of how to implement pagination with `CommitGraph`:
-
-### Example: Integrating Infinite Scroll
-First, install `react-infinite-scroller`:
-
-```shel
-npm install react-infinite-scroller
-```
-
-Then, you can integrate InfiniteScroll with CommitGraph in your component:
-
-```jsx
-import React from "react";
-import { CommitGraph } from "commit-graph";
-import InfiniteScroll from "react-infinite-scroller";
-
-<InfiniteScroll
-  loadMore={async () => loadMore()}
-  hasMore={ hasMore}
-  useWindow={false}
-  initialLoad={false}
-  loader={
-    <div>
-      Loading graph...
-    </div>
-  }
-  getScrollParent={() => document.getElementById("main-content")}
->
-  <CommitGraph
-    commits={commits}
-    branchHeads={branchHeads}
-  />
-</InfiniteScroll>;
-```
-
 
 ## Storybook
 
@@ -165,6 +154,3 @@ Explore the Commit Graph component and its features by running storybook:
 ```shell
 npm run storybook
 ```
-
-
-

@@ -1,0 +1,179 @@
+import type { Meta, StoryObj } from "@storybook/react";
+
+import {
+  multipleBranches,
+  oneCommit,
+  threeBranches,
+  twoBranches,
+  twoCommits,
+  multipleCommitsOnMain,
+} from "../helpers/sampleCommits";
+import CommitGraph from "../components/CommitGraph/index";
+
+const meta: Meta<typeof CommitGraph> = {
+  title: "Example/DoltHub-CommitGraph",
+  component: CommitGraph,
+};
+
+export default meta;
+type Story = StoryObj<typeof CommitGraph>;
+
+const graphStyle = {
+  commitSpacing: 72,
+  branchSpacing: 20,
+  nodeRadius: 2,
+  branchColors: [
+    "#010A40",
+    "#FC42C9",
+    "#3D91F0",
+    "#29E3C1",
+    "#C5A15A",
+    "#FA7978",
+    "#5D6280",
+    "#5AC58D",
+    "#5C5AC5",
+    "#EB7340",
+  ],
+};
+
+const rgbColorStyle = {
+  commitSpacing: 72,
+  branchSpacing: 20,
+  nodeRadius: 2,
+  branchColors: [
+    "rgb(1, 10, 64)",
+    "rgb(252, 66, 201)",
+    "rgb(61, 145, 240)",
+    "rgb(41, 227, 193)",
+    "rgb(197, 161, 90)",
+    "rgb(250, 121, 120)",
+    "rgb(93, 98, 128)",
+    "rgb(90, 197, 141)",
+    "rgb(92, 90, 197)",
+    "rgb(235, 115, 64)",
+  ],
+};
+
+const branchColors = ["#5D6280", "#5AC58D", "#5C5AC5", "#EB7340"];
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+
+export const OneCommit: Story = {
+  args: {
+    commits: oneCommit,
+    branchHeads: [],
+  },
+};
+
+export const TwoCommits: Story = {
+  args: {
+    commits: twoCommits,
+    branchHeads: [],
+    graphStyle,
+  },
+};
+
+export const ThreeBranches: Story = {
+  args: {
+    commits: threeBranches,
+    branchHeads: [
+      {
+        name: "main",
+        commit: {
+          sha: "bgpqkjvf2mqoi9lq4upamdj0ke7e8iuo",
+        },
+      },
+      {
+        name: "feature-branch",
+        commit: {
+          sha: "bgpv9t0smfear03um03737mrkggb84o2",
+        },
+      },
+      {
+        name: "another-branch",
+        commit: {
+          sha: "r26g8v5vo7c82c5o1tt9hcleef924tp2",
+        },
+      },
+    ],
+    graphStyle,
+  },
+};
+
+export const TwoBranches: Story = {
+  args: {
+    commits: twoBranches,
+    branchHeads: [],
+    graphStyle,
+  },
+};
+
+export const ComplicateGraph: Story = {
+  args: {
+    commits: multipleBranches,
+    branchHeads: [
+      {
+        name: "main",
+        commit: {
+          sha: "16f398rmboomr4tgeb8emenogtbqpmiv",
+        },
+      },
+      {
+        name: "feature-branch",
+        commit: {
+          sha: "ubu61jhc3qp1d28035ee3kd105ao10q1",
+        },
+      },
+      {
+        name: "another-branch",
+        commit: {
+          sha: "jpm4mg8btdnkcaolo5iqj7u36s4sk08s",
+        },
+      },
+    ],
+    graphStyle,
+  },
+};
+
+export const MultipleBranchesOnSameCommit: Story = {
+  args: {
+    commits: multipleCommitsOnMain,
+    branchHeads: [
+      {
+        name: "a",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "bb",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "longnamelongnamelongnamelongnamec",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamed",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "main",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+    ],
+    graphStyle,
+  },
+};
