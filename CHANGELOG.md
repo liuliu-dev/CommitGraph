@@ -64,7 +64,7 @@ All notable changes to this project will be documented in this file.
 
 -- **Bump Dependencies**
 
-## [2.0.0] - 2024-03-08
+## [2.0.0] - 2024-05-06
 
 ### Breaking Changes
 
@@ -135,3 +135,6 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
     }
   ```
  
+## [2.0.1] - 2024-05-29
+
+-- **Fixed:** Fixed console unique `key` warning.

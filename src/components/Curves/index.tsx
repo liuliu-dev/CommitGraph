@@ -1,7 +1,7 @@
 import React from "react";
 import { CommitNode } from "../../helpers/types";
 import CurvePath from "./CurvePath";
-import { getMergedFromBranchHeadPositions, getNewBranchToPath } from "./utils";
+import { CurveReturnType, getMergedFromBranchHeadPositions, getNewBranchToPath } from "./utils";
 
 type Props = {
   commits: CommitNode[];
@@ -10,6 +10,39 @@ type Props = {
   branchSpacing: number;
   nodeRadius: number;
 };
+
+type InnerProps={
+  newBranchCurves: CurveReturnType[];
+  mergedCurves: CurveReturnType[];
+  commit: CommitNode;
+}
+
+function Inner({newBranchCurves, mergedCurves, commit}:InnerProps){
+  return (
+    < >
+      {newBranchCurves &&
+        newBranchCurves.map(c => {
+          return (
+            <CurvePath
+              key={`${commit.hash}-curved-up-path-${c.id}`}
+              commit={commit}
+              curve={c}
+            />
+          );
+        })}
+      {mergedCurves &&
+        mergedCurves.map(curve  => {
+          return (
+            <CurvePath
+              key={`${commit.hash}-curved-down-path-${curve.id}`}
+              commit={commit}
+              curve={curve}
+            />
+          );
+        })}
+    </ >
+  );
+}
 
 export default function Curves({
   commits,
@@ -37,28 +70,7 @@ export default function Curves({
           nodeRadius,
         );
         return (
-          <>
-            {newBranchCurves &&
-              newBranchCurves.map(c => {
-                return (
-                  <CurvePath
-                    key={`${commit.hash}-curved-up-path-${c.id}`}
-                    commit={commit}
-                    curve={c}
-                  />
-                );
-              })}
-            {mergedCurves &&
-              mergedCurves.map(curve => {
-                return (
-                  <CurvePath
-                    key={`${commit.hash}-curved-down-path-${curve.id}`}
-                    commit={commit}
-                    curve={curve}
-                  />
-                );
-              })}
-          </>
+          <Inner newBranchCurves={newBranchCurves} mergedCurves={mergedCurves} commit={commit} key={commit.hash}/>
         );
       })}
     </>

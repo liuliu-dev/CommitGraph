@@ -8,8 +8,6 @@ type ReturnType = {
   
 };
 
-
-
 export function useGitHubCommitList(
   ownerName: string,
   repoName: string,

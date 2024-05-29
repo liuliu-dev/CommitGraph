@@ -1,5 +1,4 @@
 import { CommitNode, BranchPathType, Commit } from "./types";
-import React from "react";
 
 export const defaultStyle = {
   commitSpacing: 90,
