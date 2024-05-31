@@ -18,12 +18,14 @@ export type Props = {
   commits: Commit[];
   branchHeads: Branch[];
   graphStyle?: GraphStyle;
+  dateFormatFn?: (d: string | number | Date) => string;
 };
 
 export default function CommitGraph({
   commits,
   graphStyle,
   branchHeads,
+  dateFormatFn,
 }: Props) {
   const [showBlock, setShowBlock] = useState(false);
   const [topPos, setTopPos] = useState(0);
@@ -36,10 +38,12 @@ export default function CommitGraph({
   const { columns, commitsMap } = computePosition(commitNodes);
   const width = columns.length * (branchSpacing + nodeRadius * 2) + 3;
   // the position of the last commit is Math.max(...Array.from(commitsMap.values()).map((c) => c.x)), and 64 is the height of the commit details.
-  const height =commitsMap.size?
-    Math.max(...Array.from(commitsMap.values()).map(c => c.x)) * commitSpacing +
-    nodeRadius * 8 +
-    64:0;
+  const height = commitsMap.size
+    ? Math.max(...Array.from(commitsMap.values()).map(c => c.x)) *
+        commitSpacing +
+      nodeRadius * 8 +
+      64
+    : 0;
   setBranchAndCommitColor(columns, branchColors, commitsMap);
   const commitsNodes = Array.from(commitsMap.values());
   const commitInfoLeftPosition = getCommitInfoLeftPosition(width);
@@ -109,6 +113,7 @@ export default function CommitGraph({
                 branch={branch}
                 mouseOver={mouseOver}
                 mouseLeave={mouseLeave}
+                dateFormatFn={dateFormatFn}
               />
             </div>
           );

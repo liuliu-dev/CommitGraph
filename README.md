@@ -147,6 +147,14 @@ An optional object specifying the styling options for the commit-graph. The `gra
 - `branchColors` (array of strings): An array of colors to be used for different branches. Default: `['#FF0000', '#00FF00', '#0000FF']`.
 - `nodeRadius` (number): The radius of the commit node circles.
 
+### `dateFormatFn` (function, optional)
+
+An optional function to format commit dates. Takes a Date, number, or string as input and returns a string.
+
+```typescript
+dateFormatFn?: (d: string | number | Date) => string;
+```
+
 ## Storybook
 
 Explore the Commit Graph component and its features by running storybook:

@@ -134,7 +134,11 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
     link: 'https://example.com/branch/main'
     }
   ```
- 
+
 ## [2.0.1] - 2024-05-29
 
 -- **Fixed:** Fixed console unique `key` warning.
+
+## [2.0.2] - 2024-05-30
+
+-- Add `dateFormatFn` prop.
