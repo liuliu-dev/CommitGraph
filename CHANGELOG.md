@@ -139,6 +139,6 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 
 -- **Fixed:** Fixed console unique `key` warning.
 
-## [2.0.2] - 2024-05-30
+## [2.0.2] - 2024-05-31
 
 -- Add `dateFormatFn` prop.
