@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Branch, CommitNode } from "../../helpers/types";
 import BranchLabel from "../BranchLabel";
-import { excerpt } from "../Curves/utils";
+import { excerpt } from "@dolthub/web-utils";
 import css from "./index.module.css";
 import { Tooltip } from "react-tooltip";
 
@@ -10,6 +10,7 @@ type Props = {
   branch: Branch[];
   mouseOver: () => void;
   mouseLeave: () => void;
+  dateFormatFn?: (d: string | number | Date) => string;
 };
 
 export default function CommitDetails({
@@ -17,8 +18,11 @@ export default function CommitDetails({
   branch,
   mouseLeave,
   mouseOver,
+  dateFormatFn,
 }: Props) {
-  const date = commit.commitDate.toLocaleDateString();
+  const date = dateFormatFn
+    ? dateFormatFn(commit.commitDate)
+    : commit.commitDate.toLocaleDateString();
   const hashBr = commit.hash.slice(0, 7);
   const committer = commit.committer;
   const message = commit.message || "";

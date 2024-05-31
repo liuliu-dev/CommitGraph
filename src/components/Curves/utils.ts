@@ -139,7 +139,3 @@ function getPositionsBySpacing(
   const realY = commitSpacing * x + nodeRadius * 2;
   return [realX, realY];
 }
-
-export function excerpt(str: string, len: number) {
-  return str.length > len ? str.substring(0, len) + "..." : str;
-}

@@ -147,6 +147,42 @@ An optional object specifying the styling options for the commit-graph. The `gra
 - `branchColors` (array of strings): An array of colors to be used for different branches. Default: `['#FF0000', '#00FF00', '#0000FF']`.
 - `nodeRadius` (number): The radius of the commit node circles.
 
+### `dateFormatFn` (function, optional)
+
+An optional function to format commit dates. Takes a Date, number, or string as input and returns a string.
+
+```typescript
+dateFormatFn?: (d: string | number | Date) => string;
+```
+
+example:
+```typescript
+const customDateTimeFormatFn = (d: string | number | Date): string => {
+  return new Date(d).toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+  });
+};
+
+const MyComponent = () => {
+  // Your commit and branch head data, loadMore function, and hasMore flag
+  return (
+    <CommitGraph.WithInfiniteScroll
+      commits={/* Your commits data */}
+      branchHeads={/* Your branch heads data */}
+      loadMore={/* Your loadMore function */}
+      hasMore={/* hasMore flag */}
+      dateFormatFn={customDateTimeFormatFn}
+    />
+  );
+};
+
+```
+
 ## Storybook
 
 Explore the Commit Graph component and its features by running storybook:
