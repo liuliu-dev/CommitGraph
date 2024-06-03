@@ -12,6 +12,7 @@ type Props = {
   parentID?: string;
   graphStyle?: GraphStyle;
   dateFormatFn?: (d: string | number | Date) => string;
+  currentBranch?: string;
 };
 
 export default function WithInfiniteScroll({
@@ -22,6 +23,7 @@ export default function WithInfiniteScroll({
   parentID,
   graphStyle,
   dateFormatFn,
+  currentBranch,
 }: Props) {
   return (
     <div id="scroll-container" className={css.scrollContainer}>
@@ -44,6 +46,7 @@ export default function WithInfiniteScroll({
           branchHeads={branchHeads}
           graphStyle={graphStyle}
           dateFormatFn={dateFormatFn}
+          currentBranch={currentBranch}
         />
       </InfiniteScroll>
     </div>

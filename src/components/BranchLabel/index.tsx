@@ -14,6 +14,7 @@ type ItemProps = {
 type Props = {
   branches: Branch[];
   branchColor: string;
+  currentBranch?: string;
 };
 
 function Item({ branchName, branchColor, branchLink, className }: ItemProps) {
@@ -33,31 +34,47 @@ function Item({ branchName, branchColor, branchLink, className }: ItemProps) {
   );
 }
 
-export default function BranchLabel({ branches, branchColor }: Props) {
+export default function BranchLabel({
+  branches,
+  branchColor,
+  currentBranch,
+}: Props) {
   if (branches.length === 0) {
     return <></>;
   }
+  const current =
+    branches.find(b => b.name === currentBranch) ||
+    branches[branches.length - 1];
+  branches = branches.filter(b => b.name !== current.name);
   const len = branches.length;
 
   return (
     <div className={css.branches}>
-      {!!branches.length && (
-        <div className={css.firstBranch}>
-          <Item
-            branchName={branches[len - 1].name}
-            branchColor={branchColor}
-            branchLink={branches[len - 1].link}
-          />
-        </div>
-      )}
-      {len > 1 && (
+      <div className={css.firstBranch}>
+        <Item
+          branchName={current.name}
+          branchColor={branchColor}
+          branchLink={current.link}
+        />
+      </div>
+
+      {!!len && (
         <ReactPopup
-          trigger={<div className={css.number}>+{len - 1}</div>}
+          trigger={<div className={css.number}>+{len}</div>}
           on="hover"
           position="bottom right"
+          contentStyle={{
+            width: "fit-content",
+            borderRadius: "0.5rem",
+            border: "none",
+            boxShadow: "0 0 4px 0 rgba(145, 164, 168, 0.5)",
+          }}
+          offsetY={5}
+          offsetX={5}
+          arrow={false}
         >
           <div className={css.dropdown}>
-            {branches.slice(0, len - 1).map(b => (
+            {branches.map(b => (
               <Item
                 branchName={b.name}
                 branchColor={branchColor}
