@@ -113,6 +113,7 @@ export const ComplicateGraph: Story = {
     branchHeads: [
       {
         name: "main",
+        link: "https://www.google.com",
         commit: {
           sha: "16f398rmboomr4tgeb8emenogtbqpmiv",
         },
@@ -171,6 +172,12 @@ export const MultipleBranchesOnSameCommit: Story = {
         link: "https://www.google.com",
         commit: {
           sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "feature-branch",
+        commit: {
+          sha: "7d9i7jtnff94juae9pe35p41tiuqreag",
         },
       },
     ],

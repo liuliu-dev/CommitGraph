@@ -23,7 +23,7 @@ export default function Branches({
   const currentLastCommits =
     Math.max(...Array.from(commitsMap.values()).map(c => c.x)) * commitSpacing +
     nodeRadius * 4;
-  
+
   return (
     <>
       {columns.map((column, i) => {

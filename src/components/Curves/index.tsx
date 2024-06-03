@@ -1,7 +1,11 @@
 import React from "react";
 import { CommitNode } from "../../helpers/types";
 import CurvePath from "./CurvePath";
-import { CurveReturnType, getMergedFromBranchHeadPositions, getNewBranchToPath } from "./utils";
+import {
+  CurveReturnType,
+  getMergedFromBranchHeadPositions,
+  getNewBranchToPath,
+} from "./utils";
 
 type Props = {
   commits: CommitNode[];
@@ -11,15 +15,15 @@ type Props = {
   nodeRadius: number;
 };
 
-type InnerProps={
+type InnerProps = {
   newBranchCurves: CurveReturnType[];
   mergedCurves: CurveReturnType[];
   commit: CommitNode;
-}
+};
 
-function Inner({newBranchCurves, mergedCurves, commit}:InnerProps){
+function Inner({ newBranchCurves, mergedCurves, commit }: InnerProps) {
   return (
-    < >
+    <>
       {newBranchCurves &&
         newBranchCurves.map(c => {
           return (
@@ -31,7 +35,7 @@ function Inner({newBranchCurves, mergedCurves, commit}:InnerProps){
           );
         })}
       {mergedCurves &&
-        mergedCurves.map(curve  => {
+        mergedCurves.map(curve => {
           return (
             <CurvePath
               key={`${commit.hash}-curved-down-path-${curve.id}`}
@@ -40,7 +44,7 @@ function Inner({newBranchCurves, mergedCurves, commit}:InnerProps){
             />
           );
         })}
-    </ >
+    </>
   );
 }
 
@@ -70,7 +74,12 @@ export default function Curves({
           nodeRadius,
         );
         return (
-          <Inner newBranchCurves={newBranchCurves} mergedCurves={mergedCurves} commit={commit} key={commit.hash}/>
+          <Inner
+            newBranchCurves={newBranchCurves}
+            mergedCurves={mergedCurves}
+            commit={commit}
+            key={commit.hash}
+          />
         );
       })}
     </>

@@ -23,7 +23,7 @@ export default function BranchPath({
   const height = Math.abs(end - start) * (commitSpacing + nodeRadius * 4);
   const x = nodeRadius * 4 + branchOrder * branchSpacing - 1;
   const matrixColor = convertColorToMatrixVariant(branchColor);
-  
+
   return (
     <>
       <g filter={`url(#filter${branchOrder}-${start}-${end})`}>

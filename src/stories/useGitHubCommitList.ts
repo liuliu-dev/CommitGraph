@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import {  Commit } from "../helpers/types";
+import { Commit } from "../helpers/types";
 
 type ReturnType = {
   commits: Commit[];
   hasMore: boolean;
   loadMore: () => Promise<void>;
-  
 };
 
 export function useGitHubCommitList(
@@ -39,7 +38,7 @@ export function useGitHubCommitList(
       console.error("Fetching commits failed:", e);
     }
   };
- 
+
   useEffect(() => {
     getCommits();
   }, []);
