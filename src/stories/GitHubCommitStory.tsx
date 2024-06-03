@@ -13,7 +13,7 @@ export default function GitHubCommitStory({ repoName, ownerName }: Props) {
     ownerName,
     repoName,
   );
-  
+
   const { branches } = useGitHubBranchList(ownerName, repoName);
 
   return (
@@ -28,12 +28,12 @@ export default function GitHubCommitStory({ repoName, ownerName }: Props) {
 }
 
 const customDateTimeFormatFn = (d: string | number | Date): string => {
-  return new Date(d).toLocaleString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
+  return new Date(d).toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
   });
 };

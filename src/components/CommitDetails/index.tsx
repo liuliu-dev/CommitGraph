@@ -11,6 +11,7 @@ type Props = {
   mouseOver: () => void;
   mouseLeave: () => void;
   dateFormatFn?: (d: string | number | Date) => string;
+  currentBranch?: string;
 };
 
 export default function CommitDetails({
@@ -19,6 +20,7 @@ export default function CommitDetails({
   mouseLeave,
   mouseOver,
   dateFormatFn,
+  currentBranch,
 }: Props) {
   const date = dateFormatFn
     ? dateFormatFn(commit.commitDate)
@@ -49,7 +51,11 @@ export default function CommitDetails({
         ) : (
           <span className={css.bold}>{commitHashAuthorDate}</span>
         )}
-        <BranchLabel branchColor={commit.commitColor} branches={branch} />
+        <BranchLabel
+          branchColor={commit.commitColor}
+          branches={branch}
+          currentBranch={currentBranch}
+        />
       </div>
       <div
         data-tooltip-content={message}

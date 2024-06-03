@@ -19,6 +19,7 @@ export type Props = {
   branchHeads: Branch[];
   graphStyle?: GraphStyle;
   dateFormatFn?: (d: string | number | Date) => string;
+  currentBranch?: string;
 };
 
 export default function CommitGraph({
@@ -26,6 +27,7 @@ export default function CommitGraph({
   graphStyle,
   branchHeads,
   dateFormatFn,
+  currentBranch,
 }: Props) {
   const [showBlock, setShowBlock] = useState(false);
   const [topPos, setTopPos] = useState(0);
@@ -114,6 +116,7 @@ export default function CommitGraph({
                 mouseOver={mouseOver}
                 mouseLeave={mouseLeave}
                 dateFormatFn={dateFormatFn}
+                currentBranch={currentBranch}
               />
             </div>
           );

@@ -183,6 +183,11 @@ const MyComponent = () => {
 
 ```
 
+
+### `currentBranch` (string, optional)
+
+The name of the current branch.
+
 ## Storybook
 
 Explore the Commit Graph component and its features by running storybook:
