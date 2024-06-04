@@ -149,3 +149,7 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 -- **Fixed:** Fixed the branches dropdown overlap issue. Fixed the branch label link not clickable issue.
 
 -- **Added:** Added support for current branch, so it will always show up first.
+
+## [2.1.1]
+
+-- Avoid auto focus on the first link in the branches dropdown.

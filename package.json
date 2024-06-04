@@ -1,6 +1,6 @@
 {
   "name": "commit-graph",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Liu Liu <liuliu.developer@gmail.com>",
   "description": "A React component to visualize a commit graph.",
   "contributors": [
