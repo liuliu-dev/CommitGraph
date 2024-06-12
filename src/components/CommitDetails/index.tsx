@@ -12,6 +12,7 @@ type Props = {
   mouseLeave: () => void;
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
+  fullSha?: boolean;
 };
 
 export default function CommitDetails({
@@ -21,6 +22,7 @@ export default function CommitDetails({
   mouseOver,
   dateFormatFn,
   currentBranch,
+  fullSha,
 }: Props) {
   const date = dateFormatFn
     ? dateFormatFn(commit.commitDate)
@@ -28,7 +30,7 @@ export default function CommitDetails({
   const hashBr = commit.hash.slice(0, 7);
   const committer = commit.committer;
   const message = commit.message || "";
-  const commitHashAuthorDate = `${hashBr} - ${committer} - ${date}`;
+  const commitHashAuthorDate = `${fullSha ? commit.hash : hashBr} - ${committer} - ${date}`;
   const [color, setColor] = useState(commit.commitColor);
 
   return (

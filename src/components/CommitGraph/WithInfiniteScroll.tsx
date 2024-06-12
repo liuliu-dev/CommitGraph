@@ -13,24 +13,16 @@ type Props = {
   graphStyle?: GraphStyle;
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
+  fullSha?: boolean;
 };
 
-export default function WithInfiniteScroll({
-  commits,
-  branchHeads,
-  loadMore,
-  hasMore,
-  parentID,
-  graphStyle,
-  dateFormatFn,
-  currentBranch,
-}: Props) {
+export default function WithInfiniteScroll(props: Props) {
   return (
     <div id="scroll-container" className={css.scrollContainer}>
       <InfiniteScroll
-        loadMore={loadMore}
-        hasMore={hasMore}
-        useWindow={parentID ? false : true}
+        loadMore={props.loadMore}
+        hasMore={props.hasMore}
+        useWindow={props.parentID ? false : true}
         initialLoad={false}
         loader={
           <div className={css.loader} key={0}>
@@ -38,16 +30,10 @@ export default function WithInfiniteScroll({
           </div>
         }
         getScrollParent={() =>
-          parentID ? document.getElementById(parentID) : null
+          props.parentID ? document.getElementById(props.parentID) : null
         }
       >
-        <CommitGraph
-          commits={commits}
-          branchHeads={branchHeads}
-          graphStyle={graphStyle}
-          dateFormatFn={dateFormatFn}
-          currentBranch={currentBranch}
-        />
+        <CommitGraph {...props} />
       </InfiniteScroll>
     </div>
   );

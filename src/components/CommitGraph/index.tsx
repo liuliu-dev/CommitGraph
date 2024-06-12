@@ -20,6 +20,7 @@ export type Props = {
   graphStyle?: GraphStyle;
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
+  fullSha?: boolean;
 };
 
 export default function CommitGraph({
@@ -28,6 +29,7 @@ export default function CommitGraph({
   branchHeads,
   dateFormatFn,
   currentBranch,
+  fullSha,
 }: Props) {
   const [showBlock, setShowBlock] = useState(false);
   const [topPos, setTopPos] = useState(0);
@@ -117,6 +119,7 @@ export default function CommitGraph({
                 mouseLeave={mouseLeave}
                 dateFormatFn={dateFormatFn}
                 currentBranch={currentBranch}
+                fullSha={fullSha}
               />
             </div>
           );

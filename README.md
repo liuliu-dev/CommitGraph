@@ -188,6 +188,10 @@ const MyComponent = () => {
 
 The name of the current branch.
 
+### `fullSha` (boolean, optional)
+
+Instead of the default shortened SHA, display the full SHA of the commit.
+
 ## Storybook
 
 Explore the Commit Graph component and its features by running storybook:

@@ -153,3 +153,7 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 ## [2.1.1]
 
 -- Avoid auto focus on the first link in the branches dropdown.
+
+## [2.1.2]
+
+-- Add option to display full sha of commits.

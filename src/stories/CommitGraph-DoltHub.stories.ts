@@ -182,5 +182,6 @@ export const MultipleBranchesOnSameCommit: Story = {
       },
     ],
     graphStyle,
+    fullSha: true,
   },
 };
