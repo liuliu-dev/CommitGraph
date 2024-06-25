@@ -157,3 +157,7 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 ## [2.1.2]
 
 -- Add option to display full sha of commits.
+
+## [2.1.3]
+
+-- Bump dependencies, clean up unused dependencies, set sourcemap to be false.
