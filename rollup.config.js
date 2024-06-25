@@ -6,6 +6,8 @@ import terser from "@rollup/plugin-terser";
 import postcss from "rollup-plugin-postcss";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const packageJson = require("./package.json");
 
 export default [
@@ -15,12 +17,12 @@ export default [
       {
         file: packageJson.main,
         format: "cjs",
-        sourcemap: true,
+        sourcemap: false,
       },
       {
         file: packageJson.module,
         format: "esm",
-        sourcemap: true,
+        sourcemap: false,
       },
     ],
     plugins: [
