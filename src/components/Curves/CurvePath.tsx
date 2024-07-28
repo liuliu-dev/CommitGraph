@@ -4,7 +4,6 @@ import { convertColorToMatrixVariant } from "../../helpers/utils";
 import { CurveReturnType } from "./utils";
 
 type Props = {
-  commit: CommitNode;
   curve: CurveReturnType;
 };
 

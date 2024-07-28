@@ -43,7 +43,7 @@ export default function CommitGraph({
   const width = columns.length * (branchSpacing + nodeRadius * 2) + 3;
   // the position of the last commit is Math.max(...Array.from(commitsMap.values()).map((c) => c.x)), and 64 is the height of the commit details.
   const height = commitsMap.size
-    ? Math.max(...Array.from(commitsMap.values()).map(c => c.x)) *
+    ? Math.max(...Array.from(commitsMap.values()).map(c => c.y)) *
         commitSpacing +
       nodeRadius * 8 +
       64

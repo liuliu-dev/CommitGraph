@@ -32,18 +32,18 @@ export function getMergedFromBranchHeadPositions(
         commit.x,
         commit.y,
       );
-      const endPoint = commit.x + 1 > parent.x ? parent.x : commit.x + 1;
+      const endPoint = commit.y + 1 > parent.y ? parent.y : commit.y + 1;
       const height =
-        Math.abs(parent.x - commit.x) * (commitSpacing + nodeRadius * 4);
+        Math.abs(parent.y - commit.y) * (commitSpacing + nodeRadius * 4);
       const width =
-        Math.abs(parent.y - commit.y) * (branchSpacing + nodeRadius * 4);
+        Math.abs(parent.x - commit.x) * (branchSpacing + nodeRadius * 4);
 
       const end = getPositionsBySpacing(
         branchSpacing,
         commitSpacing,
         nodeRadius,
+        parent.x,
         endPoint,
-        parent.y,
       );
       mergedFromBranchHeadPositions.push({
         path: curvePath(start, end),
@@ -75,7 +75,7 @@ export function getNewBranchToPath(
   let newBranchToPositions: Array<CurveReturnType> = [];
   commit.children.forEach(c => {
     const child = commitsMap.get(c)!;
-    if (child.parents[0] === commit.hash && child.y !== commit.y) {
+    if (child.parents[0] === commit.hash && child.x !== commit.x) {
       const start = getPositionsBySpacing(
         branchSpacing,
         commitSpacing,
@@ -84,19 +84,19 @@ export function getNewBranchToPath(
         commit.y,
       );
 
-      const endPoint = commit.x - 1 > child.x ? commit.x - 1 : child.x;
+      const endPoint = commit.y - 1 > child.y ? commit.y - 1 : child.y;
 
       const end = getPositionsBySpacing(
         branchSpacing,
         commitSpacing,
         nodeRadius,
+        child.x,
         endPoint,
-        child.y,
       );
       const height =
-        Math.abs(child.x - commit.x) * (commitSpacing + nodeRadius * 4);
+        Math.abs(child.y - commit.y) * (commitSpacing + nodeRadius * 4);
       const width =
-        Math.abs(child.y - commit.y) * (branchSpacing + nodeRadius * 4) + 4;
+        Math.abs(child.x - commit.x) * (branchSpacing + nodeRadius * 4) + 4;
 
       newBranchToPositions.push({
         path: curvePath(start, [end[0], end[1] + nodeRadius * 2]),
@@ -135,7 +135,7 @@ function getPositionsBySpacing(
   x: number,
   y: number,
 ) {
-  const realX = branchSpacing * y + nodeRadius * 4;
-  const realY = commitSpacing * x + nodeRadius * 2;
+  const realX = branchSpacing * x + nodeRadius * 4;
+  const realY = commitSpacing * y + nodeRadius * 2;
   return [realX, realY];
 }
