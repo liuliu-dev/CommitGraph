@@ -80,9 +80,9 @@ export function setCommitNodeColor(
 ) {
   commitsMap.forEach(commit => {
     if (
-      commit.y === columnNumber &&
-      branch.start <= commit.x &&
-      branch.end >= commit.x
+      commit.x === columnNumber &&
+      branch.start <= commit.y &&
+      branch.end >= commit.y
     ) {
       commit.commitColor = branchColor;
     }
