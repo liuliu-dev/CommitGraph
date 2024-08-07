@@ -117,13 +117,10 @@ export function getNewBranchToPath(
 }
 
 function curvePath(start: number[], end: number[]) {
-  const dx = (end[0] - start[0]) * 0.3;
-  const dy = (start[1] - end[1]) * 0.4;
-
-  const cx2 = end[0] - dx * 0.1;
-  const cy2 = end[1] + dy;
-  const cx1 = start[0] + dx * 3;
-  const cy1 = start[1] - dy;
+  const cx2 = start[0] * 0.03 + end[0] * 0.97;
+  const cy2 = start[1] * 0.4 + end[1] * 0.6;
+  const cx1 = start[0] * 0.1 + end[0] * 0.9;
+  const cy1 = start[1] * 0.6 + end[1] * 0.4;
 
   return `M ${start[0]} ${start[1]} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${end[0]} ${end[1]}`;
 }
