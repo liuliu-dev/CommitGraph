@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import GitHubCommitStory from "./GitHubCommitStory";
 
 const meta: Meta<typeof GitHubCommitStory> = {
-  title: "Example/GitHub-CommitGraph-WithPagination",
+  title: "Example/GitHub-CommitGraph",
   component: GitHubCommitStory,
 };
 

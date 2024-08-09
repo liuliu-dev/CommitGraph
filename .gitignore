@@ -17,3 +17,5 @@
 /dist
 
 .npmignore
+
+storybook-static/

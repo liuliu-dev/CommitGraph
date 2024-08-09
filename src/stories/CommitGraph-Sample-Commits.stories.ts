@@ -11,7 +11,7 @@ import {
 import CommitGraph from "../components/CommitGraph/index";
 
 const meta: Meta<typeof CommitGraph> = {
-  title: "Example/DoltHub-CommitGraph",
+  title: "Example/CommitGraph-Sample-Commits",
   component: CommitGraph,
 };
 

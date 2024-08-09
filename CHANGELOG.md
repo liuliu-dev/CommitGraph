@@ -165,3 +165,7 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 ## [2.2.0]
 
 -- Bump dependencies, name x and y positions correctly, refactor.
+
+## [2.2.2]
+
+-- Token fix, storybook deploy.

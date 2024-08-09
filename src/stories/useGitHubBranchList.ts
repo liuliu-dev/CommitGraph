@@ -13,7 +13,7 @@ export function useGitHubBranchList(
   const [branchHeads, setBranchHeads] = useState<Branch[]>([]);
   const apiUrl = `https://api.github.com/repos/${ownerName}/${repoName}/branches`;
   const headers = new Headers({
-    Authorization: `Bearer ${token}` || "",
+    Authorization: token ? `Bearer ${token}` : "",
   });
 
   useEffect(() => {

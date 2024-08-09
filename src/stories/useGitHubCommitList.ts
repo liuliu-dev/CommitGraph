@@ -18,7 +18,7 @@ export function useGitHubCommitList(
   const pageSize = 30;
   const apiCommitsUrl = `https://api.github.com/repos/${ownerName}/${repoName}/commits?page=${page}&per_page=${pageSize}`;
   const headers = new Headers({
-    Authorization: `Bearer ${token}` || "",
+    Authorization: token ? `Bearer ${token}` : "",
   });
 
   const getCommits = async () => {
