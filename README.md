@@ -10,10 +10,14 @@ The Commit Graph package is a React component suite designed to visualize commit
 
 `CommitGraph` is utilized by platforms like [DoltHub](https://www.dolthub.com/repositories/dolthub/transparency-in-pricing/commits/main/graph) to visualize database commit log histories.
 
+## Demo
+
+The [demo](https://liuliu-dev.github.io/CommitGraph/) features sample commit data and real GitHub repository graphs.
+
 ## Features
 
 - **Interactive Commit Graph Visualization:** Render commit history as an interactive graph, offering a clear and detailed view of repository activities.
-- **Infinite Scroll Support:** `CommitGraph.WithInfiniteScroll` enhances user experience for large commit histories by dynamically loading new content as users scroll.
+- **Infinite Scroll Support:** `CommitGraph.WithInfiniteScroll` enhances the user experience for large commit histories by dynamically loading new content as users scroll.
 - **Customizable Styles:** Extensive styling options for the commit log graph, including node colors, spacing, and more, to seamlessly match your project's design.
 
 ## Installation
