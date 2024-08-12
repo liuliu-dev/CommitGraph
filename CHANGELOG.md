@@ -169,3 +169,7 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 ## [2.2.2]
 
 -- Token fix, storybook deploy.
+
+## [2.2.3]
+
+-- Storybook, add custom repo graph.

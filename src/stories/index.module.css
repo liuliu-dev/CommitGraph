@@ -1,0 +1,30 @@
+.inputs {
+  display: flex;
+  margin: 20px 10px;
+  justify-content: space-between;
+  align-items: center;
+  width: 650px;
+  input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  button {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    width: 120px;
+  }
+  button:hover {
+    background-color: lightgreen;
+    cursor: pointer;
+  }
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

@@ -99,7 +99,7 @@ export const ThreeBranches: Story = {
   },
 };
 
-export const TwoBranches: Story = {
+export const OneBranchMergedTwice: Story = {
   args: {
     commits: twoBranches,
     branchHeads: [],
@@ -107,7 +107,58 @@ export const TwoBranches: Story = {
   },
 };
 
-export const ComplicateGraph: Story = {
+export const MultipleBranchesOnSameCommit: Story = {
+  args: {
+    commits: multipleCommitsOnMain,
+    branchHeads: [
+      {
+        name: "a",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "bb",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "longnamelongnamelongnamelongname1",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongname2",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "main",
+        link: "https://www.google.com",
+        commit: {
+          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
+        },
+      },
+      {
+        name: "feature-branch",
+        commit: {
+          sha: "7d9i7jtnff94juae9pe35p41tiuqreag",
+        },
+      },
+    ],
+    graphStyle,
+    fullSha: true,
+  },
+};
+
+export const ComplicateGraph_OnePage: Story = {
   args: {
     commits: multipleBranches,
     branchHeads: [
@@ -132,56 +183,5 @@ export const ComplicateGraph: Story = {
       },
     ],
     graphStyle,
-  },
-};
-
-export const MultipleBranchesOnSameCommit: Story = {
-  args: {
-    commits: multipleCommitsOnMain,
-    branchHeads: [
-      {
-        name: "a",
-        link: "https://www.google.com",
-        commit: {
-          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        },
-      },
-      {
-        name: "bb",
-        link: "https://www.google.com",
-        commit: {
-          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        },
-      },
-      {
-        name: "longnamelongnamelongnamelongnamec",
-        link: "https://www.google.com",
-        commit: {
-          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        },
-      },
-      {
-        name: "longnamelongnamelongnamelongnamelongnamelongnamelongnamelongnamed",
-        link: "https://www.google.com",
-        commit: {
-          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        },
-      },
-      {
-        name: "main",
-        link: "https://www.google.com",
-        commit: {
-          sha: "p40jvld9vigbpmphe75vkf5ensk408bg",
-        },
-      },
-      {
-        name: "feature-branch",
-        commit: {
-          sha: "7d9i7jtnff94juae9pe35p41tiuqreag",
-        },
-      },
-    ],
-    graphStyle,
-    fullSha: true,
   },
 };

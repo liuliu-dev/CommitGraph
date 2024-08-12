@@ -1,39 +1,60 @@
-import CommitGraph from "../components/CommitGraph";
-import { useGitHubBranchList } from "./useGitHubBranchList";
-import { useGitHubCommitList } from "./useGitHubCommitList";
-import React from "react";
+import React, { useState } from "react";
+import css from "./index.module.css";
+import Graph from "./Graph";
 
 type Props = {
-  repoName: string;
-  ownerName: string;
+  ownerName?: string;
+  repoName?: string;
 };
 
-export default function GitHubCommitStory({ repoName, ownerName }: Props) {
-  const { commits, hasMore, loadMore } = useGitHubCommitList(
-    ownerName,
-    repoName,
-  );
-
-  const { branches } = useGitHubBranchList(ownerName, repoName);
-
-  return (
-    <CommitGraph.WithInfiniteScroll
-      commits={commits}
-      loadMore={loadMore}
-      hasMore={hasMore}
-      branchHeads={branches}
-      dateFormatFn={customDateTimeFormatFn}
-    />
-  );
+export default function GitHubCommitStory({ownerName,repoName}:Props) {
+  if(ownerName && repoName){
+    return <Graph ownerName={ownerName} repoName={repoName} />;
+  }
+  return <CustomizedGitHubCommitStory />;
 }
 
-const customDateTimeFormatFn = (d: string | number | Date): string => {
-  return new Date(d).toLocaleString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
-};
+ function CustomizedGitHubCommitStory() {
+  const [ownerName, setOwnerName] = useState("");
+  const [repoName, setRepoName] = useState("");
+  const [loadGraph, setLoadGraph] = useState(false);
+  const [error, setError] = useState("");
+  return (
+    <div>
+      <div className={css.inputs}>
+        <input
+          type="text"
+          placeholder="OwnerName"
+          onChange={e => {
+            setError("");
+            setOwnerName(e.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="RepoName"
+          onChange={e => {
+            setError("");
+            setRepoName(e.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            if (!ownerName || !repoName) {
+              console.log("Enter OwnerName and RepoName");
+              setError("Enter OwnerName and RepoName");
+              return;
+            }
+            setLoadGraph(true);
+          }}
+        >
+          Load Graph
+        </button>
+        <span>* enter a public repository</span>
+      </div>
+      {error && <div className={css.error}>{error}</div>}
+      {loadGraph && <Graph ownerName={ownerName} repoName={repoName} />}
+    </div>
+  );
+}
+ 
