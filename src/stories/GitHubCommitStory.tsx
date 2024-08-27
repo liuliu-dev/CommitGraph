@@ -1,20 +1,32 @@
 import React, { useState } from "react";
 import css from "./index.module.css";
 import Graph from "./Graph";
+import { GraphStyle } from "../helpers/types";
 
 type Props = {
   ownerName?: string;
   repoName?: string;
+  graphStyle?: GraphStyle;
 };
 
-export default function GitHubCommitStory({ownerName,repoName}:Props) {
-  if(ownerName && repoName){
-    return <Graph ownerName={ownerName} repoName={repoName} />;
+export default function GitHubCommitStory({
+  ownerName,
+  repoName,
+  graphStyle,
+}: Props) {
+  if (ownerName && repoName) {
+    return (
+      <Graph
+        ownerName={ownerName}
+        repoName={repoName}
+        graphStyle={graphStyle}
+      />
+    );
   }
   return <CustomizedGitHubCommitStory />;
 }
 
- function CustomizedGitHubCommitStory() {
+function CustomizedGitHubCommitStory() {
   const [ownerName, setOwnerName] = useState("");
   const [repoName, setRepoName] = useState("");
   const [loadGraph, setLoadGraph] = useState(false);
@@ -57,4 +69,3 @@ export default function GitHubCommitStory({ownerName,repoName}:Props) {
     </div>
   );
 }
- 
