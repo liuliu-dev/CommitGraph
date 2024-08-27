@@ -143,7 +143,6 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 
 -- Add `dateFormatFn` prop.
 
-
 ## [2.1.0]
 
 -- **Fixed:** Fixed the branches dropdown overlap issue. Fixed the branch label link not clickable issue.
@@ -173,3 +172,7 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 ## [2.2.3]
 
 -- Storybook, add custom repo graph.
+
+## [2.2.4]
+
+-- Graph style fix, edit readme.
