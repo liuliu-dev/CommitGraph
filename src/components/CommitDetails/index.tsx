@@ -13,6 +13,7 @@ type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
+  onClick?: () => void;
 };
 
 export default function CommitDetails({
@@ -23,6 +24,7 @@ export default function CommitDetails({
   dateFormatFn,
   currentBranch,
   fullSha,
+  onClick,
 }: Props) {
   const date = dateFormatFn
     ? dateFormatFn(commit.commitDate)
@@ -38,6 +40,7 @@ export default function CommitDetails({
       className={css.container}
       onMouseOver={mouseOver}
       onMouseLeave={mouseLeave}
+      onClick={onClick}
     >
       <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
         {commit.commitLink ? (

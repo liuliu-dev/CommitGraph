@@ -21,6 +21,7 @@ export type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
+  onClick?: (commit: Commit) => void;
 };
 
 export default function CommitGraph({
@@ -30,6 +31,7 @@ export default function CommitGraph({
   dateFormatFn,
   currentBranch,
   fullSha,
+  onClick,
 }: Props) {
   const [showBlock, setShowBlock] = useState(false);
   const [topPos, setTopPos] = useState(0);
@@ -91,7 +93,7 @@ export default function CommitGraph({
         }}
         className={css.commitInfoContainer}
       >
-        {commitsNodes.map(commit => {
+        {commitsNodes.map((commit, index) => {
           const { y } = getCommitDotPosition(
             branchSpacing,
             commitSpacing,
@@ -120,6 +122,7 @@ export default function CommitGraph({
                 dateFormatFn={dateFormatFn}
                 currentBranch={currentBranch}
                 fullSha={fullSha}
+                onClick={() => onClick && onClick(commits[index])}
               />
             </div>
           );
