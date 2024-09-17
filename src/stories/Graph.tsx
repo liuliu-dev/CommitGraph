@@ -1,5 +1,5 @@
 import CommitGraph from "../components/CommitGraph";
-import { GraphStyle } from "../helpers/types";
+import { Commit, GraphStyle } from "../helpers/types";
 import { useGitHubBranchList } from "./useGitHubBranchList";
 import { useGitHubCommitList } from "./useGitHubCommitList";
 import React from "react";
@@ -29,6 +29,7 @@ export default function Graph({ repoName, ownerName, graphStyle }: Props) {
         branchHeads={branches}
         dateFormatFn={customDateTimeFormatFn}
         graphStyle={graphStyle}
+        onClick={(commit: Commit) => console.log("Clicked", commit)}
       />
     </div>
   );

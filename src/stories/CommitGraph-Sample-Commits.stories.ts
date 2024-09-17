@@ -9,6 +9,7 @@ import {
   multipleCommitsOnMain,
 } from "../helpers/sampleCommits";
 import CommitGraph from "../components/CommitGraph/index";
+import { Commit } from "../helpers/types";
 
 const meta: Meta<typeof CommitGraph> = {
   title: "Example/CommitGraph-Sample-Commits",
@@ -61,6 +62,7 @@ export const OneCommit: Story = {
   args: {
     commits: oneCommit,
     branchHeads: [],
+    onClick: (commit: Commit) => console.log("Clicked", commit),
   },
 };
 
