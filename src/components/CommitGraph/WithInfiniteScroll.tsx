@@ -14,7 +14,11 @@ type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
-  onClick?: (commit: Commit) => void;
+  onClick?: (
+    commit: Commit,
+    event?: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+  ) => void;
+  selected?: string[];
 };
 
 export default function WithInfiniteScroll(props: Props) {
