@@ -21,7 +21,11 @@ export type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
-  onClick?: (commit: Commit) => void;
+  onClick?: (
+    commit: Commit,
+    event?: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+  ) => void;
+  selected?: string[];
 };
 
 export default function CommitGraph({
@@ -32,6 +36,7 @@ export default function CommitGraph({
   currentBranch,
   fullSha,
   onClick,
+  selected,
 }: Props) {
   const [showBlock, setShowBlock] = useState(false);
   const [topPos, setTopPos] = useState(0);
@@ -53,6 +58,8 @@ export default function CommitGraph({
   setBranchAndCommitColor(columns, branchColors, commitsMap);
   const commitsNodes = Array.from(commitsMap.values());
   const commitInfoLeftPosition = getCommitInfoLeftPosition(width);
+
+  const selectionOffsets: number[] = [];
 
   return (
     <div className={css.container}>
@@ -100,6 +107,11 @@ export default function CommitGraph({
             nodeRadius,
             commit,
           );
+
+          if (selected?.includes(commit.hash)) {
+            selectionOffsets.push(y);
+          }
+
           const branch = branchHeads.filter(b => b.commit.sha === commit.hash);
           const mouseOver = () => {
             setShowBlock(true);
@@ -122,12 +134,30 @@ export default function CommitGraph({
                 dateFormatFn={dateFormatFn}
                 currentBranch={currentBranch}
                 fullSha={fullSha}
-                onClick={() => onClick && onClick(commits[index])}
+                onClick={(
+                  event:
+                    | React.MouseEvent<HTMLDivElement>
+                    | React.TouchEvent<HTMLDivElement>,
+                ) => onClick && onClick(commits[index], event)}
               />
             </div>
           );
         })}
       </div>
+      {selectionOffsets.map((offset, index) => (
+        <div
+          key={`selections-${index}`}
+          style={{
+            left: -5,
+            top: `calc(${offset}px - 1.75rem)`,
+            height: "3.5rem",
+            width: "100%",
+            backgroundColor: "lightgreen",
+            opacity: 0.3,
+          }}
+          className={css.block}
+        />
+      ))}
       {showBlock && (
         <div
           style={{

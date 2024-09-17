@@ -98,6 +98,10 @@ export const ThreeBranches: Story = {
       },
     ],
     graphStyle,
+    selected: [
+      "bgpqkjvf2mqoi9lq4upamdj0ke7e8iuo",
+      "r26g8v5vo7c82c5o1tt9hcleef924tp2",
+    ],
   },
 };
 

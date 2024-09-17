@@ -19,6 +19,7 @@ export default function Graph({ repoName, ownerName, graphStyle }: Props) {
   const { branches } = useGitHubBranchList(ownerName, repoName);
   const repoUrl = `https://github.com/${ownerName}/${repoName}`;
 
+  const [selected, setSelected] = React.useState<string[]>([]);
   return (
     <div>
       <a href={repoUrl}>{repoUrl}</a>
@@ -29,7 +30,22 @@ export default function Graph({ repoName, ownerName, graphStyle }: Props) {
         branchHeads={branches}
         dateFormatFn={customDateTimeFormatFn}
         graphStyle={graphStyle}
-        onClick={(commit: Commit) => console.log("Clicked", commit)}
+        onClick={(commit, event) => {
+          console.log("Clicked", commit, event);
+          setSelected(current => {
+            if (current.includes(commit.sha)) {
+              if (!event?.ctrlKey) {
+                return [];
+              }
+              return current.filter(sha => sha !== commit.sha);
+            }
+            if (event?.ctrlKey) {
+              return [...current, commit.sha];
+            }
+            return [commit.sha];
+          });
+        }}
+        selected={selected}
       />
     </div>
   );

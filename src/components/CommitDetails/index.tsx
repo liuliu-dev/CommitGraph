@@ -13,7 +13,9 @@ type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
-  onClick?: () => void;
+  onClick?: (
+    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+  ) => void;
 };
 
 export default function CommitDetails({
