@@ -134,11 +134,15 @@ export default function CommitGraph({
                 dateFormatFn={dateFormatFn}
                 currentBranch={currentBranch}
                 fullSha={fullSha}
-                onClick={(
-                  event:
-                    | React.MouseEvent<HTMLDivElement>
-                    | React.TouchEvent<HTMLDivElement>,
-                ) => onClick && onClick(commits[index], event)}
+                onClick={
+                  onClick
+                    ? (
+                        event:
+                          | React.MouseEvent<HTMLDivElement>
+                          | React.TouchEvent<HTMLDivElement>,
+                      ) => onClick(commits[index], event)
+                    : undefined
+                }
               />
             </div>
           );
