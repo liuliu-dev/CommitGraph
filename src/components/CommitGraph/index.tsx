@@ -122,7 +122,7 @@ export default function CommitGraph({
                 dateFormatFn={dateFormatFn}
                 currentBranch={currentBranch}
                 fullSha={fullSha}
-                onClick={() => onClick && onClick(commits[index])}
+                onClick={onClick ? () => onClick(commits[index]) : undefined}
               />
             </div>
           );
