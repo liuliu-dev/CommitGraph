@@ -1,6 +1,6 @@
 {
-  "name": "commit-graph",
-  "version": "2.2.4",
+  "name": "@dreamcatcher-tech/commit-graph",
+  "version": "2.2.6",
   "homepage": "https://liuliu-dev.github.io/CommitGraph/",
   "author": "Liu Liu <liuliu.developer@gmail.com>",
   "description": "A React component to visualize a commit graph.",
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/liuliu-dev/CommitGraph"
+    "url": "https://github.com/dreamcatcher-tech/CommitGraph"
   },
   "license": "MIT",
   "keywords": [
