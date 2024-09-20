@@ -1,6 +1,6 @@
 import React from "react";
 import CommitGraph from ".";
-import { Branch, Commit, GraphStyle } from "../../helpers/types";
+import { Branch, Commit, CommitNode, GraphStyle } from "../../helpers/types";
 import InfiniteScroll from "react-infinite-scroller";
 import css from "./index.module.css";
 
@@ -14,6 +14,7 @@ type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
+  onCommitClick?: (commit: CommitNode) => void;
 };
 
 export default function WithInfiniteScroll(props: Props) {

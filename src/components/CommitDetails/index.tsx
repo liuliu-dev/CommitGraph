@@ -10,6 +10,7 @@ type Props = {
   branch: Branch[];
   mouseOver: () => void;
   mouseLeave: () => void;
+  onClick: () => void;
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
@@ -20,6 +21,7 @@ export default function CommitDetails({
   branch,
   mouseLeave,
   mouseOver,
+  onClick,
   dateFormatFn,
   currentBranch,
   fullSha,
@@ -38,6 +40,7 @@ export default function CommitDetails({
       className={css.container}
       onMouseOver={mouseOver}
       onMouseLeave={mouseLeave}
+      onClick={onClick}
     >
       <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
         {commit.commitLink ? (

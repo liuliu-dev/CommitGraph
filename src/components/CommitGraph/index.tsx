@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Branch, Commit, GraphStyle } from "../../helpers/types";
+import { Branch, Commit, CommitNode, GraphStyle } from "../../helpers/types";
 import {
   defaultStyle,
   formatCommits,
@@ -13,6 +13,7 @@ import Curves from "../Curves";
 import { computePosition } from "./computePosition";
 import css from "./index.module.css";
 import WithInfiniteScroll from "./WithInfiniteScroll";
+import cx from "classnames";
 
 export type Props = {
   commits: Commit[];
@@ -21,6 +22,7 @@ export type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
+  onCommitClick?: (commit: CommitNode) => void;
 };
 
 export default function CommitGraph({
@@ -30,9 +32,12 @@ export default function CommitGraph({
   dateFormatFn,
   currentBranch,
   fullSha,
+  onCommitClick,
 }: Props) {
-  const [showBlock, setShowBlock] = useState(false);
-  const [topPos, setTopPos] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [hoverPos, setHoverPos] = useState(0);
+  const [clickedPos, setClickedPos] = useState(0);
 
   const commitNodes = formatCommits(commits);
   const { commitSpacing, branchSpacing, branchColors, nodeRadius } = {
@@ -100,11 +105,22 @@ export default function CommitGraph({
           );
           const branch = branchHeads.filter(b => b.commit.sha === commit.hash);
           const mouseOver = () => {
-            setShowBlock(true);
-            setTopPos(y);
+            setHovered(true);
+            setHoverPos(y);
           };
           const mouseLeave = () => {
-            setShowBlock(false);
+            setHovered(false);
+          };
+          const onClick = () => {
+            if (onCommitClick) {
+              onCommitClick(commit);
+            }
+            if (y === clickedPos) {
+              setClicked(!clicked);
+              return;
+            }
+            setClicked(true);
+            setClickedPos(y);
           };
           return (
             <div
@@ -117,6 +133,7 @@ export default function CommitGraph({
                 branch={branch}
                 mouseOver={mouseOver}
                 mouseLeave={mouseLeave}
+                onClick={onClick}
                 dateFormatFn={dateFormatFn}
                 currentBranch={currentBranch}
                 fullSha={fullSha}
@@ -125,17 +142,8 @@ export default function CommitGraph({
           );
         })}
       </div>
-      {showBlock && (
-        <div
-          style={{
-            left: -5,
-            top: `calc(${topPos}px - 2rem)`,
-            height: "4rem",
-            width: "100%",
-          }}
-          className={css.block}
-        />
-      )}
+      {hovered && <ColorBlock pos={hoverPos} className={css.hovered} />}
+      {clicked && <ColorBlock pos={clickedPos} className={css.clicked} />}
     </div>
   );
 }
@@ -151,3 +159,22 @@ function getCommitInfoLeftPosition(width: number) {
 }
 
 CommitGraph.WithInfiniteScroll = WithInfiniteScroll;
+
+type ColorBlockProps = {
+  pos: number;
+  className: string;
+};
+
+function ColorBlock({ pos, className }: ColorBlockProps) {
+  return (
+    <div
+      style={{
+        left: -5,
+        top: `calc(${pos}px - 2rem)`,
+        height: "4rem",
+        width: "100%",
+      }}
+      className={cx(css.block, className)}
+    />
+  );
+}
