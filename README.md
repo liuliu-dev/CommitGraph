@@ -196,6 +196,10 @@ The name of the current branch.
 
 Instead of the default shortened SHA, display the full SHA of the commit.
 
+### `onCommitClick` (function, optional)
+
+An optional function to be called when a commit is clicked. The function receives the clicked commit as an argument.
+
 ## Storybook
 
 Explore the Commit Graph component and its features by running storybook:
