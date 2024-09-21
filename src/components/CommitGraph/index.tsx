@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Branch, Commit, CommitNode, GraphStyle } from "../../helpers/types";
 import {
   defaultStyle,
@@ -13,6 +13,7 @@ import Curves from "../Curves";
 import { computePosition } from "./computePosition";
 import css from "./index.module.css";
 import WithInfiniteScroll from "./WithInfiniteScroll";
+import { useOnClickOutside } from "@dolthub/react-hooks";
 import cx from "classnames";
 
 export type Props = {
@@ -56,6 +57,9 @@ export default function CommitGraph({
   setBranchAndCommitColor(columns, branchColors, commitsMap);
   const commitsNodes = Array.from(commitsMap.values());
   const commitInfoLeftPosition = getCommitInfoLeftPosition(width);
+
+  const clickRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(clickRef, () => setClicked(false));
 
   return (
     <div className={css.container}>
@@ -127,6 +131,7 @@ export default function CommitGraph({
               style={{ top: `calc(${y}px - 2rem)` }}
               className={css.details}
               key={`commit-details-${commit.hash}`}
+              ref={clickRef}
             >
               <CommitDetails
                 commit={commit}

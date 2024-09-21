@@ -177,6 +177,6 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 
 -- Graph style fix, edit readme.
 
-## [2.2.5]
+## [2.2.7]
 
 -- Add optional `onCommitClick` function, click color block.
