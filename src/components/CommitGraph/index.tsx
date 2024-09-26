@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
-import { Branch, Commit, CommitNode, GraphStyle } from "../../helpers/types";
+import {
+  Branch,
+  Commit,
+  CommitNode,
+  Diff,
+  GraphStyle,
+} from "../../helpers/types";
 import {
   defaultStyle,
   formatCommits,
@@ -24,6 +30,7 @@ export type Props = {
   currentBranch?: string;
   fullSha?: boolean;
   onCommitClick?: (commit: CommitNode) => void;
+  getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
 };
 
 export default function CommitGraph({
@@ -34,6 +41,7 @@ export default function CommitGraph({
   currentBranch,
   fullSha,
   onCommitClick,
+  getDiff,
 }: Props) {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -60,7 +68,7 @@ export default function CommitGraph({
 
   const clickRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(clickRef, () => setClicked(false));
-
+  console.log("clicked", clicked);
   return (
     <div className={css.container}>
       <div className={css.svg}>
@@ -142,6 +150,7 @@ export default function CommitGraph({
                 dateFormatFn={dateFormatFn}
                 currentBranch={currentBranch}
                 fullSha={fullSha}
+                getDiff={getDiff}
               />
             </div>
           );

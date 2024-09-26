@@ -1,36 +1,37 @@
 import React, { useState } from "react";
 import css from "./index.module.css";
 import Graph from "./Graph";
-import { GraphStyle } from "../helpers/types";
+import { Diff, GraphStyle } from "../helpers/types";
 
 type Props = {
   ownerName?: string;
   repoName?: string;
   graphStyle?: GraphStyle;
+  token?: string;
+  getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
 };
 
-export default function GitHubCommitStory({
-  ownerName,
-  repoName,
-  graphStyle,
-}: Props) {
-  if (ownerName && repoName) {
+export default function GitHubCommitStory(props: Props) {
+  if (props.ownerName && props.repoName) {
     return (
-      <Graph
-        ownerName={ownerName}
-        repoName={repoName}
-        graphStyle={graphStyle}
-      />
+      <Graph {...props} repoName={props.repoName} ownerName={props.ownerName} />
     );
   }
-  return <CustomizedGitHubCommitStory />;
+  return <CustomizedGitHubCommitStory {...props} />;
 }
 
-function CustomizedGitHubCommitStory() {
+type CustomizedGitHubCommitStoryProps = {
+  graphStyle?: GraphStyle;
+  token?: string;
+  getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
+};
+
+function CustomizedGitHubCommitStory(props: CustomizedGitHubCommitStoryProps) {
   const [ownerName, setOwnerName] = useState("");
   const [repoName, setRepoName] = useState("");
   const [loadGraph, setLoadGraph] = useState(false);
   const [error, setError] = useState("");
+
   return (
     <div>
       <div className={css.inputs}>
@@ -65,7 +66,9 @@ function CustomizedGitHubCommitStory() {
         <span>* enter a public repository</span>
       </div>
       {error && <div className={css.error}>{error}</div>}
-      {loadGraph && <Graph ownerName={ownerName} repoName={repoName} />}
+      {loadGraph && (
+        <Graph {...props} ownerName={ownerName} repoName={repoName} />
+      )}
     </div>
   );
 }

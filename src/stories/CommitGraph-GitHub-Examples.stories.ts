@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import GitHubCommitStory from "./GitHubCommitStory";
 import Graph from "./Graph";
+import { Diff } from "../helpers/types";
 
 const meta: Meta<typeof GitHubCommitStory> = {
   title: "Example/GitHub-CommitGraph-Examples",
@@ -41,6 +42,21 @@ export const DoltRepository: ExampleGraph = {
     ownerName: "dolthub",
     repoName: "dolt",
     graphStyle,
+    getDiff: async (base: string, head: string): Promise<Diff | undefined> => {
+      const apiUrl = `https://api.github.com/repos/dolthub/dolt/compare/${base}...${head}`;
+
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data as Diff;
+      } catch (error) {
+        console.error("Fetching changes failed:", error);
+      }
+      return undefined;
+    },
   },
 };
 

@@ -1,6 +1,12 @@
 import React from "react";
 import CommitGraph from ".";
-import { Branch, Commit, CommitNode, GraphStyle } from "../../helpers/types";
+import {
+  Branch,
+  Commit,
+  CommitNode,
+  Diff,
+  GraphStyle,
+} from "../../helpers/types";
 import InfiniteScroll from "react-infinite-scroller";
 import css from "./index.module.css";
 
@@ -15,6 +21,7 @@ type Props = {
   currentBranch?: string;
   fullSha?: boolean;
   onCommitClick?: (commit: CommitNode) => void;
+  getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
 };
 
 export default function WithInfiniteScroll(props: Props) {

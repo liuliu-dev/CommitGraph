@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Branch, CommitNode } from "../../helpers/types";
+import React, { useRef, useState } from "react";
+import { Branch, CommitNode, Diff } from "../../helpers/types";
 import BranchLabel from "../BranchLabel";
 import { excerpt } from "@dolthub/web-utils";
 import css from "./index.module.css";
 import { Tooltip } from "react-tooltip";
+import DiffSection from "../DiffSection";
+import { useOnClickOutside } from "@dolthub/react-hooks";
 
 type Props = {
   commit: CommitNode;
@@ -14,6 +16,7 @@ type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
+  getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
 };
 
 export default function CommitDetails({
@@ -25,6 +28,7 @@ export default function CommitDetails({
   dateFormatFn,
   currentBranch,
   fullSha,
+  getDiff,
 }: Props) {
   const date = dateFormatFn
     ? dateFormatFn(commit.commitDate)
@@ -35,12 +39,19 @@ export default function CommitDetails({
   const commitHashAuthorDate = `${fullSha ? commit.hash : hashBr} - ${committer} - ${date}`;
   const [color, setColor] = useState(commit.commitColor);
 
+  const [showDiff, setShowDiff] = useState(false);
+  const diffRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(diffRef, () => setShowDiff(false));
+
   return (
     <div
       className={css.container}
       onMouseOver={mouseOver}
       onMouseLeave={mouseLeave}
-      onClick={onClick}
+      onClick={() => {
+        setShowDiff(!showDiff);
+        onClick();
+      }}
     >
       <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
         {commit.commitLink ? (
@@ -76,6 +87,11 @@ export default function CommitDetails({
           className={css.tooltip}
           noArrow
         />
+      )}
+      {showDiff && !!getDiff && (
+        <div className={css.diffSection} ref={diffRef}>
+          <DiffSection commit={commit} getDiff={getDiff} />
+        </div>
       )}
     </div>
   );
