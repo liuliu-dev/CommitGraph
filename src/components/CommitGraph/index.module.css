@@ -54,3 +54,17 @@
 .loader {
   padding: 10px 16px;
 }
+
+.diffSection {
+  font-family: "Source Sans Pro";
+  font-size: small;
+  border: 1px solid #e1e4e8;
+  background-color: white;
+  position: absolute;
+  width: 320px;
+  right: 1rem;
+  top: 1rem;
+  z-index: 10;
+  color: #010a40;
+  border-radius: 0.5rem;
+}

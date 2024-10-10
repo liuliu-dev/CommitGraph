@@ -16,6 +16,7 @@ type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
+  clicked?: boolean;
   getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
 };
 
@@ -28,6 +29,7 @@ export default function CommitDetails({
   dateFormatFn,
   currentBranch,
   fullSha,
+  clicked,
   getDiff,
 }: Props) {
   const date = dateFormatFn
@@ -41,58 +43,64 @@ export default function CommitDetails({
 
   const [showDiff, setShowDiff] = useState(false);
   const diffRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside(diffRef, () => setShowDiff(false));
+  useOnClickOutside(diffRef, () => {
+    setShowDiff(false);
+  });
 
   return (
-    <div
-      className={css.container}
-      onMouseOver={mouseOver}
-      onMouseLeave={mouseLeave}
-      onClick={() => {
-        setShowDiff(!showDiff);
-        onClick();
-      }}
-    >
-      <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
-        {commit.commitLink ? (
-          <a
-            style={{ color: color }}
-            href={commit.commitLink}
-            className={css.bold}
-            onMouseOver={() => setColor("#1f6dc6")}
-            onMouseLeave={() => setColor(commit.commitColor)}
-          >
-            {commitHashAuthorDate}
-          </a>
-        ) : (
-          <span className={css.bold}>{commitHashAuthorDate}</span>
-        )}
-        <BranchLabel
-          branchColor={commit.commitColor}
-          branches={branch}
-          currentBranch={currentBranch}
-        />
-      </div>
+    <>
       <div
-        data-tooltip-content={message}
-        data-tooltip-id={`commit-${commit.hash}-msg`}
-        data-tooltip-place="bottom-start"
-        className={css.msg}
+        className={css.container}
+        onMouseOver={mouseOver}
+        onMouseLeave={mouseLeave}
+        onClick={() => {
+          onClick();
+          if (!showDiff) {
+            setShowDiff(true);
+          }
+        }}
       >
-        {excerpt(message, 80)}
+        <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
+          {commit.commitLink ? (
+            <a
+              style={{ color: color }}
+              href={commit.commitLink}
+              className={css.bold}
+              onMouseOver={() => setColor("#1f6dc6")}
+              onMouseLeave={() => setColor(commit.commitColor)}
+            >
+              {commitHashAuthorDate}
+            </a>
+          ) : (
+            <span className={css.bold}>{commitHashAuthorDate}</span>
+          )}
+          <BranchLabel
+            branchColor={commit.commitColor}
+            branches={branch}
+            currentBranch={currentBranch}
+          />
+        </div>
+        <div
+          data-tooltip-content={message}
+          data-tooltip-id={`commit-${commit.hash}-msg`}
+          data-tooltip-place="bottom-start"
+          className={css.msg}
+        >
+          {excerpt(message, 80)}
+        </div>
+        {message.length > 80 && (
+          <Tooltip
+            id={`commit-${commit.hash}-msg`}
+            className={css.tooltip}
+            noArrow
+          />
+        )}
       </div>
-      {message.length > 80 && (
-        <Tooltip
-          id={`commit-${commit.hash}-msg`}
-          className={css.tooltip}
-          noArrow
-        />
-      )}
-      {showDiff && !!getDiff && (
+      {showDiff && clicked && !!getDiff && (
         <div className={css.diffSection} ref={diffRef}>
           <DiffSection commit={commit} getDiff={getDiff} />
         </div>
       )}
-    </div>
+    </>
   );
 }

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ChangedFile, CommitNode, Diff } from "../../helpers/types";
-import CopyToClipboard from "react-copy-to-clipboard";
 import css from "./index.module.css";
 import ChangedFileDetails from "./ChangedFileDetails";
-import { useDelay } from "@dolthub/react-hooks";
-import { MdOutlineFileCopy } from "react-icons/md";
 
 type Props = {
   commit: CommitNode;
@@ -15,7 +12,6 @@ const diffCache: { [key: string]: Diff | undefined } = {};
 
 export default function DiffSection({ commit, getDiff }: Props) {
   const [diff, setDiff] = useState<Diff | undefined>(undefined);
-  const success = useDelay();
 
   useEffect(() => {
     const fetchDiff = async () => {
@@ -39,16 +35,11 @@ export default function DiffSection({ commit, getDiff }: Props) {
       <div className={css.top}>
         <div className={css.hashes}>
           <div>
-            commit:{" "}
-            <span className={css.bold}>
-              {commit.hash.slice(0, 7)}
-              <CopyToClipboard onCopy={success.start} text={commit.hash}>
-                <MdOutlineFileCopy />
-              </CopyToClipboard>
-            </span>
+            commit:
+            <span className={css.bold}>{commit.hash.slice(0, 7)}</span>
           </div>
           <div>
-            parent:{" "}
+            parent:
             <span className={css.bold}>{commit.parents[0].slice(0, 7)}</span>
           </div>
         </div>

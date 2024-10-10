@@ -26,7 +26,13 @@ export default function ChangedFileDetails({ file }: Props) {
         <li>
           <RiPencilFill className={css.modified} />
           {/* <span>{path}</span> */}
-          <span> {filename}</span>
+          {file.blob_url ? (
+            <a href={file.blob_url} className={css.link}>
+              {filename}
+            </a>
+          ) : (
+            <span>{filename}</span>
+          )}
         </li>
       );
     case "deleted":
@@ -34,14 +40,26 @@ export default function ChangedFileDetails({ file }: Props) {
         <li>
           <FiMinus className={css.deleted} />
           {/* <span>{path}</span> */}
-          <span>{filename}</span>
+          {file.blob_url ? (
+            <a href={file.blob_url} className={css.link}>
+              {filename}
+            </a>
+          ) : (
+            <span>{filename}</span>
+          )}
         </li>
       );
     default:
       return (
         <li>
           {/* <span>{path}</span> */}
-          <span>{filename}</span>
+          {file.blob_url ? (
+            <a href={file.blob_url} className={css.link}>
+              {filename}
+            </a>
+          ) : (
+            <span>{filename}</span>
+          )}
         </li>
       );
   }

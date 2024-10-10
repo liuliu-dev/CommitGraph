@@ -11,6 +11,7 @@
 
 .bold {
   font-weight: 600;
+  margin-left: 0.5rem;
 }
 
 .summary {
@@ -62,4 +63,13 @@
 .file {
   color: #010a40;
   font-weight: 600;
+}
+
+.link {
+  color: inherit;
+  outline: none;
+}
+
+.link:hover {
+  color: #3d91f0;
 }

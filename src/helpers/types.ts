@@ -61,6 +61,7 @@ export type ChangedFile = {
   additions: number;
   deletions: number;
   patch?: string;
+  blob_url?: string;
 };
 
 export type Diff = {
