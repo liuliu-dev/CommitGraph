@@ -180,3 +180,7 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 ## [2.2.7]
 
 -- Add optional `onCommitClick` function, click color block.
+
+## [2.3.0]
+
+-- Added diff stats on commit click via the `getDiff` function.

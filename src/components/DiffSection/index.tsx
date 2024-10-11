@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChangedFile, CommitNode, Diff } from "../../helpers/types";
 import css from "./index.module.css";
 import ChangedFileDetails from "./ChangedFileDetails";
+import { pluralize } from "@dolthub/web-utils";
 
 type Props = {
   commit: CommitNode;
@@ -29,6 +30,7 @@ export default function DiffSection({ commit, getDiff }: Props) {
   }, [commit, getDiff]);
 
   const { added, modified, deleted } = getChanged(diff?.files || []);
+  const parents = commit.parents.map(parent => parent.slice(0, 7)).join(", ");
 
   return (
     <div>
@@ -40,7 +42,7 @@ export default function DiffSection({ commit, getDiff }: Props) {
           </div>
           <div>
             parent:
-            <span className={css.bold}>{commit.parents[0].slice(0, 7)}</span>
+            <span className={css.bold}>{parents}</span>
           </div>
         </div>
         <div className={css.message}>{commit.message}</div>
@@ -49,17 +51,19 @@ export default function DiffSection({ commit, getDiff }: Props) {
         {!!modified && (
           <div>
             <span className={css.modified}>{modified}</span>
-            <span>modified</span>
+            <span>{pluralize(modified, "file")} modified</span>
           </div>
         )}
         {!!added && (
           <div>
-            <span className={css.added}> {added}</span> <span>added</span>
+            <span className={css.added}> {added}</span>{" "}
+            <span>{pluralize(added, "file")} added</span>
           </div>
         )}
         {!!deleted && (
           <div>
-            <span className={css.deleted}>{deleted}</span> <span>deleted</span>
+            <span className={css.deleted}>{deleted}</span>{" "}
+            <span>{pluralize(deleted, "file")} deleted</span>
           </div>
         )}
       </div>
