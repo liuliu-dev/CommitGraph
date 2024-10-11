@@ -1,0 +1,75 @@
+.top {
+  padding: 1rem 1.5rem;
+}
+
+.hashes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.bold {
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.summary {
+  padding: 0 0 1rem 1.5rem;
+  display: flex;
+  border-bottom: 1px solid #e1e4e8;
+  div {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+  }
+}
+
+.message {
+  white-space: pre-line;
+  color: #5d6280;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0 1.5rem 0.5rem 1.5rem;
+  li {
+    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.modified {
+  color: #c5a15a;
+  margin-right: 0.25rem;
+  font-weight: 600;
+}
+
+.deleted {
+  color: #fa7978;
+  margin-right: 0.25rem;
+  font-weight: 600;
+  stroke-width: 3px;
+}
+
+.added {
+  color: #29e3c1;
+  margin-right: 0.25rem;
+  font-weight: 600;
+  stroke-width: 3px;
+}
+
+.file {
+  color: #010a40;
+  font-weight: 600;
+}
+
+.link {
+  color: inherit;
+  outline: none;
+}
+
+.link:hover {
+  color: #3d91f0;
+}

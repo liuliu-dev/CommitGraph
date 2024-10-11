@@ -1,5 +1,5 @@
 import CommitGraph from "../components/CommitGraph";
-import { GraphStyle } from "../helpers/types";
+import { Diff, GraphStyle } from "../helpers/types";
 import { useGitHubBranchList } from "./useGitHubBranchList";
 import { useGitHubCommitList } from "./useGitHubCommitList";
 import React from "react";
@@ -8,15 +8,23 @@ export type Props = {
   repoName: string;
   ownerName: string;
   graphStyle?: GraphStyle;
+  token?: string;
+  getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
 };
 
-export default function Graph({ repoName, ownerName, graphStyle }: Props) {
+export default function Graph({
+  repoName,
+  ownerName,
+  graphStyle,
+  token,
+  getDiff,
+}: Props) {
   const { commits, hasMore, loadMore } = useGitHubCommitList(
     ownerName,
     repoName,
+    token,
   );
-
-  const { branches } = useGitHubBranchList(ownerName, repoName);
+  const { branches } = useGitHubBranchList(ownerName, repoName, token);
   const repoUrl = `https://github.com/${ownerName}/${repoName}`;
 
   return (
@@ -29,6 +37,7 @@ export default function Graph({ repoName, ownerName, graphStyle }: Props) {
         branchHeads={branches}
         dateFormatFn={customDateTimeFormatFn}
         graphStyle={graphStyle}
+        getDiff={getDiff}
       />
     </div>
   );

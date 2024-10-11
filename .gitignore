@@ -19,3 +19,5 @@
 .npmignore
 
 storybook-static/
+
+.env

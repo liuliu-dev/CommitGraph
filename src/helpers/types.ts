@@ -54,3 +54,16 @@ export type GraphStyle = {
   branchColors: string[];
   nodeRadius: number;
 };
+
+export type ChangedFile = {
+  filename: string;
+  status: string;
+  additions: number;
+  deletions: number;
+  patch?: string;
+  blob_url?: string;
+};
+
+export type Diff = {
+  files: ChangedFile[];
+};
