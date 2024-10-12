@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./index.module.css";
 import Graph from "./Graph";
 import { Diff, GraphStyle } from "../helpers/types";
@@ -40,6 +40,7 @@ function CustomizedGitHubCommitStory(props: CustomizedGitHubCommitStoryProps) {
           placeholder="OwnerName"
           onChange={e => {
             setError("");
+            setLoadGraph(false);
             setOwnerName(e.target.value);
           }}
         />
@@ -48,6 +49,7 @@ function CustomizedGitHubCommitStory(props: CustomizedGitHubCommitStoryProps) {
           placeholder="RepoName"
           onChange={e => {
             setError("");
+            setLoadGraph(false);
             setRepoName(e.target.value);
           }}
         />
