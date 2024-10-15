@@ -3,6 +3,7 @@ import { Diff, GraphStyle } from "../helpers/types";
 import { useGitHubBranchList } from "./useGitHubBranchList";
 import { useGitHubCommitList } from "./useGitHubCommitList";
 import React from "react";
+import css from "./index.module.css";
 
 export type Props = {
   repoName: string;
@@ -19,13 +20,21 @@ export default function Graph({
   token,
   getDiff,
 }: Props) {
-  const { commits, hasMore, loadMore } = useGitHubCommitList(
+  const { commits, hasMore, loadMore, error } = useGitHubCommitList(
     ownerName,
     repoName,
     token,
   );
-  const { branches } = useGitHubBranchList(ownerName, repoName, token);
+  const { branches, error: branchError } = useGitHubBranchList(
+    ownerName,
+    repoName,
+    token,
+  );
   const repoUrl = `https://github.com/${ownerName}/${repoName}`;
+
+  if (error || branchError) {
+    return <div className={css.error}>{error || branchError}</div>;
+  }
 
   return (
     <div>

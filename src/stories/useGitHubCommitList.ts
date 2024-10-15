@@ -5,6 +5,7 @@ type ReturnType = {
   commits: Commit[];
   hasMore: boolean;
   loadMore: () => Promise<void>;
+  error?: string;
 };
 
 export function useGitHubCommitList(
@@ -15,6 +16,7 @@ export function useGitHubCommitList(
   const [commits, setCommits] = useState<Commit[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [error, setError] = useState("");
   const pageSize = 30;
   const apiCommitsUrl = `https://api.github.com/repos/${ownerName}/${repoName}/commits?page=${page}&per_page=${pageSize}`;
   const headers = new Headers({
@@ -30,12 +32,21 @@ export function useGitHubCommitList(
         const newHasMore = data.length === pageSize;
         setCommits(newCommits);
         setHasMore(newHasMore);
+        setError("");
         if (newHasMore) {
           setPage(page + 1);
+        } else {
+          const errorData = await res.json();
+          const errorMessage =
+            errorData.message || `HTTP error! status: ${res.status}`;
+          setError(errorMessage);
+          throw new Error(errorMessage);
         }
       }
     } catch (e) {
-      console.error("Fetching commits failed:", e);
+      const errorMessage = e instanceof Error ? e.message : String(e);
+      setError(`Fetching commits failed: ${errorMessage}`);
+      console.error("Fetching commits failed:", errorMessage);
     }
   };
 
@@ -60,9 +71,18 @@ export function useGitHubCommitList(
             setPage(page + 1);
           }
           setHasMore(newHasMore);
+          setError("");
+        } else {
+          const errorData = await res.json();
+          const errorMessage =
+            errorData.message || `HTTP error! status: ${res.status}`;
+          setError(errorMessage);
+          throw new Error(errorMessage);
         }
       } catch (e) {
-        console.error("Fetching commits failed:", e);
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        setError(`Fetching commits failed:${errorMessage}`);
+        console.error("Fetching commits failed:", errorMessage);
       }
     }
   };
@@ -71,5 +91,6 @@ export function useGitHubCommitList(
     commits,
     loadMore,
     hasMore,
+    error,
   };
 }
