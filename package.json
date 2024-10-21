@@ -66,7 +66,7 @@
     "@storybook/react": "^8.0.0",
     "@types/react": "^18.2.57",
     "@types/react-infinite-scroller": "^1.2.5",
-    "@typescript-eslint/eslint-plugin": "8.9.0",
+    "@typescript-eslint/eslint-plugin": "8.10.0",
     "@typescript-eslint/parser": "8.8.1",
     "eslint-config-airbnb-base": "latest",
     "eslint-config-airbnb-typescript": "latest",
