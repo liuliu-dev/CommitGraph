@@ -47,31 +47,35 @@ export default function DiffSection({ commit, getDiff }: Props) {
         </div>
         <div className={css.message}>{commit.message}</div>
       </div>
-      <div className={css.summary}>
-        {!!modified && (
-          <div>
-            <span className={css.modified}>{modified}</span>
-            <span>{pluralize(modified, "file")} modified</span>
+      {diff && (
+        <>
+          <div className={css.summary}>
+            {!!modified && (
+              <div>
+                <span className={css.modified}>{modified}</span>
+                <span>{pluralize(modified, "file")} modified</span>
+              </div>
+            )}
+            {!!added && (
+              <div>
+                <span className={css.added}> {added}</span>{" "}
+                <span>{pluralize(added, "file")} added</span>
+              </div>
+            )}
+            {!!deleted && (
+              <div>
+                <span className={css.deleted}>{deleted}</span>{" "}
+                <span>{pluralize(deleted, "file")} deleted</span>
+              </div>
+            )}
           </div>
-        )}
-        {!!added && (
-          <div>
-            <span className={css.added}> {added}</span>{" "}
-            <span>{pluralize(added, "file")} added</span>
-          </div>
-        )}
-        {!!deleted && (
-          <div>
-            <span className={css.deleted}>{deleted}</span>{" "}
-            <span>{pluralize(deleted, "file")} deleted</span>
-          </div>
-        )}
-      </div>
-      <ul className={css.list}>
-        {diff?.files.map(file => (
-          <ChangedFileDetails key={file.filename} file={file} />
-        ))}
-      </ul>
+          <ul className={css.list}>
+            {diff?.files.map(file => (
+              <ChangedFileDetails key={file.filename} file={file} />
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 }
