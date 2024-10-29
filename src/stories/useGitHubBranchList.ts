@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Branch } from "../helpers/types";
+import { Branch } from "../types";
 
 type ReturnType = {
   branches: Branch[];

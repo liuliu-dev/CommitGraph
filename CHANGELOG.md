@@ -184,3 +184,7 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 ## [2.3.0]
 
 -- Added diff stats on commit click via the `getDiff` function.
+
+## [2.3.1]
+
+-- Add support for Dolt diff.

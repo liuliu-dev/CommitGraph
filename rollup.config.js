@@ -6,8 +6,6 @@ import terser from "@rollup/plugin-terser";
 import postcss from "rollup-plugin-postcss";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
-const isProduction = process.env.NODE_ENV === "production";
-
 const packageJson = require("./package.json");
 
 export default [

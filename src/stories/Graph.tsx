@@ -1,5 +1,5 @@
 import CommitGraph from "../components/CommitGraph";
-import { Diff, GraphStyle } from "../helpers/types";
+import { Diff, GraphStyle } from "../types";
 import { useGitHubBranchList } from "./useGitHubBranchList";
 import { useGitHubCommitList } from "./useGitHubCommitList";
 import React from "react";

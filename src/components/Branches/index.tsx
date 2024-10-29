@@ -1,5 +1,5 @@
 import React from "react";
-import { BranchPathType, CommitNode } from "../../helpers/types";
+import { BranchPathType, CommitNode } from "../../types";
 import BranchPath from "./BranchPath";
 
 type Props = {

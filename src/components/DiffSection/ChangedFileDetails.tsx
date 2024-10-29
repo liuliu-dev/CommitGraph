@@ -1,5 +1,5 @@
 import { FiPlus } from "react-icons/fi";
-import { ChangedFile } from "../../helpers/types";
+import { ChangedFile } from "../../types";
 import css from "./index.module.css";
 import React from "react";
 import { RiPencilFill } from "react-icons/ri";

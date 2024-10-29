@@ -58,8 +58,8 @@ export type GraphStyle = {
 export type ChangedFile = {
   filename: string;
   status: string;
-  additions: number;
-  deletions: number;
+  additions?: number;
+  deletions?: number;
   patch?: string;
   blob_url?: string;
 };

@@ -1,4 +1,4 @@
-import { CommitNode, BranchPathType, Commit } from "./types";
+import { CommitNode, BranchPathType, Commit } from "../types";
 
 export const defaultStyle = {
   commitSpacing: 90,

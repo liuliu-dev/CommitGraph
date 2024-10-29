@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Branch, CommitNode, Diff } from "../../helpers/types";
+import { Branch, CommitNode, Diff } from "../../types";
 import BranchLabel from "../BranchLabel";
 import { excerpt } from "@dolthub/web-utils";
 import css from "./index.module.css";
@@ -18,6 +18,7 @@ type Props = {
   fullSha?: boolean;
   clicked?: boolean;
   getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
+  forDolt?: boolean;
 };
 
 export default function CommitDetails({
@@ -31,6 +32,7 @@ export default function CommitDetails({
   fullSha,
   clicked,
   getDiff,
+  forDolt
 }: Props) {
   const date = dateFormatFn
     ? dateFormatFn(commit.commitDate)
@@ -98,7 +100,7 @@ export default function CommitDetails({
       </div>
       {showDiff && clicked && !!getDiff && (
         <div className={css.diffSection} ref={diffRef}>
-          <DiffSection commit={commit} getDiff={getDiff} />
+          <DiffSection commit={commit} getDiff={getDiff} forDolt={forDolt}/>
         </div>
       )}
     </>

@@ -5,7 +5,7 @@ import {
   CommitNode,
   Diff,
   GraphStyle,
-} from "../../helpers/types";
+} from "../../types";
 import {
   defaultStyle,
   formatCommits,
@@ -30,6 +30,7 @@ export type Props = {
   fullSha?: boolean;
   onCommitClick?: (commit: CommitNode) => void;
   getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
+  forDolt?: boolean;
 };
 
 export default function CommitGraph({
@@ -41,6 +42,7 @@ export default function CommitGraph({
   fullSha,
   onCommitClick,
   getDiff,
+  forDolt
 }: Props) {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -147,6 +149,7 @@ export default function CommitGraph({
                 fullSha={fullSha}
                 getDiff={getDiff}
                 clicked={clicked}
+                forDolt={forDolt}
               />
             </div>
           );

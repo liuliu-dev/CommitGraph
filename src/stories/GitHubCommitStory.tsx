@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import css from "./index.module.css";
 import Graph from "./Graph";
-import { Diff, GraphStyle } from "../helpers/types";
+import { Diff, GraphStyle } from "../types";
 
 type Props = {
   ownerName?: string;

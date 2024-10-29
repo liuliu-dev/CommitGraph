@@ -1,4 +1,4 @@
-import { CommitNode } from "../../helpers/types";
+import { CommitNode } from "../../types";
 
 export type CurveReturnType = {
   path: string;

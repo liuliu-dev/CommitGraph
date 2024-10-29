@@ -1,4 +1,4 @@
-import { BranchPathType, CommitNode } from "../../helpers/types";
+import { BranchPathType, CommitNode } from "../../types";
 
 function topologicalOrderCommits(
   commits: CommitNode[],

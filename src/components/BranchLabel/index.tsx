@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPopup from "reactjs-popup";
 import css from "./index.module.css";
-import { Branch } from "../../helpers/types";
+import { Branch } from "../../types";
 import cx from "classnames";
 
 type ItemProps = {

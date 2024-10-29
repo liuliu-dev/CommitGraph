@@ -6,7 +6,7 @@ import {
   CommitNode,
   Diff,
   GraphStyle,
-} from "../../helpers/types";
+} from "../../types";
 import InfiniteScroll from "react-infinite-scroller";
 import css from "./index.module.css";
 

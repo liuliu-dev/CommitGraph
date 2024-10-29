@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Commit } from "../helpers/types";
+import { Commit } from "../types";
 
 type ReturnType = {
   commits: Commit[];
