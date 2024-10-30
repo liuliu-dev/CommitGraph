@@ -2,21 +2,25 @@
   padding: 1rem 1.5rem;
 }
 
-.hashes {
+.commitAndParents {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
   margin-bottom: 1rem;
+}
+
+.hashes {
+  display: flex;
 }
 
 .bold {
   font-weight: 600;
-  margin-left: 0.5rem;
+  margin-right: 0.25rem;
 }
 
 .summary {
   padding: 0 0 1rem 1.5rem;
-  display: flex;
   border-bottom: 1px solid #e1e4e8;
   div {
     display: flex;
@@ -44,6 +48,7 @@
   color: #c5a15a;
   margin-right: 0.25rem;
   font-weight: 600;
+  width: 0.75rem;
 }
 
 .deleted {
@@ -51,6 +56,7 @@
   margin-right: 0.25rem;
   font-weight: 600;
   stroke-width: 3px;
+  width: 0.75rem;
 }
 
 .added {
@@ -58,6 +64,7 @@
   margin-right: 0.25rem;
   font-weight: 600;
   stroke-width: 3px;
+  width: 0.75rem;
 }
 
 .file {

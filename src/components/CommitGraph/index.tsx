@@ -1,11 +1,5 @@
 import React, { useRef, useState } from "react";
-import {
-  Branch,
-  Commit,
-  CommitNode,
-  Diff,
-  GraphStyle,
-} from "../../types";
+import { Branch, Commit, CommitNode, Diff, GraphStyle } from "../../types";
 import {
   defaultStyle,
   formatCommits,
@@ -42,7 +36,7 @@ export default function CommitGraph({
   fullSha,
   onCommitClick,
   getDiff,
-  forDolt
+  forDolt,
 }: Props) {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);

@@ -31,24 +31,33 @@ export default function DiffSection({ commit, getDiff, forDolt }: Props) {
   }, [commit, getDiff]);
 
   const { added, modified, deleted } = getChanged(diff?.files || []);
-  const parents = commit.parents.map(parent => parent.slice(0, 7)).join(", ");
-  const file=forDolt ? "table" : "file";
+  const file = forDolt ? "table" : "file";
+
   return (
     <div>
       <div className={css.top}>
-        <div className={css.hashes}>
-          <div>
-            commit:
-            <span className={css.bold}>{commit.hash.slice(0, 7)}</span>
+        <div className={css.commitAndParents}>
+          <div className={css.hashes}>
+            <div className={css.bold}>commit:</div>
+            <div>{commit.hash}</div>
           </div>
-          <div>
-            parent:
-            <span className={css.bold}>{parents}</span>
+          <div className={css.hashes}>
+            <div className={css.bold}>
+              {pluralize(commit.parents.length, "parent")}:
+            </div>
+            <div>
+              {commit.parents.map((p, i) => (
+                <div>
+                  {p}
+                  {i === commit.parents.length - 1 ? "" : ","}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className={css.message}>{commit.message}</div>
       </div>
-      {diff && (
+      {!!diff?.files.length && (
         <>
           <div className={css.summary}>
             {!!modified && (

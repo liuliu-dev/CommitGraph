@@ -30,9 +30,8 @@ export default function CommitDetails({
   dateFormatFn,
   currentBranch,
   fullSha,
-  clicked,
   getDiff,
-  forDolt
+  forDolt,
 }: Props) {
   const date = dateFormatFn
     ? dateFormatFn(commit.commitDate)
@@ -44,6 +43,7 @@ export default function CommitDetails({
   const [color, setColor] = useState(commit.commitColor);
 
   const [showDiff, setShowDiff] = useState(false);
+  const [showDiffButton, setShowDiffButton] = useState(false);
   const diffRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(diffRef, () => {
     setShowDiff(false);
@@ -53,29 +53,39 @@ export default function CommitDetails({
     <>
       <div
         className={css.container}
-        onMouseOver={mouseOver}
-        onMouseLeave={mouseLeave}
-        onClick={() => {
-          onClick();
-          if (!showDiff) {
-            setShowDiff(true);
-          }
+        onMouseOver={() => {
+          mouseOver(), setShowDiffButton(true);
         }}
+        onMouseLeave={() => {
+          mouseLeave(), setShowDiffButton(false);
+        }}
+        onClick={onClick}
       >
         <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
-          {commit.commitLink ? (
-            <a
-              style={{ color: color }}
-              href={commit.commitLink}
-              className={css.bold}
-              onMouseOver={() => setColor("#1f6dc6")}
-              onMouseLeave={() => setColor(commit.commitColor)}
-            >
-              {commitHashAuthorDate}
-            </a>
-          ) : (
-            <span className={css.bold}>{commitHashAuthorDate}</span>
-          )}
+          <div>
+            {commit.commitLink ? (
+              <a
+                style={{ color: color }}
+                href={commit.commitLink}
+                className={css.bold}
+                onMouseOver={() => setColor("#1f6dc6")}
+                onMouseLeave={() => setColor(commit.commitColor)}
+              >
+                {commitHashAuthorDate}
+              </a>
+            ) : (
+              <span className={css.bold}>{commitHashAuthorDate}</span>
+            )}
+            {showDiffButton && !!getDiff && !!commit.parents.length && (
+              <button
+                type="button"
+                className={css.button}
+                onClick={() => setShowDiff(true)}
+              >
+                See commit overview
+              </button>
+            )}
+          </div>
           <BranchLabel
             branchColor={commit.commitColor}
             branches={branch}
@@ -98,9 +108,9 @@ export default function CommitDetails({
           />
         )}
       </div>
-      {showDiff && clicked && !!getDiff && (
+      {showDiff && !!getDiff && (
         <div className={css.diffSection} ref={diffRef}>
-          <DiffSection commit={commit} getDiff={getDiff} forDolt={forDolt}/>
+          <DiffSection commit={commit} getDiff={getDiff} forDolt={forDolt} />
         </div>
       )}
     </>

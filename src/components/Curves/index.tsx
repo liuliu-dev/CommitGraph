@@ -29,7 +29,7 @@ function Inner({ newBranchCurves, mergedCurves, commit }: InnerProps) {
           return (
             <CurvePath
               key={`${commit.hash}-curved-up-path-${c.id}`}
-               curve={c}
+              curve={c}
             />
           );
         })}
@@ -38,7 +38,7 @@ function Inner({ newBranchCurves, mergedCurves, commit }: InnerProps) {
           return (
             <CurvePath
               key={`${commit.hash}-curved-down-path-${curve.id}`}
-               curve={curve}
+              curve={curve}
             />
           );
         })}
