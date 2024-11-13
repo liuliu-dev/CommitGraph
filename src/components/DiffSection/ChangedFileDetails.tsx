@@ -1,12 +1,12 @@
 import { FiPlus } from "react-icons/fi";
-import { ChangedFile } from "../../types";
+import { ChangedItem } from "../../types";
 import css from "./index.module.css";
 import React from "react";
 import { RiPencilFill } from "react-icons/ri";
 import { FiMinus } from "react-icons/fi";
 
 type Props = {
-  file: ChangedFile;
+  file: ChangedItem;
 };
 
 export default function ChangedFileDetails({ file }: Props) {

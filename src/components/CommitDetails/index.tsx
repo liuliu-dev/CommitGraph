@@ -6,6 +6,7 @@ import css from "./index.module.css";
 import { Tooltip } from "react-tooltip";
 import DiffSection from "../DiffSection";
 import { useOnClickOutside } from "@dolthub/react-hooks";
+import { fromCommitNodeToCommit } from "src/helpers/utils";
 
 type Props = {
   commit: CommitNode;
@@ -20,6 +21,8 @@ type Props = {
   getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
   forDolt?: boolean;
 };
+
+const diffCache: { [key: string]: Diff | undefined } = {};
 
 export default function CommitDetails({
   commit,
@@ -48,6 +51,8 @@ export default function CommitDetails({
   useOnClickOutside(diffRef, () => {
     setShowDiff(false);
   });
+  const [diff, setDiff] = useState<Diff | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -80,7 +85,22 @@ export default function CommitDetails({
               <button
                 type="button"
                 className={css.button}
-                onClick={() => setShowDiff(true)}
+                onClick={async () => {
+                  setLoading(true);
+                  setShowDiff(true);
+                  const cacheKey = `${commit.parents[0]}-${commit.hash}`;
+                  if (diffCache[cacheKey]) {
+                    setDiff(diffCache[cacheKey]);
+                  } else {
+                    const result = await getDiff(
+                      commit.parents[0],
+                      commit.hash,
+                    );
+                    diffCache[cacheKey] = result;
+                    setDiff(result);
+                  }
+                  setLoading(false);
+                }}
               >
                 See commit overview
               </button>
@@ -100,7 +120,7 @@ export default function CommitDetails({
         >
           {excerpt(message, 80)}
         </div>
-        {message.length > 80 && (
+        {message.length > 80 && !getDiff && (
           <Tooltip
             id={`commit-${commit.hash}-msg`}
             className={css.tooltip}
@@ -108,9 +128,14 @@ export default function CommitDetails({
           />
         )}
       </div>
-      {showDiff && !!getDiff && (
-        <div className={css.diffSection} ref={diffRef}>
-          <DiffSection commit={commit} getDiff={getDiff} forDolt={forDolt} />
+      {showDiff && (
+        <div ref={diffRef}>
+          <DiffSection
+            commit={fromCommitNodeToCommit(commit)}
+            diff={diff}
+            forDolt={forDolt}
+            loading={loading}
+          />
         </div>
       )}
     </>

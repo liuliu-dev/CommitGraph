@@ -1,45 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { ChangedFile, CommitNode, Diff } from "../../types";
+import { ChangedItem, Commit, Diff } from "../../types";
 import css from "./index.module.css";
 import ChangedFileDetails from "./ChangedFileDetails";
 import { pluralize } from "@dolthub/web-utils";
+import { SmallLoader } from "@dolthub/react-components";
 
 type Props = {
-  commit: CommitNode;
-  getDiff: (base: string, head: string) => Promise<Diff | undefined>;
+  commit: Commit;
+  diff?: Diff;
   forDolt?: boolean;
+  loading?: boolean;
 };
 
-const diffCache: { [key: string]: Diff | undefined } = {};
-
-export default function DiffSection({ commit, getDiff, forDolt }: Props) {
-  const [diff, setDiff] = useState<Diff | undefined>(undefined);
-
-  useEffect(() => {
-    const fetchDiff = async () => {
-      const cacheKey = `${commit.parents[0]}-${commit.hash}`;
-      if (diffCache[cacheKey]) {
-        setDiff(diffCache[cacheKey]);
-      } else {
-        const result = await getDiff(commit.parents[0], commit.hash);
-        diffCache[cacheKey] = result;
-        setDiff(result);
-      }
-    };
-
-    fetchDiff();
-  }, [commit, getDiff]);
-
+export default function DiffSection({ commit, diff, forDolt, loading }: Props) {
   const { added, modified, deleted } = getChanged(diff?.files || []);
   const file = forDolt ? "table" : "file";
+  const files = diff?.files || diff?.tables;
 
   return (
-    <div>
+    <div className={css.diffSection}>
       <div className={css.top}>
         <div className={css.commitAndParents}>
           <div className={css.hashes}>
             <div className={css.bold}>commit:</div>
-            <div>{commit.hash}</div>
+            <div>{commit.sha}</div>
           </div>
           <div className={css.hashes}>
             <div className={css.bold}>
@@ -47,17 +31,19 @@ export default function DiffSection({ commit, getDiff, forDolt }: Props) {
             </div>
             <div>
               {commit.parents.map((p, i) => (
-                <div>
-                  {p}
+                <div key={p.sha}>
+                  {p.sha}
                   {i === commit.parents.length - 1 ? "" : ","}
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className={css.message}>{commit.message}</div>
+        <div className={css.message}>{commit.commit.message}</div>
+        {loading && <SmallLoader loaded={!loading} className={css.loading} />}
+        {/* {err && <div className={css.error}>{err}</div>} */}
       </div>
-      {!!diff?.files.length && (
+      {!!files?.length && (
         <>
           <div className={css.summary}>
             {!!modified && (
@@ -80,7 +66,7 @@ export default function DiffSection({ commit, getDiff, forDolt }: Props) {
             )}
           </div>
           <ul className={css.list}>
-            {diff?.files.map(file => (
+            {files.map(file => (
               <ChangedFileDetails key={file.filename} file={file} />
             ))}
           </ul>
@@ -96,7 +82,7 @@ type GetChangedReturnType = {
   deleted: number;
 };
 
-function getChanged(files: ChangedFile[]): GetChangedReturnType {
+function getChanged(files: ChangedItem[]): GetChangedReturnType {
   let added = 0;
   let modified = 0;
   let deleted = 0;

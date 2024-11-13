@@ -102,3 +102,18 @@ export function setBranchAndCommitColor(
     });
   });
 }
+
+export function fromCommitNodeToCommit(commit: CommitNode): Commit {
+  return {
+    sha: commit.hash,
+    commit: {
+      author: {
+        name: commit.committer,
+        date: commit.commitDate,
+      },
+      message: commit.message ?? "",
+    },
+    parents: commit.parents.map(p => ({ sha: p })),
+    html_url: commit.commitLink,
+  };
+}

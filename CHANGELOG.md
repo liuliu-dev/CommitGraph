@@ -189,6 +189,6 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 
 -- Add support for Dolt diff.
 
-## [2.3.3]
+## [2.3.8]
 
 -- Diff section UI fixes.

@@ -212,16 +212,16 @@ Represents changes between two commits:
 
 ```typescript
 export type Diff = {
-  files: ChangedFile[];
+  files: ChangedItem[];
 };
 ```
 
-### `ChangedFile` Type
+### `ChangedItem` Type
 
 Details of files changed between commits:
 
 ```typescript
-export type ChangedFile = {
+export type ChangedItem = {
   filename: string;
   status: string; // "added", "modified", or "deleted"
   additions: number;

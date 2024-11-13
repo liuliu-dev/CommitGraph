@@ -55,7 +55,7 @@ export type GraphStyle = {
   nodeRadius: number;
 };
 
-export type ChangedFile = {
+export type ChangedItem = {
   filename: string;
   status: string;
   additions?: number;
@@ -65,5 +65,6 @@ export type ChangedFile = {
 };
 
 export type Diff = {
-  files: ChangedFile[];
+  files?: ChangedItem[];
+  tables?: ChangedItem[];
 };
