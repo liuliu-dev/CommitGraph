@@ -1,7 +1,6 @@
 {
   "name": "commit-graph",
   "version": "2.3.9",
-  "packageManager": "yarn@4.0.2",
   "homepage": "https://liuliu-dev.github.io/CommitGraph/",
   "author": "Liu Liu <liuliu.developer@gmail.com>",
   "description": "A React component to visualize a commit graph.",
@@ -95,7 +94,6 @@
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "resolutions": {
-    "string-width": "^4.2.0",
-    "wrap-ansi": "^7.0.0"
+    "wrap-ansi/string-width": "^4.2.0"
   }
 }
