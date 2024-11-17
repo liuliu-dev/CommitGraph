@@ -14,6 +14,8 @@ export default function ChangedFileDetails({ file }: Props) {
   // const path = file.filename.split("/").slice(0, -1).join("/") + "/";
   switch (file.status) {
     case "added":
+    case "new":
+    case "created":
       return (
         <li>
           <FiPlus className={css.added} />
@@ -22,6 +24,9 @@ export default function ChangedFileDetails({ file }: Props) {
         </li>
       );
     case "modified":
+    case "changed":
+    case "updated":
+    case "edited":
       return (
         <li>
           <RiPencilFill className={css.modified} />
@@ -36,6 +41,8 @@ export default function ChangedFileDetails({ file }: Props) {
         </li>
       );
     case "deleted":
+    case "removed":
+    case "dropped":
       return (
         <li>
           <FiMinus className={css.deleted} />

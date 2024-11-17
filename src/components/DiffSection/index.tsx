@@ -41,7 +41,6 @@ export default function DiffSection({ commit, diff, forDolt, loading }: Props) {
         </div>
         <div className={css.message}>{commit.commit.message}</div>
         {loading && <SmallLoader loaded={!loading} className={css.loading} />}
-        {/* {err && <div className={css.error}>{err}</div>} */}
       </div>
       {!!files?.length && (
         <>
@@ -89,12 +88,19 @@ function getChanged(files: ChangedItem[]): GetChangedReturnType {
   files.forEach(file => {
     switch (file.status) {
       case "added":
+      case "new":
+      case "created":
         added++;
         break;
       case "modified":
+      case "changed":
+      case "updated":
+      case "edited":
         modified++;
         break;
       case "deleted":
+      case "removed":
+      case "dropped":
         deleted++;
         break;
     }
