@@ -4,7 +4,9 @@
   border: 1px solid #e1e4e8;
   background-color: white;
   position: absolute;
-  width: 360px;
+  width: fit-content;
+  max-width: 32rem;
+  overflow-wrap: anywhere;
   right: 1rem;
   top: 1rem;
   z-index: 10;
@@ -55,6 +57,11 @@
     padding: 0.25rem 0;
     display: flex;
     align-items: center;
+    svg {
+      flex-shrink: 0;
+      width: 0.75rem;
+      margin-right: 0.75rem;
+    }
   }
 }
 
@@ -62,7 +69,7 @@
   color: #c5a15a;
   margin-right: 0.25rem;
   font-weight: 600;
-  width: 0.75rem;
+  width: 1.25rem;
 }
 
 .deleted {
@@ -70,7 +77,7 @@
   margin-right: 0.25rem;
   font-weight: 600;
   stroke-width: 3px;
-  width: 0.75rem;
+  width: 1.25rem;
 }
 
 .added {
@@ -78,7 +85,7 @@
   margin-right: 0.25rem;
   font-weight: 600;
   stroke-width: 3px;
-  width: 0.75rem;
+  width: 1.25rem;
 }
 
 .file {

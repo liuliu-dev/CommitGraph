@@ -1,6 +1,6 @@
 {
   "name": "commit-graph",
-  "version": "2.3.8",
+  "version": "2.3.9",
   "homepage": "https://liuliu-dev.github.io/CommitGraph/",
   "author": "Liu Liu <liuliu.developer@gmail.com>",
   "description": "A React component to visualize a commit graph.",
@@ -49,7 +49,7 @@
     "@dolthub/react-components": "^0.2.7",
     "@dolthub/react-hooks": "^0.1.7",
     "@dolthub/web-utils": "^0.1.5",
-    "@rollup/plugin-typescript": "11.1.6",
+    "@rollup/plugin-typescript": "12.1.1",
     "classnames": "^2.3.2",
     "react": ">=18.0.0",
     "react-copy-to-clipboard": "^5.1.0",
@@ -67,8 +67,8 @@
     "@storybook/react": "^8.0.0",
     "@types/react": "^18.2.57",
     "@types/react-infinite-scroller": "^1.2.5",
-    "@typescript-eslint/eslint-plugin": "8.11.0",
-    "@typescript-eslint/parser": "8.11.0",
+    "@typescript-eslint/eslint-plugin": "8.16.0",
+    "@typescript-eslint/parser": "8.14.0",
     "eslint-config-airbnb-base": "latest",
     "eslint-config-airbnb-typescript": "latest",
     "eslint-config-prettier": "^9.1.0",
@@ -81,7 +81,7 @@
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "^8.0.0",
+    "storybook": "8.2.9",
     "ts-jest": "^29.1.2",
     "typescript": "^5.4.2",
     "yalc": "^1.0.0-pre.53"
@@ -94,6 +94,7 @@
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "resolutions": {
-    "cross-spawn": "^7.0.5"
+    "cross-spawn": "^7.0.5",
+    "wrap-ansi/string-width": "^4.2.0"
   }
 }
