@@ -1992,10 +1992,10 @@
     "@types/node" "^22.0.0"
     ts-dedent "^2.0.0"
 
-"@storybook/core@8.4.5":
-  version "8.4.5"
-  resolved "https://registry.yarnpkg.com/@storybook/core/-/core-8.4.5.tgz#4133927a43834664777f0918caf32542630cbdd5"
-  integrity sha512-aB1sQNX5nRoUAqg5u1py0MuR/VPd6c6PhECa4rW6pmr7kZcfyP4PP6UFpXuN71ypTQlkRE3Vc5PQZ3gLhE9o3g==
+"@storybook/core@8.4.6":
+  version "8.4.6"
+  resolved "https://registry.yarnpkg.com/@storybook/core/-/core-8.4.6.tgz#78a3155f428635be808c4ef2912eeb79140228c8"
+  integrity sha512-WeojVtHy0/t50tzw/15S+DLzKsj8BN9yWdo3vJMvm+nflLFvfq1XvD9WGOWeaFp8E/o3AP+4HprXG0r42KEJtA==
   dependencies:
     "@storybook/csf" "^0.1.11"
     better-opn "^3.0.2"
@@ -8832,12 +8832,12 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-2.0.1.tgz#55cb000ccf1d48728bd23c685a063998cf1a1b63"
   integrity sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==
 
-storybook@8.4.5:
-  version "8.4.5"
-  resolved "https://registry.yarnpkg.com/storybook/-/storybook-8.4.5.tgz#ba9589e2887958d1353dbc1a2cb6142e80e36a2c"
-  integrity sha512-9tfgabXnMibYp3SvoaJXXMD63Pw0SA9Hnf5v6TxysCYZs4DZ/04fAkK+9RW+K4C5JkV83qXMMlrsPj766R47fg==
+storybook@8.4.6:
+  version "8.4.6"
+  resolved "https://registry.yarnpkg.com/storybook/-/storybook-8.4.6.tgz#6a25899fc4a58657e3a66c0b0d9066f3c201f8cc"
+  integrity sha512-J6juZSZT2u3PUW0QZYZZYxBq6zU5O0OrkSgkMXGMg/QrS9to9IHmt4FjEMEyACRbXo8POcB/fSXa3VpGe7bv3g==
   dependencies:
-    "@storybook/core" "8.4.5"
+    "@storybook/core" "8.4.6"
 
 stream-browserify@^3.0.0:
   version "3.0.0"
