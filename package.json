@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.0",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@storybook/nextjs": "^8.0.0",
     "@storybook/react": "^8.0.0",
