@@ -1024,9 +1024,9 @@
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
 "@dolthub/react-components@^0.2.7":
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/@dolthub/react-components/-/react-components-0.2.8.tgz#d50bf2a7095db718d50563032016de564ec3349c"
-  integrity sha512-BDsJs7gOPpJkQeNGZqFWXkt8szwRi1oThPUapa+bJIyA6UUoE2XM+ONpcRBApgnnA2cgQFJtPuPNLG3vh9a5cQ==
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@dolthub/react-components/-/react-components-0.2.9.tgz#8de934108392734203132b640ef922730a9f0c23"
+  integrity sha512-JyvUPnhjBkmNo4w2OMtaPXKgc6qmm7oxMzSeiP0CaTTx4br2CN1ftis6dXcFxFFH0+SVHdcZdWhqVLAgJkfGNA==
   dependencies:
     "@dolthub/react-contexts" "^0.1.0"
     "@dolthub/react-hooks" "^0.1.7"
@@ -1038,11 +1038,11 @@
     numeral "^2.0.6"
     react-copy-to-clipboard "^5.1.0"
     react-loader "^2.4.7"
-    react-markdown "^9.0.1"
+    react-markdown "^10.0.0"
     react-select "^5.8.3"
     react-tooltip "^5.28.0"
     reactjs-popup "^2.0.6"
-    remark-gfm "^4.0.0"
+    remark-gfm "^4.0.1"
     tailwindcss "^3.4.1"
 
 "@dolthub/react-contexts@^0.1.0":
@@ -7748,12 +7748,13 @@ react-loader@^2.4.7:
     prop-types "^15.5.8"
     spin.js "2.x"
 
-react-markdown@^9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-9.0.1.tgz#c05ddbff67fd3b3f839f8c648e6fb35d022397d1"
-  integrity sha512-186Gw/vF1uRkydbsOIkcGXw7aHq0sZOCRFFjGrr7b9+nVZg4UfA4enXCaxm4fUzecU38sWfrNDitGhshuU7rdg==
+react-markdown@^10.0.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-10.1.0.tgz#e22bc20faddbc07605c15284255653c0f3bad5ca"
+  integrity sha512-qKxVopLT/TyA6BX3Ue5NwabOsAzm0Q7kAPwq6L+wWDwisYs7R8vZ0nRXqq6rkueboxpkjvLGU9fWifiX/ZZFxQ==
   dependencies:
     "@types/hast" "^3.0.0"
+    "@types/mdast" "^4.0.0"
     devlop "^1.0.0"
     hast-util-to-jsx-runtime "^2.0.0"
     html-url-attributes "^3.0.0"
@@ -7957,10 +7958,10 @@ relateurl@^0.2.7:
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha512-G08Dxvm4iDN3MLM0EsP62EDV9IuhXPR6blNz6Utcp7zyV3tr4HVNINt6MpaRWbxoOHT3Q7YN2P+jaHX8vUbgog==
 
-remark-gfm@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/remark-gfm/-/remark-gfm-4.0.0.tgz#aea777f0744701aa288b67d28c43565c7e8c35de"
-  integrity sha512-U92vJgBPkbw4Zfu/IiW2oTZLSL3Zpv+uI7My2eq8JxKgqraFdU8YUGicEJCEgSbeaG+QDFqIcwwfMTOEelPxuA==
+remark-gfm@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/remark-gfm/-/remark-gfm-4.0.1.tgz#33227b2a74397670d357bf05c098eaf8513f0d6b"
+  integrity sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==
   dependencies:
     "@types/mdast" "^4.0.0"
     mdast-util-gfm "^3.0.0"
