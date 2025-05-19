@@ -81,7 +81,7 @@
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "8.6.12",
+    "storybook": "8.6.14",
     "ts-jest": "^29.1.2",
     "typescript": "^5.4.2",
     "yalc": "^1.0.0-pre.53"
