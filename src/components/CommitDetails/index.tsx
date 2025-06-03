@@ -68,10 +68,22 @@ export default function CommitDetails({
       >
         <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
           <div>
-            {commit.commitLink ? (
+            {commit.onCommitClick ? (
+              <span
+                style={{ color: color }}
+                className={`${css.bold} ${css.clickable}`}
+                onClick={() => {
+                  commit.onCommitClick!();
+                }}
+                onMouseOver={() => setColor("#1f6dc6")}
+                onMouseLeave={() => setColor(commit.commitColor)}
+              >
+                {commitHashAuthorDate}
+              </span>
+            ) : commit.commitLink ? (
               <a
                 style={{ color: color }}
-                href={commit.commitLink}
+                href={commit.commitLink as string}
                 className={css.bold}
                 onMouseOver={() => setColor("#1f6dc6")}
                 onMouseLeave={() => setColor(commit.commitColor)}
@@ -81,6 +93,7 @@ export default function CommitDetails({
             ) : (
               <span className={css.bold}>{commitHashAuthorDate}</span>
             )}
+
             {showDiffButton && !!getDiff && !!commit.parents.length && (
               <button
                 type="button"

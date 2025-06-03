@@ -12,22 +12,19 @@ export default [
   {
     input: "src/index.ts",
     output: [
-      {
-        file: packageJson.main,
-        format: "cjs",
-        sourcemap: false,
-      },
-      {
-        file: packageJson.module,
-        format: "esm",
-        sourcemap: false,
-      },
+      { file: packageJson.main, format: "cjs", sourcemap: false },
+      { file: packageJson.module, format: "esm", sourcemap: false },
     ],
     plugins: [
       peerDepsExternal(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript({
+        tsconfig: "./tsconfig.json",
+        noEmit: false,
+        declaration: false,
+        exclude: ["**/__tests__", "**/*.test.ts"],
+      }),
       terser(),
       postcss(),
     ],

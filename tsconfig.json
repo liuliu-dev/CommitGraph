@@ -3,24 +3,24 @@
     "rootDir": "src",
     "baseUrl": ".",
     "declaration": true,
-    "declarationDir": "types",
     "outDir": "dist",
     "target": "ES2015",
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",
     "moduleResolution": "node",
     "jsx": "react",
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
     "noImplicitAny": true, 
-    "types": ["node"]
+    "types": ["node"],
+    "noEmit": false
   },
   "exclude": [
     "node_modules",
-    "../dist",
+    "dist",
     "src/**/**/*.test.ts",
     "src/stories",
     "src/**/sampleCommits.ts"

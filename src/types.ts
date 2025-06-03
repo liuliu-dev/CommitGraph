@@ -1,19 +1,14 @@
-type ParentCommit = {
-  sha: string;
-};
+type ParentCommit = { sha: string };
 
 export type Commit = {
   sha: string;
   commit: {
-    author: {
-      name: string;
-      date: string | number | Date;
-      email?: string;
-    };
+    author: { name: string; date: string | number | Date; email?: string };
     message: string;
   };
   parents: ParentCommit[];
   html_url?: string;
+  onCommitClick?: () => void;
 };
 
 export type CommitNode = {
@@ -29,6 +24,7 @@ export type CommitNode = {
   y: number;
   commitColor: string;
   commitLink?: string;
+  onCommitClick?: () => void;
 };
 
 export type BranchPathType = {
@@ -40,13 +36,7 @@ export type BranchPathType = {
   branchOrder: number;
 };
 
-export type Branch = {
-  name: string;
-  commit: {
-    sha: string;
-  };
-  link?: string;
-};
+export type Branch = { name: string; commit: { sha: string }; link?: string };
 
 export type GraphStyle = {
   commitSpacing: number;
@@ -64,7 +54,4 @@ export type ChangedItem = {
   blob_url?: string;
 };
 
-export type Diff = {
-  files?: ChangedItem[];
-  tables?: ChangedItem[];
-};
+export type Diff = { files?: ChangedItem[]; tables?: ChangedItem[] };

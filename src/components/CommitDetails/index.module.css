@@ -54,3 +54,7 @@
   color: #3d91f0;
   cursor: pointer;
 }
+
+.clickable{
+  cursor: pointer;
+}
