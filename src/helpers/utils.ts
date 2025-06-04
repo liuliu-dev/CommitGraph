@@ -38,7 +38,7 @@ export function formatCommits(commits: Commit[]): CommitNode[] {
       message: commit.commit.message,
       commitDate: new Date(commit.commit.author.date),
       commitLink: commit.html_url,
-      onCommitClick: commit.onCommitClick,
+      onCommitNavigate: commit.onCommitNavigate,
       commitColor: "",
       x: -1,
       y: -1,
@@ -116,6 +116,6 @@ export function fromCommitNodeToCommit(commit: CommitNode): Commit {
     },
     parents: commit.parents.map(p => ({ sha: p })),
     html_url: commit.commitLink,
-    onCommitClick: commit.onCommitClick,
+    onCommitNavigate: commit.onCommitNavigate,
   };
 }

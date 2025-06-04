@@ -68,12 +68,12 @@ export default function CommitDetails({
       >
         <div style={{ color: commit.commitColor }} className={css.labelAndLink}>
           <div>
-            {commit.onCommitClick ? (
+            {commit.onCommitNavigate ? (
               <span
                 style={{ color: color }}
                 className={`${css.bold} ${css.clickable}`}
                 onClick={() => {
-                  commit.onCommitClick!();
+                  commit.onCommitNavigate!();
                 }}
                 onMouseOver={() => setColor("#1f6dc6")}
                 onMouseLeave={() => setColor(commit.commitColor)}

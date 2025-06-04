@@ -193,6 +193,6 @@ If you are upgrading from a version prior to 2.0.0, please note the changes to p
 
 -- Diff section UI fixes.
 
-## [2.3.11]
+## [2.3.12]
 
--- Add optional `onCommitClick` in `commit` object, to handle routing in commit item.
+-- Add optional `onCommitNavigate` in `commit` object, to handle routing in commit item.

@@ -8,7 +8,7 @@ export type Commit = {
   };
   parents: ParentCommit[];
   html_url?: string;
-  onCommitClick?: () => void;
+  onCommitNavigate?: () => void;
 };
 
 export type CommitNode = {
@@ -24,7 +24,7 @@ export type CommitNode = {
   y: number;
   commitColor: string;
   commitLink?: string;
-  onCommitClick?: () => void;
+  onCommitNavigate?: () => void;
 };
 
 export type BranchPathType = {
