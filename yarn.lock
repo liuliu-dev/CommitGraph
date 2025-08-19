@@ -1062,11 +1062,11 @@
     react-hotkeys "^2.0.0"
 
 "@dolthub/web-utils@^0.1.2", "@dolthub/web-utils@^0.1.5":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@dolthub/web-utils/-/web-utils-0.1.9.tgz#06ff0e34b239e18bdb7cd909dcd4a625db8d7e58"
-  integrity sha512-NXv8/TNpw0+4/zgJtb5+dcOjPJbVeo1Y5h1U29BvAKBuQU+uR7WDQ7tuSAgtxDA4Hc/VFtD+1Fa0fkvUdYQ9uw==
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@dolthub/web-utils/-/web-utils-0.1.10.tgz#a38c0e925e5aea8a9741449d180e97ee3fcb4fc5"
+  integrity sha512-V+VvBKeNGwKm2DC+EXrd/+vXEwmvNiUs8u4JQ2G6dEs6oXdcfXZExKrij0gp7GeBZQ//vZfZJIOx4JItXKCGJQ==
   dependencies:
-    node-sql-parser "^5.3.5"
+    node-sql-parser "^5.3.10"
     timeago.js "^4.0.2"
 
 "@emnapi/runtime@^1.2.0":
@@ -6892,10 +6892,10 @@ node-releases@^2.0.18:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.18.tgz#f010e8d35e2fe8d6b2944f03f70213ecedc4ca3f"
   integrity sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==
 
-node-sql-parser@^5.3.5:
-  version "5.3.8"
-  resolved "https://registry.yarnpkg.com/node-sql-parser/-/node-sql-parser-5.3.8.tgz#b71db4cb80dc5302fc77d7b6ca3bcb269b2124bf"
-  integrity sha512-aqGTzK8kPJAwQ6tqdS0l+vX358LXMmZDw902ePfiPn3PSDsg2HeR2tHFioXNHJW00YHoic6VVYY80waFb/zdxw==
+node-sql-parser@^5.3.10:
+  version "5.3.11"
+  resolved "https://registry.yarnpkg.com/node-sql-parser/-/node-sql-parser-5.3.11.tgz#41b40eb705db5f88f5cc8f1be0b9defe632c6bdc"
+  integrity sha512-1ZcXu2qEFZlMkkaYPpMoTkypTunYTvtnInzVjWDhjc1+FS5h/WqT1rbgP2pP42/nXBWfPVN66mEfidWSpYVs1Q==
   dependencies:
     "@types/pegjs" "^0.10.0"
     big-integer "^1.6.48"
