@@ -29,7 +29,7 @@ npm install commit-graph
 
 ## Quick Start
 
-### UBasic Usage (without infinite scroll):
+### Basic Usage (without infinite scroll):
 
 For a basic implementation without infinite scroll:
 

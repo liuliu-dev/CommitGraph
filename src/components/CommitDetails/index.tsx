@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Branch, CommitNode, Diff } from "../../types";
 import BranchLabel from "../BranchLabel";
-import { excerpt } from "@dolthub/web-utils";
+import { excerpt } from "../../helpers/inlineUtils";
 import css from "./index.module.css";
 import { Tooltip } from "react-tooltip";
 import DiffSection from "../DiffSection";
-import { useOnClickOutside } from "@dolthub/react-hooks";
+import { useOnClickOutside } from "../../helpers/useOnClickOutside";
 import { fromCommitNodeToCommit } from "src/helpers/utils";
 
 type Props = {
