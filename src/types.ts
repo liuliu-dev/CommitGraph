@@ -17,8 +17,6 @@ export type CommitNode = {
   parents: string[];
   committer: string;
   commitDate: Date;
-  author?: string;
-  authorDate?: Date;
   message?: string;
   x: number;
   y: number;

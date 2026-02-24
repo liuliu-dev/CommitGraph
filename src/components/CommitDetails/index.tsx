@@ -17,7 +17,6 @@ type Props = {
   dateFormatFn?: (d: string | number | Date) => string;
   currentBranch?: string;
   fullSha?: boolean;
-  clicked?: boolean;
   getDiff?: (base: string, head: string) => Promise<Diff | undefined>;
   forDolt?: boolean;
 };
@@ -59,10 +58,10 @@ export default function CommitDetails({
       <div
         className={css.container}
         onMouseOver={() => {
-          mouseOver(), setShowDiffButton(true);
+          (mouseOver(), setShowDiffButton(true));
         }}
         onMouseLeave={() => {
-          mouseLeave(), setShowDiffButton(false);
+          (mouseLeave(), setShowDiffButton(false));
         }}
         onClick={onClick}
       >

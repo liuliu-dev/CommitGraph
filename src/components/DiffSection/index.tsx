@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ChangedItem, Commit, Diff } from "../../types";
 import css from "./index.module.css";
 import ChangedFileDetails from "./ChangedFileDetails";

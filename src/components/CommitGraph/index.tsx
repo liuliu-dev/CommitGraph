@@ -142,7 +142,6 @@ export default function CommitGraph({
                 currentBranch={currentBranch}
                 fullSha={fullSha}
                 getDiff={getDiff}
-                clicked={clicked}
                 forDolt={forDolt}
               />
             </div>
