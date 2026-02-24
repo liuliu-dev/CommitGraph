@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Tooltip } from "react-tooltip";
-import { fromCommitNodeToCommit } from "src/helpers/utils";
+import { fromCommitNodeToCommit } from "../../helpers/utils";
 import { Branch, CommitNode, Diff } from "../../types";
 import BranchLabel from "../BranchLabel";
 import { excerpt } from "../../helpers/inlineUtils";
