@@ -14,5 +14,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Run the "yarn ci" command
-        run: yarn ci
+      - name: Install and CI
+        run: yarn && yarn ci
