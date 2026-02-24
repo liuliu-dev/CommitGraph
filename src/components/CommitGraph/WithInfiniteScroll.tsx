@@ -1,7 +1,7 @@
 import React from "react";
+import InfiniteScroll from "react-infinite-scroller";
 import CommitGraph from ".";
 import { Branch, Commit, CommitNode, Diff, GraphStyle } from "../../types";
-import InfiniteScroll from "react-infinite-scroller";
 import css from "./index.module.css";
 
 type Props = {
@@ -24,7 +24,7 @@ export default function WithInfiniteScroll(props: Props) {
       <InfiniteScroll
         loadMore={props.loadMore}
         hasMore={props.hasMore}
-        useWindow={props.parentID ? false : true}
+        useWindow={!props.parentID}
         initialLoad={false}
         loader={
           <div className={css.loader} key={0}>

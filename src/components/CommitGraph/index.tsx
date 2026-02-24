@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import cx from "classnames";
 import { Branch, Commit, CommitNode, Diff, GraphStyle } from "../../types";
 import {
   defaultStyle,
@@ -13,7 +14,6 @@ import Curves from "../Curves";
 import { computePosition } from "./computePosition";
 import css from "./index.module.css";
 import WithInfiniteScroll from "./WithInfiniteScroll";
-import cx from "classnames";
 
 export type Props = {
   commits: Commit[];
@@ -80,17 +80,15 @@ export default function CommitGraph({
             branchSpacing={branchSpacing}
             nodeRadius={nodeRadius}
           />
-          {commitsNodes.map(commit => {
-            return (
-              <CommitDot
-                key={`${commit.hash}-dot`}
-                commit={commit}
-                commitSpacing={commitSpacing}
-                branchSpacing={branchSpacing}
-                nodeRadius={nodeRadius}
-              />
-            );
-          })}
+          {commitsNodes.map(commit => (
+            <CommitDot
+              key={`${commit.hash}-dot`}
+              commit={commit}
+              commitSpacing={commitSpacing}
+              branchSpacing={branchSpacing}
+              nodeRadius={nodeRadius}
+            />
+          ))}
         </svg>
       </div>
       <div

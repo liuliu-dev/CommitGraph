@@ -1,8 +1,8 @@
 import React from "react";
 import ReactPopup from "reactjs-popup";
+import cx from "classnames";
 import css from "./index.module.css";
 import { Branch } from "../../types";
-import cx from "classnames";
 
 type ItemProps = {
   branchName: string;
@@ -45,8 +45,8 @@ export default function BranchLabel({
   const current =
     branches.find(b => b.name === currentBranch) ||
     branches[branches.length - 1];
-  branches = branches.filter(b => b.name !== current.name);
-  const len = branches.length;
+  const otherBranches = branches.filter(b => b.name !== current.name);
+  const len = otherBranches.length;
 
   return (
     <div className={css.branches}>
@@ -74,7 +74,7 @@ export default function BranchLabel({
           arrow={false}
         >
           <div className={css.dropdown}>
-            {branches.map(b => (
+            {otherBranches.map(b => (
               <Item
                 branchName={b.name}
                 branchColor={branchColor}

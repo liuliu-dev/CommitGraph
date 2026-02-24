@@ -1,5 +1,5 @@
-import { convertColorToMatrixVariant } from "../../helpers/utils";
 import React from "react";
+import { convertColorToMatrixVariant } from "../../helpers/utils";
 
 type Props = {
   start: number;

@@ -29,21 +29,19 @@ export function formatCommits(commits: Commit[]): CommitNode[] {
       }
     });
   });
-  return commits.map(commit => {
-    return {
-      hash: commit.sha,
-      parents: commit.parents.map(p => p.sha),
-      children: childrenMap.get(commit.sha) ?? [],
-      committer: commit.commit.author.name,
-      message: commit.commit.message,
-      commitDate: new Date(commit.commit.author.date),
-      commitLink: commit.html_url,
-      onCommitNavigate: commit.onCommitNavigate,
-      commitColor: "",
-      x: -1,
-      y: -1,
-    };
-  });
+  return commits.map(commit => ({
+    hash: commit.sha,
+    parents: commit.parents.map(p => p.sha),
+    children: childrenMap.get(commit.sha) ?? [],
+    committer: commit.commit.author.name,
+    message: commit.commit.message,
+    commitDate: new Date(commit.commit.author.date),
+    commitLink: commit.html_url,
+    onCommitNavigate: commit.onCommitNavigate,
+    commitColor: "",
+    x: -1,
+    y: -1,
+  }));
 }
 
 function hexToColorMatrixVariant(hex?: string): string {
@@ -62,7 +60,7 @@ function rgbColorToMatrixVariant(rgb: string): string {
     .replace("rgb(", "")
     .replace(")", "")
     .split(",")
-    .map(x => parseInt(x) / 255);
+    .map(x => parseInt(x, 10) / 255);
   return `0 0 0 0 ${r} 0 0 0 0 ${g} 0 0 0 0 ${b} 0 0 0 0.5 0`;
 }
 
@@ -95,8 +93,8 @@ export function setBranchAndCommitColor(
   branchColors: string[],
   commitsMap: Map<string, CommitNode>,
 ) {
-  columns.map((column, i) => {
-    column.map(c => {
+  columns.forEach((column, i) => {
+    column.forEach(c => {
       const branchColor = branchColors[c.branchOrder % branchColors.length];
       c.color = branchColor;
       setCommitNodeColor(c, i, commitsMap, branchColor);

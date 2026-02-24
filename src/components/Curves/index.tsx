@@ -25,23 +25,16 @@ function Inner({ newBranchCurves, mergedCurves, commit }: InnerProps) {
   return (
     <>
       {newBranchCurves &&
-        newBranchCurves.map(c => {
-          return (
-            <CurvePath
-              key={`${commit.hash}-curved-up-path-${c.id}`}
-              curve={c}
-            />
-          );
-        })}
+        newBranchCurves.map(c => (
+          <CurvePath key={`${commit.hash}-curved-up-path-${c.id}`} curve={c} />
+        ))}
       {mergedCurves &&
-        mergedCurves.map(curve => {
-          return (
-            <CurvePath
-              key={`${commit.hash}-curved-down-path-${curve.id}`}
-              curve={curve}
-            />
-          );
-        })}
+        mergedCurves.map(curve => (
+          <CurvePath
+            key={`${commit.hash}-curved-down-path-${curve.id}`}
+            curve={curve}
+          />
+        ))}
     </>
   );
 }

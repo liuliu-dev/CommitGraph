@@ -9,7 +9,7 @@ function topologicalOrderCommits(
     (a, b) => b.commitDate.getTime() - a.commitDate.getTime(),
   );
 
-  let sortedCommits: string[] = [];
+  const sortedCommits: string[] = [];
   const seen = new Map<string, boolean>();
 
   function dfs(commit: CommitNode) {
@@ -134,9 +134,9 @@ function computeColumns(
       });
 
       // find the first column that has no branches that overlap with the current commit
-      const colFitAtEnd = columns.slice(maxChildX + 1).findIndex(column => {
-        return minChildY >= column[column.length - 1].end;
-      });
+      const colFitAtEnd = columns
+        .slice(maxChildX + 1)
+        .findIndex(column => minChildY >= column[column.length - 1].end);
 
       const col = colFitAtEnd === -1 ? -1 : maxChildX + 1 + colFitAtEnd;
 
@@ -185,13 +185,11 @@ export function computePosition(commits: CommitNode[]) {
     commitsMap,
   );
 
-  const columnsWithEndCommit = columns.map(column => {
-    return column.map(branchPath => {
-      return {
-        ...branchPath,
-        endCommit: commitsMapWithPos.get(branchPath.endCommitHash),
-      };
-    });
-  });
+  const columnsWithEndCommit = columns.map(column =>
+    column.map(branchPath => ({
+      ...branchPath,
+      endCommit: commitsMapWithPos.get(branchPath.endCommitHash),
+    })),
+  );
   return { columns: columnsWithEndCommit, commitsMap: commitsMapWithPos };
 }

@@ -2,7 +2,7 @@ name: Run CI on commit-graph
 on:
   pull_request:
     paths:
-      - "/"
+      - "**"
   workflow_dispatch:
 
 jobs:
@@ -10,13 +10,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18"
-      - name: Run the "npm ci" command
-        run: npm ci
-      - name: Run the "npm run build" command
-        run: npm run build
-      - name: Run the "npm test" command
-        run: npm test
+          node-version: "22"
+      - name: Run the "yarn ci" command
+        run: yarn ci

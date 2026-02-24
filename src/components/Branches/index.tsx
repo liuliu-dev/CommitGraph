@@ -26,8 +26,8 @@ export default function Branches({
 
   return (
     <>
-      {columns.map((column, i) => {
-        return column.map(c => {
+      {columns.map((column, i) =>
+        column.map(c => {
           const end = c.end === Infinity ? currentLastCommits : c.end;
           return (
             <BranchPath
@@ -43,8 +43,8 @@ export default function Branches({
               nodeRadius={nodeRadius}
             />
           );
-        });
-      })}
+        }),
+      )}
     </>
   );
 }
