@@ -1,6 +1,14 @@
 # dependencies
 /node_modules
 
+# Yarn Berry
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 # next.js
 /.next/
 .env.*.local
@@ -8,6 +16,9 @@
 
 # rollup cache
 /.rollup.cache/
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
 
 #logs
 ./storybook.log

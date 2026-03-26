@@ -2,7 +2,6 @@ import React from "react";
 import ReactPopup from "reactjs-popup";
 import css from "./index.module.css";
 import { Branch } from "../../types";
-import cx from "classnames";
 
 type ItemProps = {
   branchName: string;
@@ -21,7 +20,7 @@ function Item({ branchName, branchColor, branchLink, className }: ItemProps) {
   return (
     <div
       style={{ color: branchColor, borderColor: branchColor }}
-      className={cx(css.outer, className)}
+      className={[css.outer, className].filter(Boolean).join(" ")}
     >
       {branchLink ? (
         <a href={branchLink} className={css.link}>

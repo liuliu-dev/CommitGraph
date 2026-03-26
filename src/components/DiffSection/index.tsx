@@ -1,9 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ChangedItem, Commit, Diff } from "../../types";
 import css from "./index.module.css";
 import ChangedFileDetails from "./ChangedFileDetails";
-import { pluralize } from "@dolthub/web-utils";
-import { SmallLoader } from "@dolthub/react-components";
+import { pluralize } from "../../helpers/utils";
+
+const SmallLoader = ({
+  loaded,
+  className,
+}: {
+  loaded: boolean;
+  className?: string;
+}) => (
+  <div
+    className={className}
+    style={{ opacity: loaded ? 0 : 1, transition: "opacity 0.2s" }}
+  >
+    Loading...
+  </div>
+);
 
 type Props = {
   commit: Commit;

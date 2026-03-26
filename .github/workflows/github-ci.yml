@@ -1,22 +1,29 @@
 name: Run CI on commit-graph
 on:
   pull_request:
-    paths:
-      - "/"
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   ci:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
-      - name: Run the "npm ci" command
-        run: npm ci
-      - name: Run the "npm run build" command
-        run: npm run build
-      - name: Run the "npm test" command
-        run: npm test
+          node-version: "22"
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Lint
+        run: yarn lint
+      - name: Type check
+        run: yarn compile
+      - name: Test
+        run: yarn test
+      - name: Build
+        run: yarn build

@@ -9,7 +9,7 @@ function topologicalOrderCommits(
     (a, b) => b.commitDate.getTime() - a.commitDate.getTime(),
   );
 
-  let sortedCommits: string[] = [];
+  const sortedCommits: string[] = [];
   const seen = new Map<string, boolean>();
 
   function dfs(commit: CommitNode) {

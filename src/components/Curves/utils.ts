@@ -20,7 +20,7 @@ export function getMergedFromBranchHeadPositions(
   if (commit.parents.length < 2) {
     return [];
   }
-  let mergedFromBranchHeadPositions: CurveReturnType[] = [];
+  const mergedFromBranchHeadPositions: CurveReturnType[] = [];
 
   for (let i = 1; i < commit.parents.length; i++) {
     const parent = commitsMap.get(commit.parents[i]);
@@ -72,7 +72,7 @@ export function getNewBranchToPath(
   if (commit.children.length < 2) {
     return [];
   }
-  let newBranchToPositions: Array<CurveReturnType> = [];
+  const newBranchToPositions: Array<CurveReturnType> = [];
   commit.children.forEach(c => {
     const child = commitsMap.get(c)!;
     if (child.parents[0] === commit.hash && child.x !== commit.x) {
