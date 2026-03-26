@@ -1,12 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Branch, CommitNode, Diff } from "../../types";
 import BranchLabel from "../BranchLabel";
-import { excerpt } from "@dolthub/web-utils";
 import css from "./index.module.css";
 import { Tooltip } from "react-tooltip";
 import DiffSection from "../DiffSection";
-import { useOnClickOutside } from "@dolthub/react-hooks";
-import { fromCommitNodeToCommit } from "src/helpers/utils";
+import { excerpt, fromCommitNodeToCommit } from "../../helpers/utils";
+import { useOnClickOutside } from "../../helpers/hooks";
 
 type Props = {
   commit: CommitNode;
@@ -59,10 +58,12 @@ export default function CommitDetails({
       <div
         className={css.container}
         onMouseOver={() => {
-          mouseOver(), setShowDiffButton(true);
+          mouseOver();
+          setShowDiffButton(true);
         }}
         onMouseLeave={() => {
-          mouseLeave(), setShowDiffButton(false);
+          mouseLeave();
+          setShowDiffButton(false);
         }}
         onClick={onClick}
       >

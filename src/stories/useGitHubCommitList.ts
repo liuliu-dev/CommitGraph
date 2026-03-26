@@ -28,20 +28,22 @@ export function useGitHubCommitList(
       const res = await fetch(apiCommitsUrl, { headers });
       if (res.ok) {
         const data = await res.json();
-        const newCommits: Commit[] = data as Commit[];
-        const newHasMore = data.length === pageSize;
+        // Ensure data is an array before processing
+        const commits = Array.isArray(data) ? data : [];
+        const newCommits: Commit[] = commits as Commit[];
+        const newHasMore = commits.length === pageSize;
         setCommits(newCommits);
         setHasMore(newHasMore);
         setError("");
         if (newHasMore) {
           setPage(page + 1);
-        } else {
-          const errorData = await res.json();
-          const errorMessage =
-            errorData.message || `HTTP error! status: ${res.status}`;
-          setError(errorMessage);
-          throw new Error(errorMessage);
         }
+      } else {
+        const errorData = await res.json();
+        const errorMessage =
+          errorData.message || `HTTP error! status: ${res.status}`;
+        setError(errorMessage);
+        throw new Error(errorMessage);
       }
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : String(e);
@@ -63,8 +65,10 @@ export function useGitHubCommitList(
         const res = await fetch(apiCommitsUrl, { headers });
         if (res.ok) {
           const data = await res.json();
-          const newCommits: Commit[] = data as Commit[];
-          const newHasMore = data.length === pageSize;
+          // Ensure data is an array before processing
+          const fetchedCommits = Array.isArray(data) ? data : [];
+          const newCommits: Commit[] = fetchedCommits as Commit[];
+          const newHasMore = fetchedCommits.length === pageSize;
           const allCommits = (commits ?? []).concat(newCommits);
           setCommits(allCommits);
           if (newHasMore) {

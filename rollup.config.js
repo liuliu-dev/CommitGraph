@@ -5,8 +5,7 @@ import dts from "rollup-plugin-dts";
 import terser from "@rollup/plugin-terser";
 import postcss from "rollup-plugin-postcss";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
-
-const packageJson = require("./package.json");
+import packageJson from "./package.json" with { type: "json" };
 
 export default [
   {
@@ -23,10 +22,28 @@ export default [
         tsconfig: "./tsconfig.json",
         noEmit: false,
         declaration: false,
-        exclude: ["**/__tests__", "**/*.test.ts"],
+        exclude: [
+          "**/__tests__",
+          "**/*.test.ts",
+          "**/*.stories.ts",
+          "src/stories/**",
+        ],
+        sourceMap: false,
+        inlineSources: false,
       }),
-      terser(),
-      postcss(),
+      terser({
+        compress: {
+          drop_console: true,
+        },
+        mangle: true,
+        format: {
+          comments: false,
+        },
+      }),
+      postcss({
+        minimize: true,
+        extract: false,
+      }),
     ],
     external: ["react", "react-dom", "styled-components"],
   },

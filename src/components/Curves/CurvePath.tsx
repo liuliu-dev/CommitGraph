@@ -1,5 +1,4 @@
 import React from "react";
-import { CommitNode } from "../../types";
 import { convertColorToMatrixVariant } from "../../helpers/utils";
 import { CurveReturnType } from "./utils";
 

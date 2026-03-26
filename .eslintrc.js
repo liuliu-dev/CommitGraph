@@ -1,61 +1,35 @@
 module.exports = {
   env: {
+    browser: true,
+    es2021: true,
     node: true,
-    "jest/globals": true,
+    jest: true,
   },
   extends: [
-    "airbnb-base",
-    "airbnb-typescript/base",
-    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "prettier",
-    "plugin:jest-dom/recommended",
-    "plugin:testing-library/react",
-    "plugin:css-modules/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    project: "./tsconfig.json",
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  plugins: [
-    "@typescript-eslint",
-    "jest",
-    "jest-dom",
-    "testing-library",
-    "css-modules",
-  ],
-  rules: {
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-      },
-    ],
-    "@typescript-eslint/no-use-before-define": [
-      "error",
-      {
-        functions: false,
-        classes: false,
-      },
-    ],
-    "import/prefer-default-export": "off",
-    "no-use-before-define": [
-      "error",
-      {
-        functions: false,
-        classes: false,
-      },
-    ],
-  },
-  overrides: [
-    {
-      files: ["*test.ts?(x)"],
-      rules: {
-        "@typescript-eslint/no-var-requires": "off",
-      },
+  plugins: ["react", "react-hooks", "@typescript-eslint"],
+  settings: {
+    react: {
+      version: "detect",
     },
-  ],
+  },
+  rules: {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "off", // Turn off base rule for TypeScript
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+  },
 };

@@ -36,7 +36,7 @@ const graphStyle = {
   ],
 };
 
-const rgbColorStyle = {
+const _rgbColorStyle = {
   commitSpacing: 72,
   branchSpacing: 20,
   nodeRadius: 2,
@@ -54,7 +54,7 @@ const rgbColorStyle = {
   ],
 };
 
-const branchColors = ["#5D6280", "#5AC58D", "#5C5AC5", "#EB7340"];
+const _branchColors = ["#5D6280", "#5AC58D", "#5C5AC5", "#EB7340"];
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 
 export const OneCommit: Story = {

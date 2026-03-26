@@ -119,3 +119,12 @@ export function fromCommitNodeToCommit(commit: CommitNode): Commit {
     onCommitNavigate: commit.onCommitNavigate,
   };
 }
+
+export function excerpt(str: string, len: number): string {
+  if (str.length <= len) return str;
+  return str.slice(0, len) + "...";
+}
+
+export function pluralize(n: number, word: string): string {
+  return n === 1 ? word : `${word}s`;
+}
