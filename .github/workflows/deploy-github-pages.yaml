@@ -23,7 +23,11 @@ jobs:
       # Set up Node
       - uses: actions/setup-node@v4
         with:
-          node-version: '^18.0.0'
+          node-version: '20'
+
+      # Enable Corepack for Yarn 4
+      - name: Enable Corepack
+        run: corepack enable
 
       #👇 Add Storybook build and deploy to GitHub Pages as a step in the workflow
       - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
