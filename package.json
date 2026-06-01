@@ -89,7 +89,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^10",
     "ts-jest": "^29.4.6",
-    "typescript": "^5.4.2",
+    "typescript": "^6.0.2",
     "typescript-eslint": "^8.57.2",
     "yalc": "^1.0.0-pre.53"
   },
