@@ -8341,15 +8341,15 @@ __metadata:
   linkType: hard
 
 "react-tooltip@npm:^5.30.0":
-  version: 5.30.0
-  resolution: "react-tooltip@npm:5.30.0"
+  version: 5.30.1
+  resolution: "react-tooltip@npm:5.30.1"
   dependencies:
     "@floating-ui/dom": "npm:^1.6.1"
     classnames: "npm:^2.3.0"
   peerDependencies:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
-  checksum: 10c0/a942ac78f4c3cf7adfeb97630bf68390683772a37a351cc84b21cef3e3c10991fca8a6ff84e9a410f0cb267ec83de3e19509b9dfaf7ec0d83478a0402621a238
+  checksum: 10c0/479c44f366070daa61ffc9458f7788964cea875eb7c1c4fcccd964fa93ca9bbf59c9e0c140f47c288b84d9db9c7b7ab3815c74e0d8ea698c3e00f8aea8db1411
   languageName: node
   linkType: hard
 
